@@ -114,12 +114,19 @@ tutorial_data:
     particle_guide: true
   16:
     hologram:
+      - "<&6><&l>Elevators"
+      - "<&e>Gold blocks function as elevators."
+      - "<&e>You can travel up, or down 25 blocks at a time."
+      - "<&e>Step inside to give it a try!"
+    particle_guide: true
+  17:
+    hologram:
       - "<&6><&l>The World (1/2)"
       - "<&e>The world is split into 2 sections<&co>"
       - "<&e>The <&c>Savage Lands <&e>are the inner 20,000 blocks."
       - "<&e>The <&2>Outer Realms <&e>are everywhere outside of that."
     particle_guide: true
-  17:
+  18:
     hologram:
       - "<&6><&l>The World Part (2/2)"
       - "<&e>The <&c>Savage Lands <&e>have <&c>PvP Enabled."
@@ -127,7 +134,7 @@ tutorial_data:
       - "<&e>The <&2>Outer Realms <&e>are a safe haven."
       - "<&e>No monsters will spawn, and PvP is disabled."
     particle_guide: true
-  18:
+  19:
     hologram:
       - "<&6><&l>Chat"
       - "<&e>We have cross-server chat available"
@@ -135,7 +142,7 @@ tutorial_data:
       - "<&e>You can also click on the channel name in chat!"
       - "<&c>Please keep our rules in mind."
     particle_guide: true
-  19:
+  20:
     hologram:
       - "<&6><&l>End Game"
       - "<&e>The closer to the center of the world you get,"
@@ -144,7 +151,7 @@ tutorial_data:
       - "<&e>Should you manage to endure the challenge, powerful rewards await."
     particle_guide: true
     run_task: tutorial_spawn_finale
-  20:
+  21:
     hologram:
       - "<&a><&l>Start Your Journey"
       - "<&e>Jump through the hole to be teleported to the game world."
