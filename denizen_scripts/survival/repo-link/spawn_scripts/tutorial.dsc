@@ -92,7 +92,7 @@ tutorial_data:
       - "<&6><&l>Warp Command"
       - "<&b>Warps can be made by any player within their claim."
       - "<&e>You can visit server warps, or other player's warps."
-      - "<&a>Command Menu<&co> <&b>/warps"
+      - "<&e>Command Menu<&co> <&b>/warps"
       - "<&a>--------------------------"
       - "<&e>Use <&b>/warps <&e>and go to Grim to continue."
     particle_guide: true
@@ -133,7 +133,7 @@ tutorial_data:
       - "<&e>We have cross-server chat available"
       - "<&e>Use <&6>/chat<&e> to change your channel"
       - "<&e>You can also click on the channel name in chat!"
-      - "<&a>Please keep our rules in mind."
+      - "<&c>Please keep our rules in mind."
     particle_guide: true
   19:
     hologram:
