@@ -49,12 +49,12 @@ mod_online_inv:
     # Replace empty slots in inventory with player heads.
     - determine <[inventory]>
   slots:
-    - "[] [] [] [] [] [] [] [] []"
-    - "[] [] [] [] [] [] [] [] []"
-    - "[] [] [] [] [] [] [] [] []"
-    - "[] [] [] [] [] [] [] [] []"
-    - "[] [] [] [] [] [] [] [] []"
-    - "[border] [border] [border] [border] [close] [border] [border] [border] [border]"
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [border] [border] [border] [border] [close] [border] [border] [border] [border]
 
 mod_online_inv_events:
   type: world
@@ -95,9 +95,9 @@ mod_actions_inv:
     - define banItem <tern[<player.has_permission[mod.moderator]>].pass[<item[mod_ban_item]>].fail[<item[air]>]>
     - determine <list[<[muteItem]>|<[sendItem]>|<[kickItem]>|<[banItem]>]>
   slots:
-    - "[b1] [b2] [b1] [b2] [head] [b2] [b1] [b2] [b1]"
-    - "[b2] [] [x] [] [x] [] [x] [] [b2]"
-    - "[b1] [b2] [b1] [b2] [back] [b2] [b1] [b2] [b1]"
+    - [b1] [b2] [b1] [b2] [head] [b2] [b1] [b2] [b1]
+    - [b2] [] [x] [] [x] [] [x] [] [b2]
+    - [b1] [b2] [b1] [b2] [back] [b2] [b1] [b2] [b1]
 
 mod_actions_inv_events:
   type: world
@@ -151,9 +151,9 @@ mod_send_inv:
         - define inventory:|:<[item]>
     - determine <[inventory]>
   slots:
-    - "[b2] [b1] [b1] [b2] [b1] [b2] [b1] [b1] [b2]"
-    - "[x] [] [] [] [] [] [] [] [x]"
-    - "[back] [b2] [b1] [b2] [head] [b2] [b1] [b2] [back]"
+    - [b2] [b1] [b1] [b2] [b1] [b2] [b1] [b1] [b2]
+    - [x] [] [] [] [] [] [] [] [x]
+    - [back] [b2] [b1] [b2] [head] [b2] [b1] [b2] [back]
 
 mod_send_inv_events:
   type: world
@@ -195,12 +195,12 @@ mod_kick_inv:
         - define inventory:|:<[item]>
     - determine <[inventory]>
   slots:
-    - "[x] [x] [x] [x] [x] [x] [x] [x] [x]"
-    - "[x] [x] [] [x] [] [x] [] [x] [x]"
-    - "[x] [] [x] [x] [] [x] [x] [] [x]"
-    - "[x] [] [] [] [x] [] [] [] [x]"
-    - "[] [] [] [] [] [] [] [] []"
-    - "[back] [b1] [b2] [b1] [head] [b1] [b2] [b1] [back]"
+    - [x] [x] [x] [x] [x] [x] [x] [x] [x]
+    - [x] [x] [] [x] [] [x] [] [x] [x]
+    - [x] [] [x] [x] [] [x] [x] [] [x]
+    - [x] [] [] [] [x] [] [] [] [x]
+    - [] [] [] [] [] [] [] [] []
+    - [back] [b1] [b2] [b1] [head] [b1] [b2] [b1] [back]
 
 mod_kick_inv_events:
   type: world
@@ -241,12 +241,12 @@ mod_ban_inv:
         - define inventory:|:<[item]>
     - determine <[inventory]>
   slots:
-    - "[x] [x] [x] [x] [x] [x] [x] [x] [x]"
-    - "[x] [x] [] [x] [] [x] [] [x] [x]"
-    - "[x] [] [] [x] [] [x] [] [] [x]"
-    - "[x] [x] [] [x] [] [x] [] [x] [x]"
-    - "[] [] [] [] [] [] [] [] []"
-    - "[back] [b1] [b2] [b1] [head] [b1] [b2] [b1] [back]"
+    - [x] [x] [x] [x] [x] [x] [x] [x] [x]
+    - [x] [x] [] [x] [] [x] [] [x] [x]
+    - [x] [] [] [x] [] [x] [] [] [x]
+    - [x] [x] [] [x] [] [x] [] [x] [x]
+    - [] [] [] [] [] [] [] [] []
+    - [back] [b1] [b2] [b1] [head] [b1] [b2] [b1] [back]
 
 mod_ban_inv_events:
   type: world
