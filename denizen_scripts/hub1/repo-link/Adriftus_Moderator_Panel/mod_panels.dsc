@@ -29,7 +29,7 @@ mod_online_inv:
   size: 54
   definitions:
     border: <item[light_blue_stained_glass_pane].with[display_name=<&r>]>
-    close: <item[red_stained_glass_pane].with[display_name=<&c><&l>Close]>
+    close: <item[red_stained_glass_pane].with[display_name=<&c><&l>Close;nbt=<list[to/close]>]>
   procedural items:
     - define inventory:<list[]>
     # Loop over list of online players.
