@@ -2,6 +2,7 @@
 # - REPLACE TAB COMPLETES WITH NEW TAB COMPLETIONS SYSTEM.
 # - MAKE COMMAND DEFINITIONS CONSISTENT BETWEEN COMMANDS. (Definition name, value, usage, etc.)
 # - EXPAND CHAT (UN)MUTE FUNCTION.
+# - Use <context.args.is_empty> instead of `<context.args.get[1]||null> == null`
 # - Add report commands, that will notify staff and a Discord channel.
 # - Replace nested foreach loop in mod_get_infractions procedure in mod_infractions.
 # - Split panel scripts up into a folder.
@@ -17,13 +18,13 @@ mod_command:
   tab complete:
     # -- One Argument Tab Complete
     - define arguments <server.online_players.parse[name].exclude[<player.name>]>
-    - if <context.args.size> == 0:
+    - if <context.args.is_empty>:
       - determine <[arguments]>
     - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>].not>:
       - determine <[arguments].filter[starts_with[<context.args.get[1]>]]>
   script:
     # -- Hopefully this logic will work & make sense in a few weeks.
-    - if <context.args.get[1]||null> == null:
+    - if <context.args.is_empty>:
       - inventory open d:<inventory[mod_online_inv]>
     - else if <context.args.get[1]> == version:
       - narrate "<&6>Adriftus <&e>Moderator Panel"

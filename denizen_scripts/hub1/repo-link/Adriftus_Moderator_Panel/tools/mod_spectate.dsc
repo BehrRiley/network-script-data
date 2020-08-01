@@ -10,14 +10,14 @@ mod_spectate_command:
   tab completions:
     1: <server.online_players.parse[name].exclude[<player.name>]>
   script:
-    - if <player.has_flag[spectateEnabled]> && <context.args.get[1]||null> == null:
+    - if <player.has_flag[spectateEnabled]> && <context.args.is_empty>:
       - flag player spectateEnabled:!
       - adjust <player> gamemode:<player.flag[lastGM]>
       - adjust <player> flying:false
       - teleport <player> <player.flag[lastLocation]>
       - narrate "<&7>[<&b>ModSpec<&7>] <&c>Toggled ModSpec." targets:<player>
       - stop
-    - if <context.args.get[1]||null> == null:
+    - if <context.args.is_empty>:
     # GMs: Survival, Creative, Adventure
       - if <player.gamemode> != SPECTATOR:
         - flag player spectateEnabled:true
