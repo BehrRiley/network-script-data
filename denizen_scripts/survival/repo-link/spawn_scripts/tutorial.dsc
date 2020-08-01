@@ -213,6 +213,7 @@ tutorial_next:
         - narrate <script[tutorial_data].parsed_key[<[stage]>.message]>
       - if <script[tutorial_data].list_keys[<[stage]>].contains[particle_guide]> && <script[tutorial_data].parsed_key[<[stage]>.particle_guide]>:
         - look <player> tutorial_<[stage]>
+        - define last_distance 128
         - while <player.location.world.name> == spawn && <player.location.distance[<location[tutorial_<[stage]>]>]> > 7:
           - define points <player.location.points_between[<location[tutorial_<[stage]>]>].get[3].to[last]>
           - foreach <[points]>:
@@ -223,12 +224,12 @@ tutorial_next:
               - define value <[value].above[2]>
             - playeffect <script[tutorial_data].parsed_key[particle_trail.particle]> at:<[value]> quantity:<script[tutorial_data].parsed_key[particle_trail.quantity]> offset:<script[tutorial_data].parsed_key[particle_trail.offset]> targets:<player>
             - wait 1t
-          - if <player.location.distance[<location[tutorial_<[stage]>]>]> > <[last_distance].+[5]||100>:
+          - if <player.location.distance[<location[tutorial_<[stage]>]>]> > <[last_distance].+[5]>:
             - narrate "<&e>You have gone too far from your next tutorial location."
             - narrate "<&e>You may restart it at any time by using <&b>/tutorial"
             - inject tutorial_skipped
             - stop
-          - else if <player.location.distance[<location[tutorial_<[stage]>]>]> < <[last_distance]||100>:
+          - else if <player.location.distance[<location[tutorial_<[stage]>]>]> < <[last_distance]>:
             - define last_distance <player.location.distance[<location[tutorial_<[stage]>]>]>
           - wait 5t
       - foreach <script[tutorial_data].parsed_key[<[stage]>.hologram]>:
@@ -248,8 +249,8 @@ tutorial_timeout:
   type: task
   definitions: stage
   script:
-    - while <player.flag[tutorial]||null> == <[stage]>:
-      - if <queue.time_ran> > <duration[10m]>:
+    - while <player.has_flag[tutorial]> && <player.flag[tutorial]> == <[stage]>:
+      - if <queue.time_ran.in_seconds> > 600:
         - inject tutorial_skipped
         - narrate "<&e>Your tutorial has timed out."
         - narrate "<&e>You may use <&b>/tutorial<&e> at any time to restart it."
