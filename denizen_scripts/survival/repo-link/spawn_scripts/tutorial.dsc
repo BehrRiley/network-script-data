@@ -34,7 +34,7 @@ tutorial_data:
     hologram:
       - "<&6><&l>Vote Crates"
       - "<&e>Voting for our server will earn you rewards."
-      - "<&e>use <&b>/vote <&e>to find out how."
+      - "<&e>Use <&b>/vote <&e>to find out how."
     particle_guide: true
   5:
     hologram:
@@ -122,7 +122,7 @@ tutorial_data:
   17:
     hologram:
       - "<&6><&l>The World Part (2/2)"
-      - "<&e>The <&c>Savage Lands &ehave <&c>PvP Enabled."
+      - "<&e>The <&c>Savage Lands <&e>have <&c>PvP Enabled."
       - "<&e>Beware of encounters there as monsters will spawn."
       - "<&e>The <&2>Outer Realms <&e>are a safe haven."
       - "<&e>No monsters will spawn, and PvP is disabled."
