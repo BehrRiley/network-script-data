@@ -32,18 +32,15 @@ tutorial_data:
     particle_guide: true
   4:
     hologram:
-      - "<&6><&l>Warp Command"
-      - "<&b>Warps can be made by any player within their claim."
-      - "<&e>You can visit server warps, or other player's warps."
-      - "<&a>Command Menu<&co> <&b>/warps"
+      - "<&6><&l>Vote Crates"
+      - "<&e>Voting for our server will earn you rewards."
+      - "<&e>use <&b>/vote <&e>to find out how."
     particle_guide: true
   5:
     hologram:
-      - "<&6><&l>Grim"
-      - "<&e>Grim can help you return to your death location."
-      - "<&c>Be aware, nothing is free."
-      - "<&a>--------------------------"
-      - "<&e>Use <&b>/warps <&e>and go to the market to continue."
+      - "<&6><&l>Soul Forge"
+      - "<&e>Here you can forge your items with souls."
+      - "<&c>Souls can be acquired in the <&4>Savage Lands."
     particle_guide: true
   6:
     hologram:
@@ -53,8 +50,60 @@ tutorial_data:
       - "<&e>You can also get daily rewards!"
     title: "<&6>Use <&b>/warps"
     subtitle: "Go to the server warp: Marketplace"
-    message: "<&6>/warp &eto the server warp: Marketplace"
   7:
+    hologram:
+      - "<&6><&l>Cosmetics"
+      - "<&e>Here you can purchase titles and bow trails!"
+      - "<&c>Use <&6>/titles<&e> and <&6>/bowtrails<&e> to use them."
+    particle_guide: true
+  8:
+    hologram:
+      - "<&6><&l>Claims"
+      - "<&e>Here you can purchase upgrades for your claim."
+      - "<&c>Upgrades only apply within your claim."
+    particle_guide: true
+  9:
+    hologram:
+      - "<&6><&l>Mystery Boxes"
+      - "<&e>Here you can purchase mysterious packages."
+      - "<&e>Who knows what they might contain."
+    particle_guide: true
+  10:
+    hologram:
+      - "<&6><&l>Stonks!"
+      - "<&e>Our Stonks Broker buys and sells items."
+      - "<&e>Prices fluctuate, so check back often!"
+    particle_guide: true
+  11:
+    hologram:
+      - "<&6><&l>Survivalist"
+      - "<&e>Want a little something a little more useful?"
+      - "<&e>The survivalist sells backpacks, tents, and more!"
+    particle_guide: true
+  12:
+    hologram:
+      - "<&6><&l>Daily Rewards"
+      - "<&e>Wait a minute, is that you from the future?"
+      - "<&e>Maybe you have something to give yourself."
+      - "<&c>Each day you can recieve a daily reward."
+    particle_guide: true
+  13:
+    hologram:
+      - "<&6><&l>Warp Command"
+      - "<&b>Warps can be made by any player within their claim."
+      - "<&e>You can visit server warps, or other player's warps."
+      - "<&a>Command Menu<&co> <&b>/warps"
+      - "<&a>--------------------------"
+      - "<&e>Use <&b>/warps <&e>and go to Grim to continue."
+    particle_guide: true
+    message: "<&6>/warp <&e>to the server warp<&co> Grim"
+  14:
+    hologram:
+      - "<&6><&l>Grim"
+      - "<&e>Grim can help you return to your death location."
+      - "<&c>Be aware, nothing is free."
+    particle_guide: true
+  15:
     hologram:
       - "<&6><&l>Claims"
       - "<&e>You can claim land!"
@@ -63,28 +112,30 @@ tutorial_data:
       - "<&e>You can manage everything related to chunks in the GUI."
       - "<&a>Command<&co> <&b>/claims"
     particle_guide: true
-  8:
+  16:
     hologram:
-      - "<&d><&l>Soul Forge"
-      - "<&e>Here you can forge your items with souls."
-      - "<&c>Souls can be acquired in the <&4>Savage Lands."
-    particle_guide: true
-  9:
-    hologram:
-      - "<&d><&l>The World (1/2)"
+      - "<&6><&l>The World (1/2)"
       - "<&e>The world is split into 2 sections<&co>"
-      - "<&e>The &cSavage Lands &eare the inner 20,000 blocks."
-      - "<&e>The &2Outer Realms &eare everywhere outside of that."
+      - "<&e>The <&c>Savage Lands <&e>are the inner 20,000 blocks."
+      - "<&e>The <&2>Outer Realms <&e>are everywhere outside of that."
     particle_guide: true
-  10:
+  17:
     hologram:
-      - "<&d><&l>The World Part (2/2)"
+      - "<&6><&l>The World Part (2/2)"
       - "<&e>The <&c>Savage Lands &ehave <&c>PvP Enabled."
       - "<&e>Beware of encounters there as monsters will spawn."
       - "<&e>The <&2>Outer Realms <&e>are a safe haven."
       - "<&e>No monsters will spawn, and PvP is disabled."
     particle_guide: true
-  11:
+  18:
+    hologram:
+      - "<&6><&l>Chat"
+      - "<&e>We have cross-server chat available"
+      - "<&e>Use <&6>/chat<&e> to change your channel"
+      - "<&e>You can also click on the channel name in chat!"
+      - "<&a>Please keep our rules in mind."
+    particle_guide: true
+  19:
     hologram:
       - "<&6><&l>End Game"
       - "<&e>The closer to the center of the world you get,"
@@ -93,7 +144,7 @@ tutorial_data:
       - "<&e>Should you manage to endure the challenge, powerful rewards await."
     particle_guide: true
     run_task: tutorial_spawn_finale
-  12:
+  20:
     hologram:
       - "<&a><&l>Start Your Journey"
       - "<&e>Jump through the hole to be teleported to the game world."
