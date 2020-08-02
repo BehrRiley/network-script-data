@@ -148,7 +148,7 @@ tutorial_data:
     hologram:
       - "<&6><&l>End Game"
       - "<&e>Monsters grow stronger as you venture towards the center of the world."
-      - "<&e>These monsters posess and guard more powerful equipment and items."
+      - "<&e>These monsters possess and guard more powerful equipment and items."
       - "<&e>The only <&d>Ender Portal <&e>resides at the bottom of a dungeon in the center."
       - "<&e>Should you manage to endure the challenge, powerful rewards await."
     particle_guide: true
