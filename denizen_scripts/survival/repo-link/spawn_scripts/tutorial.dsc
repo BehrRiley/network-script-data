@@ -237,6 +237,7 @@ tutorial_next:
           - wait 5t
       - foreach <script[tutorial_data].parsed_key[<[stage]>.hologram]>:
         - fakespawn armor_stand[custom_name_visible=true;marker=true;visible=false;custom_name=<[value]>] <location[tutorial_<[stage]>].above[3].sub[0,<[loop_index].*[0.25]>,0]> duration:10m
+        - wait 4t
       - if <script[tutorial_data].parsed_key[<[stage].+[1]>]||null> == null:
         - fakespawn armor_stand[custom_name_visible=true;marker=true;visible=false;custom_name=<script[tutorial_data].parsed_key[complete_button]>] <location[tutorial_<[stage]>].above[1]> duration:10m
       - else:
