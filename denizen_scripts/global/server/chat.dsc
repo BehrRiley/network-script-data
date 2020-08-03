@@ -18,9 +18,9 @@ chat_system_events:
       - define ChannelText <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
       
       - if <yaml[global.player.<player.uuid>].contains[rank]>:
-        - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><player.name><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server><&nl><&color[#F3FFAD]>Rank<&color[#26FFC9]>: <&color[#C1F2F7]><yaml[global.player.<player.uuid>].read[rank]>"
+        - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><player.name><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase><&nl><&color[#F3FFAD]>Rank<&color[#26FFC9]>: <&color[#C1F2F7]><yaml[global.player.<player.uuid>].read[rank]>"
       - else:
-        - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><player.name><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server>"
+        - define Hover "<&color[#F3FFAD]>Name<&color[#26FFC9]>: <&color[#C1F2F7]><player.name><&nl><&color[#F3FFAD]>Server<&color[#26FFC9]>: <&color[#C1F2F7]><bungee.server.to_titlecase>"
       - define Text <yaml[chat_config].read[channels.<[channel]>.format.name].parsed>
       - define Hint "msg <player.name> "
       - define NameText <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Hint]>]>
@@ -47,7 +47,7 @@ chat_history_save:
   debug: false
   definitions: Channel|Message
   script:
-    - yaml id:chat_history set <[channel]>_history:->:<map[].with[channel].as[<[channel]>].with[message].as[<[Message]>].with[time].as[<server.current_time_millis>]>
+    - yaml id:chat_history set <[channel]>_history:->:<map.with[channel].as[<[channel]>].with[message].as[<[Message]>].with[time].as[<server.current_time_millis>]>
     - if <yaml[chat_history].read[<[channel]>_history].size> > 25:
       - yaml id:chat_history set <[channel]>_history:!|:<yaml[chat_history].read[<[channel]>_history].remove[first]>
 
@@ -55,7 +55,7 @@ chat_history_show:
   type: task
   debug: false
   script:
-    - define list <list[]>
+    - define list <list>
     - foreach <yaml[global.player.<player.uuid>].read[chat.channels.active].filter_tag[<yaml[chat_config].list_keys[channels].contains[<[Filter_Value]>]>]> as:Channel:
       - if !<yaml[chat_history].list_keys[].contains[<[Channel]>_history]>:
         - foreach next
