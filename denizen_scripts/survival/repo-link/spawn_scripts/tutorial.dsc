@@ -228,8 +228,8 @@ tutorial_next:
             - playeffect <script[tutorial_data].parsed_key[particle_trail.particle]> at:<[value]> quantity:<script[tutorial_data].parsed_key[particle_trail.quantity]> offset:<script[tutorial_data].parsed_key[particle_trail.offset]> targets:<player>
             - wait 1t
           - if <player.location.distance[<location[tutorial_<[stage]>]>]> > <[last_distance].+[5]>:
-            - narrate "<&e>You have gone too far from your next tutorial location."
-            - narrate "<&e>You may restart it at any time by using <&b>/tutorial"
+            - narrate "<&4>You have gone too far from your next tutorial location."
+            - narrate "<element[<&e>You can restart the tutorial at any time by using <&b>/tutorial<&e>.].on_hover[<&e>Click to restart the tutorial].on_click[/tutorial]>"
             - inject tutorial_skipped
             - stop
           - else if <player.location.distance[<location[tutorial_<[stage]>]>]> < <[last_distance]>:
@@ -256,8 +256,8 @@ tutorial_timeout:
     - while <player.has_flag[tutorial]> && <player.flag[tutorial]> == <[stage]>:
       - if <queue.time_ran.in_seconds> > 600:
         - inject tutorial_skipped
-        - narrate "<&e>Your tutorial has timed out."
-        - narrate "<&e>You may use <&b>/tutorial<&e> at any time to restart it."
+        - narrate "<&4>Your tutorial has timed out."
+        - narrate "<element[<&e>You can restart the tutorial at any time by using <&b>/tutorial<&e>.].on_hover[<&e>Click to restart the tutorial].on_click[/tutorial]>"
       - wait 10s
 
 tutorial_skipped:
@@ -282,10 +282,10 @@ tutorial_events:
         - foreach <player.fake_entities>:
           - fakespawn <[value]> cancel
         - inject tutorial_skipped
-        - narrate "<&e>You have opted to skip the tutorial."
-        - narrate "<&e>Please view <&b>/help <&e>for any questions."
+        - narrate "<&4>You have opted to skip the tutorial."
+        - narrate "<element[<&e>Please view <&b>/help <&e>for any questions.].on_hover[<&e>Click to open the help menu.].on_click[/help]>"
         - narrate "<element[<&e>You can restart the tutorial at any time by using <&b>/tutorial<&e>.].on_hover[<&e>Click to restart the tutorial].on_click[/tutorial]>"
     on player exits spawn_cuboid flagged:tutorial:
       - inject tutorial_skipped
-      - narrate "<&e>You have exited spawn, and stopped the tutorial."
-      - narrate "<&e>You can restart the tutorial at any time by using <&b>/tutorial<&e>."
+      - narrate "<&4>You have exited spawn, and stopped the tutorial."
+      - narrate "<element[<&e>You can restart the tutorial at any time by using <&b>/tutorial<&e>.].on_hover[<&e>Click to restart the tutorial].on_click[/tutorial]>"
