@@ -284,7 +284,7 @@ tutorial_events:
         - inject tutorial_skipped
         - narrate "<&e>You have opted to skip the tutorial."
         - narrate "<&e>Please view <&b>/help <&e>for any questions."
-        - narrate "<&e>You can restart the tutorial at any time by using <&b>/tutorial<&e>."
+        - narrate "<element[<&e>You can restart the tutorial at any time by using <&b>/tutorial<&e>.].on_hover[<&e>Click to restart the tutorial].on_click[/tutorial]>"
     on player exits spawn_cuboid flagged:tutorial:
       - inject tutorial_skipped
       - narrate "<&e>You have exited spawn, and stopped the tutorial."
