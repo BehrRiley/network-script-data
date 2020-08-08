@@ -1,14 +1,14 @@
 mod_mute_item:
   type: item
   debug: false
-  material: jukebox
+  material: <item[jukebox]>
   display name: <&2>Mute
   lore:
     - "<&6>Mute the Player from Chat."
     - "<&6>Empêchez le joueur de parler."
     - "Right Click / Clic Droit"
   mechanisms:
-    flags: ALL
+    flags: <list[HIDE_ATTRIBUTES]>
 
 mod_unmute_item:
   type: item
@@ -20,35 +20,35 @@ mod_unmute_item:
     - "<&e>Permettez le joueur de parler."
     - "Right Click / Clic Droit"
   mechanisms:
-    flags: ALL
+    flags: <list[HIDE_ATTRIBUTES]>
 
 mod_send_item:
   type: item
   debug: false
-  material: ender_pearl
+  material: <item[ender_pearl]>
   display name: <&5><&l>Send
   lore:
     - "<&d>Transfer the Player to a Server."
     - "<&d>Envoyez le joueur au serveur."
   mechanisms:
-    flags: ALL
+    flags: <list[HIDE_ATTRIBUTES]>
 
 mod_kick_item:
   type: item
   debug: false
-  material: leather_boots
+  material: <item[leather_boots]>
   color: 16711680
   display name: <&d><&l>Kick
   lore:
     - "<&e>Kick the Player from the Server."
     - "<&e>Coup de pied du serveur."
   mechanisms:
-    flags: ALL
+    flags: <list[HIDE_ATTRIBUTES]>
 
 mod_ban_item:
   type: item
   debug: false
-  material: wooden_axe
+  material: <item[wooden_axe]>
   display name: <&c><&l>Ban
   lore:
     - "Left Click / Clic Gauche:"
@@ -60,12 +60,12 @@ mod_ban_item:
   enchantments:
     - ARROW_INFINITE:1
   mechanisms:
-    flags: HIDE_ATTRIBUTES|HIDE_ENCHANTS
+    flags: <list[HIDE_ATTRIBUTES|HIDE_ENCHANTS]>
 
 mod_player_item:
   type: item
   debug: false
-  material: player_head
+  material: <item[player_head]>
   display name: <player.flag[amp_map].as_map.get[uuid].as_player.name>
   lore:
     - "<&6>Nickname: <&r><yaml[global.player.<player.flag[amp_map].as_map.get[uuid]>].read[Display_Name]||None>"
@@ -79,20 +79,20 @@ mod_player_item:
 mod_level1_item:
   type: item
   debug: false
-  material: yellow_terracotta
+  material: <item[yellow_terracotta]>
   tag: <&f><&lb><&e>1<&f><&rb><&e>
   colour: <&e>
 
 mod_level2_item:
   type: item
   debug: false
-  material: orange_terracotta
+  material: <item[orange_terracotta]>
   tag: <&7><&lb><&6>2<&7><&rb><&6>
   colour: <&6>
 
 mod_level3_item:
   type: item
   debug: false
-  material: red_terracotta
+  material: <item[red_terracotta]>
   tag: <&8><&lb><&c>3<&8><&rb><&c>
   colour: <&c>
