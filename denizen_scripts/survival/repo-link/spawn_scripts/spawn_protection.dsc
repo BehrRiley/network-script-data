@@ -32,8 +32,8 @@ spawn_player_food_level:
   type: world
   debug: false
   events:
-    on entity changes food level in:spawn:
-      - adjust <player> food_level:20
+    on player changes food level in:spawn:
+      - determine 20
 
 # Anti Drown
 spawn_player_drowns:
