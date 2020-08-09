@@ -7,7 +7,7 @@ MobInv:
     permission: behrry.essentials.mobinv
     script:
     # % ██ [ Check args ] ██
-        - if <context.args.get[1]||null> != null:
+        - if <context.args.first||null> != null:
             - inject Command_Syntax Instantly
 
     # % ██ [ Define mob ] ██
@@ -57,9 +57,3 @@ MobInv_Handler:
             - inventory clear d:<[Inventory]>
             - inventory set d:<[Inventory]> o:<[Inventory].list_contents>
             - note as:<[Inventory]> remove
-
-#MobInventory_Handler:
-#    type: world
-#    events:
-#        on player
-#

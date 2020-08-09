@@ -2,28 +2,28 @@
 # @ ██    Command Dependencies | Easy injections to complete scripts
 # % ██
 # % ██  [ Command Syntax Error & Stop ] ██
-# - ██  [ Usage ] - inject Command_Syntax Instantly
+# - ██  [ Usage ] - inject Command_Syntax
 Command_Syntax:
     type: task
     debug: false
     script:
-        - define Command "<queue.script.yaml_key[aliases].get[1]||<queue.script.yaml_key[Name]>> "
-        - define Hover "<proc[Colorize].context[Click to Insert:|Green]><proc[Colorize].context[<&nl> <queue.script.yaml_key[Usage].parsed>|Yellow]>"
-        - define Text "<proc[Colorize].context[Syntax: <queue.script.yaml_key[Usage].parsed>|Yellow]>"
+        - define Command "<queue.script.data_key[aliases].first||<queue.script.data_key[Name]>> "
+        - define Hover "<proc[Colorize].context[Click to Insert:|Green]><proc[Colorize].context[<&nl> <queue.script.parsed_key[Usage]>|Yellow]>"
+        - define Text "<proc[Colorize].context[Syntax: <queue.script.parsed_key[Usage]>|Yellow]>"
         - narrate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
         - stop
 
 
 # % ██  [ Used a command wrongly, provide reason ] ██
 # - ██  [ Usage ] - define Reason "no"
-# - ██  [       ] - inject Command_Error Instantly
+# - ██  [       ] - inject Command_Error
 Command_Error:
     type: task
     debug: false
     script:
-        - define Hover "<proc[Colorize].context[You Typed:|red]><&r><&nl><&4>/<&c><context.alias||<context.command>> <context.raw_args><&nl><&2>C<&a>lick to <&2>I<&a>nsert<&nl><&6>Syntax<&co> <proc[Colorize].context[<queue.script.yaml_key[Usage].parsed>|yellow]>"
-        - define Text "<proc[Colorize].context[<[Reason]>|red]>"
-        - define Command "<queue.script.yaml_key[aliases].get[1]||<context.alias||<context.command>>> "
+        - define Hover "<proc[Colorize].context[You Typed:|red]><&r><&nl><&4>/<&c><context.alias||<context.command>> <context.raw_args><&nl><&2>C<&a>lick to <&2>I<&a>nsert<&nl><&6>Syntax<&co> <proc[Colorize].context[<queue.script.parsed_key[Usage]>|yellow]>"
+        - define Text <proc[Colorize].context[<[Reason]>|red]>
+        - define Command "<queue.script.data_key[aliases].first||<context.alias||<context.command>>> "
         - narrate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
         - stop
 
@@ -36,7 +36,7 @@ Permission_Error:
     debug: false
     script:
         - define Text "<proc[Colorize].context[You don't have permission to do that.|red]>"
-        - define Hover "<proc[Colorize].context[Permission Required:|red]> <&6><queue.script.yaml_key[adminpermission]>"
+        - define Hover "<proc[Colorize].context[Permission Required:|red]> <&6><queue.script.data_key[adminpermission]>"
         - narrate <proc[HoverMsg].context[<[Hover]>|<[Text]>]>
         - stop
 
@@ -48,11 +48,11 @@ Admin_Verification:
     type: task
     debug: false
     script:
-        - if !<player.has_permission[<queue.script.yaml_key[adminpermission]>]>:
+        - if !<player.has_permission[<queue.script.data_key[adminpermission]>]>:
             - inject Permission_Error
 
 #$# % ██  [ Specifically not moderation, no permission message ] ██
-#$# - ██  [ Usage ] - inject Admin_Permission_Denied instantly
+#$# - ██  [ Usage ] - inject Admin_Permission_Denied
 #$Admin_Permission_Denied:
 #$    type: task
 #$    debug: false
@@ -64,7 +64,7 @@ Admin_Verification:
 
 # % ██  [ Verifies a player online ] ██
 # - ██  [ Usage ]  - define User playername
-# - ██  [       ]  - inject Player_Verification Instantly
+# - ██  [       ]  - inject Player_Verification
 Player_Verification:
     type: task
     debug: false
@@ -74,15 +74,13 @@ Player_Verification:
         - narrate <proc[MsgHover].context[<[Hover]>|<[Text]>]>
         - stop
     script:
-        - if <[User].length> < 4:
-            - inject locally ErrorProcess Instantly
         - else if <server.match_player[<[User]>]||null> == null:
-            - inject locally ErrorProcess Instantly
+            - inject locally ErrorProcess
         - define User <server.match_player[<[User]>]>
 
 # % ██  [ Verifies a player online or offline ] ██
 # - ██  [ Usage ]  - define User playername
-# - ██  [       ]  - inject Player_Verification_Offline Instantly
+# - ██  [       ]  - inject Player_Verification_Offline
 Player_Verification_Offline:
     type: task
     debug: false
@@ -92,11 +90,9 @@ Player_Verification_Offline:
         - narrate <proc[MsgHover].context[<[Hover]>|<[Text]>]>
         - stop
     script:
-        - if <[User].length> < 4:
-            - inject locally ErrorProcess Instantly
         - else if <server.match_player[<[User]>]||null> == null:
             - if <server.match_offline_player[<[User]>]||null> == null:
-                - inject locally ErrorProcess Instantly
+                - inject locally ErrorProcess
             - else:
                 - define User <server.match_offline_player[<[User]>]>
         - else:
@@ -104,13 +100,11 @@ Player_Verification_Offline:
 
 # % ██  [ Verifies a player online or offline, returns null instead of closing the queue if invalid ] ██
 # - ██  [ Usage ]  - define User playername
-# - ██  [       ]  - inject Player_Verification_Offline_NullReturn Instantly
+# - ██  [       ]  - inject Player_Verification_Offline_NullReturn
 Player_Verification_Offline_NullReturn:
     type: task
     debug: false
     script:
-        - if <[User].length> < 4:
-            - define User null
         - else if <server.match_player[<[User]>]||null> == null:
             - define User <server.match_offline_player[<[User]>]||null>
         - else:
@@ -126,18 +120,18 @@ User_Display_Simple:
         - if <[User].has_flag[behrry.essentials.display_name]>:
             - determine "<&r><[User].display_name||<[User].flag[behrry.essentials.display_name]>><&r> <proc[Colorize].context[(<[User].name>)|yellow]>"
         - else:
-            - determine "<proc[Colorize].context[<[User].name>|yellow]>"
+            - determine <proc[Colorize].context[<[User].name>|yellow]>
 
 # % ██  [ Logging chat for global chat ] ██
 # - ██  [ Usage ]  - define Log SettingsKey/<[Message]>
-# - ██  [       ]  - inject ChatLog Instantly
+# - ██  [       ]  - inject ChatLog
 Chat_Logger:
     type: task
     debug: false
     script:
         - if <server.flag[Behrry.Essentials.ChatHistory.Global].size||0> > 24:
             - flag server Behrry.Essentials.ChatHistory.Global:<-:<server.flag[Behrry.Essentials.ChatHistory.Global].first>
-        - flag server "Behrry.Essentials.ChatHistory.Global:->:<[Log]>"
+        - flag server Behrry.Essentials.ChatHistory.Global:->:<[Log]>
 
 # @ ███████████████████████████████████████████████████████████
 # @ ██    Command Dependencies | Tab Completion
@@ -152,27 +146,27 @@ Chat_Logger:
 # - ██  [  # 3  ] - determine <proc[Online_Player_Tabcomplete].context[1|<player>]>
 # % ██  [       ]   tab completes all players online by their name for the first arg, blacklisting players flagged "Admin"
 # % ██  [       ]   the Blacklist must be escaped if it is a list of players
-# - ██  [ # 4.1 ] - determine <proc[Online_Player_Tabcomplete].context[1|<server.list_players_flagged[Admin].escaped>]>
+# - ██  [ # 4.1 ] - determine <proc[Online_Player_Tabcomplete].context[1|<server.players_flagged[Admin].escaped>]>
 # % ██  [       ]   OR you can inject the script directly as opposed to using the procedure tag:
 # % ██  [       ]   tab completes all players by their name for the first arg, blacklisting online players flagged "Admin"
-# - ██  [  #4.2 ] - define blacklist <server.list_online_players_flagged[Admin]>
+# - ██  [  #4.2 ] - define blacklist <server.online_players_flagged[Admin]>
 # - ██  [       ] - inject Online_Player_Tabcomplete
 # % ██  [       ]
 # % ██  [       ]   tab completes all players by their name for the second arg, and blacklisting online players flagged "Admin"
 # - ██  [  # 5  ] - define iArg 2
-# - ██  [       ] - define blacklist <server.list_online_players_flagged[Admin]>
+# - ██  [       ] - define blacklist <server.online_players_flagged[Admin]>
 # - ██  [       ] - inject Online_Player_Tabcomplete
 Online_Player_Tabcomplete:
     type: task
     debug: false
     definitions: iArg|Blacklist
     script:
-        - if !<[iArg].exists>:
+        - if <[iArg]||null> == null:
             - define iArg 1
         - if <context.args.size> == <[iArg].sub[1]>:
-            - determine <server.list_online_players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name]>
+            - determine <server.online_players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name]>
         - else if <context.args.size> == <[iArg]> && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <server.list_online_players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name].filter[starts_with[<context.args.get[<[iArg]>]>]]>
+            - determine <server.online_players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name].filter[starts_with[<context.args.get[<[iArg]>]>]]>
 
 
 
@@ -187,27 +181,27 @@ Online_Player_Tabcomplete:
 # % ██  [       ]
 # % ██  [       ]   tab completes all players by their name for the first arg, blacklisting players flagged "Admin"
 # % ██  [       ]   the Blacklist must be escaped if it is a list of players
-# - ██  [ # 4.1 ] - determine <proc[All_Player_Tabcomplete].context[1|<server.list_players_flagged[Admin].escaped>]>
+# - ██  [ # 4.1 ] - determine <proc[All_Player_Tabcomplete].context[1|<server.players_flagged[Admin].escaped>]>
 # % ██  [       ]   OR you can inject the script directly as opposed to using the procedure tag:
 # % ██  [       ]   tab completes all players by their name for the first arg, blacklisting players flagged "Admin"
-# - ██  [  #4.2 ] - define blacklist <server.list_players_flagged[Admin]>
+# - ██  [  #4.2 ] - define blacklist <server.players_flagged[Admin]>
 # - ██  [       ] - inject All_Player_Tabcomplete
 # % ██  [       ]
 # % ██  [       ]   tab completes all players by their name for the second arg, and blacklisting players flagged "Admin"
 # - ██  [  # 5  ] - define iArg 2
-# - ██  [       ] - define blacklist <server.list_players_flagged[Admin]>
+# - ██  [       ] - define blacklist <server.players_flagged[Admin]>
 # - ██  [       ] - inject All_Player_Tabcomplete
 All_Player_Tabcomplete:
     type: task
     debug: false
     definitions: iArg|Blacklist
     script:
-        - if !<[iArg].exists>:
+        - if <[iArg]||null> == null:
             - define iArg 1
         - if <context.args.size> == <[iArg].sub[1]>:
-            - determine <server.list_players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name]>
+            - determine <server.players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name]>
         - else if <context.args.size> == <[iArg]> && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <server.list_players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name].filter[starts_with[<context.args.get[<[iArg]>]>]]>
+            - determine <server.players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name].filter[starts_with[<context.args.get[<[iArg]>]>]]>
 
 
 
@@ -225,7 +219,7 @@ OneArg_Command_Tabcomplete:
     debug: false
     definitions: iArg|Args
     script:
-        - if !<[iArg].exists>:
+        - if <[iArg]||null> == null:
             - define iArg 1
         - if <context.args.size> == <[iArg].sub[1]>:
             - determine <[Args]>
@@ -241,7 +235,7 @@ OneArg_Command_Tabcomplete:
 # - ██  [       ] - define Arg2 <list[thin|handtossed|brooklyn]>
 # - ██  [       ] - define Arg3 <list[redsauce|bbq|alfredo]>
 # - ██  [       ] - define Arg4 <list[pepperonies|sausage|pineapples|none]>
-# - ██  [       ] - inject MultiArg_Command_Tabcomplete Instantly
+# - ██  [       ] - inject MultiArg_Command_Tabcomplete
 MultiArg_Command_Tabcomplete:
     type: task
     debug: false
@@ -273,7 +267,7 @@ MultiArg_Command_Tabcomplete:
 # - ██  [       ] - define Arg2LargeArgs <list[Pepperonies|Sausage|Ham|Chicken|Pineapples|Bacon]>
 # - ██  [       ] - define Arg3 <list[RedSauce|bbq|alfredo]>
 # - ██  [       ] - define Arg4RedSauceArgs <list[Pepperonies|Sausage|Pineapples]>
-# - ██  [       ] - inject MultiArg_With_MultiArgs_Command_Tabcomplete Instantly
+# - ██  [       ] - inject MultiArg_With_MultiArgs_Command_Tabcomplete
 # % ██  [ Notes ] Tab-completes a list of options for a numbered list of args with specific args per args
 MultiArg_With_MultiArgs_Command_Tabcomplete:
     type: task
@@ -305,7 +299,7 @@ MultiArg_With_MultiArgs_Command_Tabcomplete:
 # - ██  [  # 1  ] - define Arg1 <list[Option1|Option2]>
 # - ██  [  # 1  ] - define Arg2Option1Args <list[Option3|Option4]>
 # - ██  [  # 1  ] - define Arg3Option2Args <list[Option5|Option6]>
-# - ██  [       ] - inject MultiArg_With_MultiArgs_Command_Tabcomplete Instantly
+# - ██  [       ] - inject MultiArg_With_MultiArgs_Command_Tabcomplete
 # % ██  [ Notes ] Tab-completes a list of options for a numbered list of args with specific args per args
 MultiArg_With_MultiArgs_Excess_Command_Tabcomplete:
     type: task
@@ -320,15 +314,15 @@ MultiArg_With_MultiArgs_Excess_Command_Tabcomplete:
                 #@ Player is typing a current arg
                 - if !<context.raw_args.ends_with[<&sp>]>:
                     #@ TabCompleting Arg#
-                    - if <[Arg<[Loop_Index]>].exists>:
+                    - if <[Arg<[Loop_Index]>]||null> != null:
                         - determine <[Arg<[Loop_Index]>].filter[starts_with[<context.args.get[<[Loop_Index]>]>]]>
                     #@ TabCompleting Arg#ArgArgs
                     - repeat <[ArgSize]>:
                         - define ArgRef <[ArgSize].sub[<[Value]>]>
-                        - if <[Arg<[ArgRef]>].exists>:
+                        - if <[Arg<[ArgRef]>]||null> != null:
                             - if <[Arg<[ArgRef]>].contains[<context.args.get[<[ArgRef]>]>]>:
                                 - define Option <context.args.get[<[ArgRef]>]>
-                                - if <[Arg<[loop_index]><[Option]>Args].exists>:
+                                - if <[Arg<[loop_index]><[Option]>Args]||null> != null:
                                     - determine <[Arg<[Loop_Index]><[Option]>Args].filter[starts_with[<context.args.last>]]>
                                     
                 #@ Player is typing a new arg - check for Arg#
@@ -341,14 +335,14 @@ MultiArg_With_MultiArgs_Excess_Command_Tabcomplete:
                         - define i1 <[Value]>
                         #@ Check for previous Arg#
                         - define ArgRef <[ArgSize].add[1].sub[<[i1]>]>
-                        - if <[Arg<[i1]>].exists>:
+                        - if <[Arg<[i1]>]||null> != null:
                             - repeat <[ArgRef].add[1]>:
                                 - define i2 <[Value]>
                                 - if <context.args.size.add[1]> != <[i2]>:
                                     - repeat next
                                 - define iArg <context.args.get[<[ArgSize].add[1].sub[<[i2]>]>]>
                                 - if <[Arg<[i1]>].contains[<[iArg]>]>:
-                                    - if <[Arg<[ArgSize].add[1]><[iArg]>Args].exists>:
+                                    - if <[Arg<[ArgSize].add[1]><[iArg]>Args]||null> != null:
                                         - determine <[Arg<[ArgSize].add[1]><[iArg]>Args]>
             #@ Skip to next index
             - else:
@@ -390,10 +384,10 @@ MultiArg_With_MultiArgs_Excess_Command_Tabcomplete:
 # @ ██    Command Dependencies | Unique Command Features
 # % ██
 # @ ██  [ Activates or Deactivates a toggle command ] ██
-# @ ██  [ Usage ] - define Arg <context.args.get[1]||null>
-# @ ██  [       ] - define ModeFlag "Behr.Essentials.Example"
+# @ ██  [ Usage ] - define Arg <context.args.first||null>
+# @ ██  [       ] - define ModeFlag Behr.Essentials.Example
 # @ ██  [       ] - define ModeName "Mode Name"
-# @ ██  [       ] - inject Activation_Arg_Command Instantly
+# @ ██  [       ] - inject Activation_Arg_Command
 # @ ██  [       ]
 # @ ██  [       ] - run Activation_Arg_Command "def:Behr.Essentials.Example|Mode Name"
 # @ ██  [       ] - run Activation_Arg_Command "def:Behr.Essentials.Example|Mode Name|on"
@@ -417,16 +411,16 @@ Activation_Arg:
     script:
         - choose <[Arg]||null>:
             - case on true activate:
-                - inject locally Activate Instantly
+                - inject locally Activate
             - case off false deactivate:
-                - inject locally Deactivate Instantly
+                - inject locally Deactivate
             - case null:
                 - if <player.has_flag[<[ModeFlag]>]>:
-                    - inject locally Deactivate Instantly
+                    - inject locally Deactivate
                 - else:
-                    - inject locally Activate Instantly
+                    - inject locally Activate
             - default:
-                - inject Command_Syntax Instantly
+                - inject Command_Syntax
 
 
 

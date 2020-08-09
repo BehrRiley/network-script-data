@@ -18,7 +18,7 @@ Teleport_Command:
             - inject Command_Syntax
 
     # % ██ [ Check player arg ] ██
-        - define User <context.args.get[1]>
+        - define User <context.args.first>
         - inject Player_Verification_Offline
 
     # % ██ [ Check for multi-player teleporting ] ██
@@ -36,6 +36,11 @@ Teleport_Command:
         # % ██ [ Check if player is still requested ] ██
                 - if <[User].flag[Behr.Essentials.teleport.request].parse[before[/]].contains[<Player>]||false>:
                     - narrate format:Colorize_Red "Teleport request still pending."
+                    - stop
+
+            # - ██ [ Temporary Event Handle ] ██
+                - if <player.has_flag[Event.InEvent]>:
+                    - narrate format:Colorize_Red "You cannot do that during an event."
                     - stop
 
                 - define HoverA "<proc[Colorize].context[Accept Teleport Request from:|Green]><&nl><proc[User_Display_Simple].context[<player>]>"
@@ -84,7 +89,7 @@ Teleport_Command:
                 - inject Admin_Permission_Denied
 
         # % ██ [ Teleport multiple people to last player ] ██
-            - foreach <context.raw_args.split[<&sp>].get[1].to[<context.args.size.sub[1]>]> as:User:
+            - foreach <context.raw_args.split[<&sp>].first.to[<context.args.size.sub[1]>]> as:User:
                 - inject Player_Verification
                 - if <[PlayerList].contains[<[User]>]||false>:
                     - define reason "<proc[Player_Display_Simple].context[<[User]>]> was entered more than once."

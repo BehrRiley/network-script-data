@@ -3,17 +3,17 @@ Backpack:
   material: chest
   display name: <&a>Backpack
   lore:
-    - "<&e>Slots<&co> <&a>9"
-    - "<&a>"
-    - "<&e>Hold in Hand"
-    - "<&b>Place block to open"
+    - <&e>Slots<&co> <&a>9
+    - <&a>
+    - <&e>Hold in Hand
+    - <&b>Place block to open
   mechanisms:
     nbt: backpack_slots/9|backpack_contents/<list>|unique/<server.current_time_millis>
 
 Backpack_events:
   type: world
   events:
-    on player right clicks with:Backpack:
+    on player right clicks block with:Backpack:
       - determine passively cancelled
       - wait 1t
       - inject Backpack_open
