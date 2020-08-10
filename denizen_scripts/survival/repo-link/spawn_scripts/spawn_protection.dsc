@@ -19,6 +19,7 @@ spawn_world_protection:
       - if !<player.has_flag[world.spawn.modify]> && !<player.has_flag[world.spawn.can_shoot]>:
         - determine cancelled
 
+
 # Anti Damaged Events
 spawn_player_takes_damage:
   type: world
