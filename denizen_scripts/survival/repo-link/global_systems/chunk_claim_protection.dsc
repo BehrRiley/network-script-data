@@ -925,7 +925,7 @@ claiming_protection_group_disband:
   definitions: group
   script:
   - yaml id:claims set groups.<[group]>:!
-  - foreach <server.notables[cuboids].filter[notable_name.starts_with[claim.<[group]>]]> as:cuboid:
+  - foreach <server.notables[cuboids].filter[note_name.starts_with[claim.<[group]>]]> as:cuboid:
     - define chunk <[cuboid].as_cuboid.center.chunk>
     - yaml id:claims set <[chunk].world>.<[chunk].x>.<[chunk].z>:!
     - yaml id:claims set limits.current.<player.uuid>:--
@@ -1240,10 +1240,8 @@ claiming_system_upgrade_events:
   type: world
   debug: false
   events:
-    on player enters area:
-    - if <context.cuboids.filter[note_name.starts_with[claim]].is_empty>:
-      - stop
-    - define group <context.cuboids.filter[note_name.starts_with[claim]].parse[note_name.after[.].before[/]].first>
+    on player enters claim*:
+    - define group <context.area.note_name.after[.].before[/]>
     - if <player.flag[claim_enter_ignore]||null> == <[group]>:
       - flag player claim_enter_ignore:!
       - stop
@@ -1256,10 +1254,8 @@ claiming_system_upgrade_events:
             - inject claim_system_apply_upgrade_fly
             - foreach next
         - inject claim_system_apply_upgrade_<[upgrade_name]>
-    on player exits area:
-    - if <context.cuboids.filter[note_name.starts_with[claim]].is_empty>:
-      - stop
-    - define group <context.cuboids.filter[note_name.starts_with[claim]].parse[note.after[.].before[/]].first>
+    on player exits claim*:
+    - define group <context.area.note_name.after[.].before[/]>
     - flag player claim_enter_ignore:<[group]> duration:6t
     - wait 2t
     - if !<player.is_online>:
@@ -1268,7 +1264,7 @@ claiming_system_upgrade_events:
       - inject claiming_system_bossBar_Stop
       - wait 2t
       - foreach fly|time-control|weather-control as:upgrade_name:
-        - define newgroup:<player.location.cuboids.filter[notable_name.starts_with[claim]].first.note_name.after[.].before[/]||null>
+        - define newgroup:<player.location.cuboids.filter[note_name.starts_with[claim]].first.note_name.after[.].before[/]||null>
         - if <[newgroup]> != null:
           - if <yaml[claims].read[groups.<[newgroup]>.members.<player.uuid>.<[upgrade_name]>]||true> || <yaml[claims].read[groups.<[newgroup]>.members.everyone.<[upgrade_name]>]||true>:
             - if <yaml[claims].read[groups.<[newgroup]>.upgrades.<[upgrade_name]>]> && <yaml[claims].read[groups.<[newgroup]>.settings.<[upgrade_name]>]> != off:

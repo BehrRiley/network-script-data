@@ -10,7 +10,7 @@
 # ██ [ Root Directories           ] ██
 playerdata
 resource_packs/*
-system_scripts/*
+system_scripts/system
 
 # ██ [ Server Directories         ] ██
 denizen_scripts/gielinordev
@@ -18,11 +18,14 @@ denizen_scripts/gielinordev
 # ██ [ Scriptdata Directories     ] ██
 scriptdata/global/twitch
 scriptdata/global/bungee
+scriptdata/global/admin
+scriptdata/global/bans
 
 # ██ [ Scriptdata Files           ] ██
 scriptdata/global/Behr_Essentials
 scriptdata/global/discord/token.yml
 scriptdata/global/discord/webhooks.yml
+scriptdata/global/discord/oAuth_Data.yml
 scriptdata/global/players
 scriptdata/global/network/titles.yml
 denizen_scripts/relay/repo-link/Handlers/message_handler.dsc

@@ -2,7 +2,7 @@
 # @ ██    Command Dependencies | Easy injections to complete scripts
 # % ██
 # % ██  [ Command Syntax Error & Stop ] ██
-# - ██  [ Usage ] - inject Command_Syntax Instantly
+# - ██  [ Usage ] - inject Command_Syntax
 Command_Syntax:
     type: task
     debug: false
@@ -16,7 +16,7 @@ Command_Syntax:
 
 # % ██  [ Used a command wrongly, provide reason ] ██
 # - ██  [ Usage ] - define Reason "no"
-# - ██  [       ] - inject Command_Error Instantly
+# - ██  [       ] - inject Command_Error
 Command_Error:
     type: task
     debug: false
@@ -52,7 +52,7 @@ Admin_Verification:
             - inject Permission_Error
 
 #$# % ██  [ Specifically not moderation, no permission message ] ██
-#$# - ██  [ Usage ] - inject Admin_Permission_Denied instantly
+#$# - ██  [ Usage ] - inject Admin_Permission_Denied
 #$Admin_Permission_Denied:
 #$    type: task
 #$    debug: false
@@ -64,7 +64,7 @@ Admin_Verification:
 
 # % ██  [ Verifies a player online ] ██
 # - ██  [ Usage ]  - define User playername
-# - ██  [       ]  - inject Player_Verification Instantly
+# - ██  [       ]  - inject Player_Verification
 Player_Verification:
     type: task
     debug: false
@@ -75,14 +75,14 @@ Player_Verification:
         - stop
     script:
         - if <[User].length> < 4:
-            - inject locally ErrorProcess Instantly
+            - inject locally ErrorProcess
         - else if <server.match_player[<[User]>]||null> == null:
-            - inject locally ErrorProcess Instantly
+            - inject locally ErrorProcess
         - define User <server.match_player[<[User]>]>
 
 # % ██  [ Verifies a player online or offline ] ██
 # - ██  [ Usage ]  - define User playername
-# - ██  [       ]  - inject Player_Verification_Offline Instantly
+# - ██  [       ]  - inject Player_Verification_Offline
 Player_Verification_Offline:
     type: task
     debug: false
@@ -93,10 +93,10 @@ Player_Verification_Offline:
         - stop
     script:
         - if <[User].length> < 4:
-            - inject locally ErrorProcess Instantly
+            - inject locally ErrorProcess
         - else if <server.match_player[<[User]>]||null> == null:
             - if <server.match_offline_player[<[User]>]||null> == null:
-                - inject locally ErrorProcess Instantly
+                - inject locally ErrorProcess
             - else:
                 - define User <server.match_offline_player[<[User]>]>
         - else:
@@ -104,14 +104,12 @@ Player_Verification_Offline:
 
 # % ██  [ Verifies a player online or offline, returns null instead of closing the queue if invalid ] ██
 # - ██  [ Usage ]  - define User playername
-# - ██  [       ]  - inject Player_Verification_Offline_NullReturn Instantly
+# - ██  [       ]  - inject Player_Verification_Offline_NullReturn
 Player_Verification_Offline_NullReturn:
     type: task
     debug: false
     script:
-        - if <[User].length> < 4:
-            - define User null
-        - else if <server.match_player[<[User]>]||null> == null:
+        - if <server.match_player[<[User]>]||null> == null:
             - define User <server.match_offline_player[<[User]>]||null>
         - else:
             - define User <server.match_player[<[User]>]>
@@ -130,7 +128,7 @@ User_Display_Simple:
 
 # % ██  [ Logging chat for global chat ] ██
 # - ██  [ Usage ]  - define Log SettingsKey/<[Message]>
-# - ██  [       ]  - inject ChatLog Instantly
+# - ██  [       ]  - inject ChatLog
 Chat_Logger:
     type: task
     debug: false
@@ -167,12 +165,12 @@ Online_Player_Tabcomplete:
     debug: false
     definitions: iArg|Blacklist
     script:
-        - if !<[iArg].exists>:
+        - if <[iArg]||null> == null:
             - define iArg 1
         - if <context.args.size> == <[iArg].sub[1]>:
-            - determine <server.online_players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name]>
+            - determine <server.online_players.exclude[<[Blacklist]||null>].parse[name]>
         - else if <context.args.size> == <[iArg]> && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <server.online_players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name].filter[starts_with[<context.args.get[<[iArg]>]>]]>
+            - determine <server.online_players.exclude[<[Blacklist]||null>].parse[name].filter[starts_with[<context.args.get[<[iArg]>]>]]>
 
 
 
@@ -202,12 +200,12 @@ All_Player_Tabcomplete:
     debug: false
     definitions: iArg|Blacklist
     script:
-        - if !<[iArg].exists>:
+        - if <[iArg]||null> == null:
             - define iArg 1
         - if <context.args.size> == <[iArg].sub[1]>:
-            - determine <server.players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name]>
+            - determine <server.players.exclude[<[Blacklist]||null>].parse[name]>
         - else if <context.args.size> == <[iArg]> && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <server.players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name].filter[starts_with[<context.args.get[<[iArg]>]>]]>
+            - determine <server.players.exclude[<[Blacklist]||null>].parse[name].filter[starts_with[<context.args.get[<[iArg]>]>]]>
 
 
 
@@ -225,7 +223,7 @@ OneArg_Command_Tabcomplete:
     debug: false
     definitions: iArg|Args
     script:
-        - if !<[iArg].exists>:
+        - if <[iArg]||null> == null:
             - define iArg 1
         - if <context.args.size> == <[iArg].sub[1]>:
             - determine <[Args]>
@@ -241,7 +239,7 @@ OneArg_Command_Tabcomplete:
 # - ██  [       ] - define Arg2 <list[thin|handtossed|brooklyn]>
 # - ██  [       ] - define Arg3 <list[redsauce|bbq|alfredo]>
 # - ██  [       ] - define Arg4 <list[pepperonies|sausage|pineapples|none]>
-# - ██  [       ] - inject MultiArg_Command_Tabcomplete Instantly
+# - ██  [       ] - inject MultiArg_Command_Tabcomplete
 MultiArg_Command_Tabcomplete:
     type: task
     debug: false
@@ -251,9 +249,9 @@ MultiArg_Command_Tabcomplete:
         - foreach <context.args> as:Arg:
             - if <[Loop_Index]> == <context.args.size>:
                 - if !<context.raw_args.ends_with[<&sp>]>:
-                    - if <[Arg<[Loop_Index]>].exists>:
+                    - if <[Arg<[Loop_Index]>]||null> != null:
                         - determine <[Arg<[Loop_Index]>].filter[starts_with[<context.args.get[<[Loop_Index]>]>]]>
-                - else if <[Arg<[Loop_Index].add[1]>].exists>:
+                - else if <[Arg<[Loop_Index].add[1]>]||null> != null:
                     - determine <[Arg<[Loop_Index].add[1]>]>
             - else:
                 - foreach next
@@ -273,7 +271,7 @@ MultiArg_Command_Tabcomplete:
 # - ██  [       ] - define Arg2LargeArgs <list[Pepperonies|Sausage|Ham|Chicken|Pineapples|Bacon]>
 # - ██  [       ] - define Arg3 <list[RedSauce|bbq|alfredo]>
 # - ██  [       ] - define Arg4RedSauceArgs <list[Pepperonies|Sausage|Pineapples]>
-# - ██  [       ] - inject MultiArg_With_MultiArgs_Command_Tabcomplete Instantly
+# - ██  [       ] - inject MultiArg_With_MultiArgs_Command_Tabcomplete
 # % ██  [ Notes ] Tab-completes a list of options for a numbered list of args with specific args per args
 MultiArg_With_MultiArgs_Command_Tabcomplete:
     type: task
@@ -284,16 +282,16 @@ MultiArg_With_MultiArgs_Command_Tabcomplete:
         - foreach <context.args> as:Arg:
             - if <[Loop_Index]> == <context.args.size>:
                 - if !<context.raw_args.ends_with[<&sp>]>:
-                    - if <[Arg<[Loop_Index]>].exists>:
+                    - if <[Arg<[Loop_Index]>]||null> != null:
                         - determine <[Arg<[Loop_Index]>].filter[starts_with[<context.args.get[<[Loop_Index]>]>]]>
                     - if  <[Arg<[Loop_Index].sub[1]>].contains[<context.args.get[<[Loop_Index].sub[1]>]>]>:
                         - define Option <context.args.get[<[Loop_Index].sub[1]>]>:
-                        - if <[Arg<[loop_index]><[Option]>Args].exists>:
+                        - if <[Arg<[loop_index]><[Option]>Args]||null> != null:
                             - determine <[Arg<[Loop_Index]><[Option]>Args].filter[starts_with[<context.args.last>]]>
-                - else if <[Arg<[Loop_Index].add[1]>].exists>:
+                - else if <[Arg<[Loop_Index].add[1]>]||null> != null:
                     - determine <[Arg<[Loop_Index].add[1]>]>
                 - else if <[Arg<[Loop_Index]>].contains[<context.args.last>]>:
-                    - if <[Arg<[Loop_Index].add[1]><context.args.last>Args].exists>:
+                    - if <[Arg<[Loop_Index].add[1]><context.args.last>Args]||null> != null:
                         - determine <[Arg<[Loop_Index].add[1]><context.args.last>Args]>
             - else:
                 - foreach next
@@ -305,7 +303,7 @@ MultiArg_With_MultiArgs_Command_Tabcomplete:
 # - ██  [  # 1  ] - define Arg1 <list[Option1|Option2]>
 # - ██  [  # 1  ] - define Arg2Option1Args <list[Option3|Option4]>
 # - ██  [  # 1  ] - define Arg3Option2Args <list[Option5|Option6]>
-# - ██  [       ] - inject MultiArg_With_MultiArgs_Command_Tabcomplete Instantly
+# - ██  [       ] - inject MultiArg_With_MultiArgs_Command_Tabcomplete
 # % ██  [ Notes ] Tab-completes a list of options for a numbered list of args with specific args per args
 MultiArg_With_MultiArgs_Excess_Command_Tabcomplete:
     type: task
@@ -320,19 +318,19 @@ MultiArg_With_MultiArgs_Excess_Command_Tabcomplete:
                 #@ Player is typing a current arg
                 - if !<context.raw_args.ends_with[<&sp>]>:
                     #@ TabCompleting Arg#
-                    - if <[Arg<[Loop_Index]>].exists>:
+                    - if <[Arg<[Loop_Index]>]||null> != null:
                         - determine <[Arg<[Loop_Index]>].filter[starts_with[<context.args.get[<[Loop_Index]>]>]]>
                     #@ TabCompleting Arg#ArgArgs
                     - repeat <[ArgSize]>:
                         - define ArgRef <[ArgSize].sub[<[Value]>]>
-                        - if <[Arg<[ArgRef]>].exists>:
+                        - if <[Arg<[ArgRef]>]||null> != null:
                             - if <[Arg<[ArgRef]>].contains[<context.args.get[<[ArgRef]>]>]>:
                                 - define Option <context.args.get[<[ArgRef]>]>
-                                - if <[Arg<[loop_index]><[Option]>Args].exists>:
+                                - if <[Arg<[loop_index]><[Option]>Args]> != null:
                                     - determine <[Arg<[Loop_Index]><[Option]>Args].filter[starts_with[<context.args.last>]]>
                                     
                 #@ Player is typing a new arg - check for Arg#
-                - else if <[Arg<[Loop_Index].add[1]>].exists>:
+                - else if <[Arg<[Loop_Index].add[1]>]||null> != null:
                     - determine <[Arg<[Loop_Index].add[1]>]>
                 
                 #@ Player is typing a new arg - check for Arg#ArgArgs
@@ -341,14 +339,14 @@ MultiArg_With_MultiArgs_Excess_Command_Tabcomplete:
                         - define i1 <[Value]>
                         #@ Check for previous Arg#
                         - define ArgRef <[ArgSize].add[1].sub[<[i1]>]>
-                        - if <[Arg<[i1]>].exists>:
+                        - if <[Arg<[i1]>]||null> != null:
                             - repeat <[ArgRef].add[1]>:
                                 - define i2 <[Value]>
                                 - if <context.args.size.add[1]> != <[i2]>:
                                     - repeat next
                                 - define iArg <context.args.get[<[ArgSize].add[1].sub[<[i1]>]>]>
                                 - if <[Arg<[i1]>].contains[<[iArg]>]>:
-                                    - if <[Arg<[ArgSize].add[1]><[iArg]>Args].exists>:
+                                    - if <[Arg<[ArgSize].add[1]><[iArg]>Args]||null> != null:
                                         - determine <[Arg<[ArgSize].add[1]><[iArg]>Args]>
             #@ Skip to next index
             - else:
@@ -362,25 +360,25 @@ MultiArg_With_MultiArgs_Excess_Command_Tabcomplete:
 #^        - foreach <context.args> as:Arg:
 #^            - if <[Loop_Index]> == <context.args.size>:
 #^                - if !<context.raw_args.ends_with[<&sp>]>:
-#^                    - if <[Arg<[Loop_Index]>].exists>:
+#^                    - if <[Arg<[Loop_Index]>]||null> != null:
 #^                        - determine <[Arg<[Loop_Index]>].filter[starts_with[<context.args.get[<[Loop_Index]>]>]]>
 #^                    - repeat <context.args.size>:
-#^                        - if <[Arg<context.args.size.sub[<[Value]>]>].exists>:
+#^                        - if <[Arg<context.args.size.sub[<[Value]>]>]||null> != null:
 #^                            - if <[Arg<context.args.size.sub[<[Value]>]>].contains[<context.args.get[<context.args.size.sub[<[Value]>]>]>]>:
-#^                                - if <[Arg<[loop_index]><context.args.get[<context.args.size.sub[<[Value]>]>]>Args].exists>:
+#^                                - if <[Arg<[loop_index]><context.args.get[<context.args.size.sub[<[Value]>]>]>Args]||null> != null:
 #^                                    - determine <[Arg<[Loop_Index]><context.args.get[<context.args.size.sub[<[Value]>]>]>Args].filter[starts_with[<context.args.last>]]>
-#^                - else if <[Arg<[Loop_Index].add[1]>].exists>:
+#^                - else if <[Arg<[Loop_Index].add[1]>]||null> != null:
 #^                    - determine <[Arg<[Loop_Index].add[1]>]>
 #^                - else:
 #^                    - repeat <context.args.size>:
 #^                        - define i1 <[Value]>
-#^                        - if <[Arg<[i1]>].exists>:
+#^                        - if <[Arg<[i1]>]||null> != null:
 #^                            - repeat <context.args.size.add[1].sub[<[i1]>].add[1]>:
 #^                                - define i2 <[Value]>
 #^                                - if <context.args.size.add[1]> != <[i2]>:
 #^                                    - repeat next
 #^                                - if <[Arg<[i1]>].contains[<context.args.get[<context.args.size.add[1].sub[<[i2]>]>]>]>:
-#^                                    - if <[Arg<context.args.size.add[1]><context.args.get[<context.args.size.add[1].sub[<[i2]>]>]>Args].exists>:
+#^                                    - if <[Arg<context.args.size.add[1]><context.args.get[<context.args.size.add[1].sub[<[i2]>]>]>Args]||null> != null:
 #^                                        - determine <[Arg<context.args.size.add[1]><context.args.get[<context.args.size.add[1].sub[<[i2]>]>]>Args]>
 #%            #@ Skip to next index
 #^            - else:
@@ -393,7 +391,7 @@ MultiArg_With_MultiArgs_Excess_Command_Tabcomplete:
 # @ ██  [ Usage ] - define Arg <context.args.first||null>
 # @ ██  [       ] - define ModeFlag "Behr.Essentials.Example"
 # @ ██  [       ] - define ModeName "Mode Name"
-# @ ██  [       ] - inject Activation_Arg_Command Instantly
+# @ ██  [       ] - inject Activation_Arg_Command
 # @ ██  [       ]
 # @ ██  [       ] - run Activation_Arg_Command "def:Behr.Essentials.Example|Mode Name"
 # @ ██  [       ] - run Activation_Arg_Command "def:Behr.Essentials.Example|Mode Name|on"
@@ -417,16 +415,16 @@ Activation_Arg:
     script:
         - choose <[Arg]||null>:
             - case on true activate:
-                - inject locally Activate Instantly
+                - inject locally Activate
             - case off false deactivate:
-                - inject locally Deactivate Instantly
+                - inject locally Deactivate
             - case null:
                 - if <player.has_flag[<[ModeFlag]>]>:
-                    - inject locally Deactivate Instantly
+                    - inject locally Deactivate
                 - else:
-                    - inject locally Activate Instantly
+                    - inject locally Activate
             - default:
-                - inject Command_Syntax Instantly
+                - inject Command_Syntax
 
 
 

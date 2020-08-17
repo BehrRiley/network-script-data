@@ -2,10 +2,7 @@
 Parkour_events:
   type: world
   events:
-    on player enters area:
-      - define note_name <context.cuboids.filter[note_name.starts_with[parkour]].parse[note_name].first||null>
-      - if <[note_name]> == null:
-        - stop
+    on player enters parkour*:
       - define level <[note_name].after[~]||null>
       - choose <[note_name].after[.].before[~]>:
         # parkour.SetWaypoint~#
@@ -67,6 +64,8 @@ parkour_quit_command:
         - flag player parkour:!
         - teleport <player> parkour_complete
         - stop
+      - else:
+        - narrate "<&c>You are not currently participating in the parkour!"
 
 parkour_leave_handler:
   type: world

@@ -10,7 +10,7 @@ BStaff:
   enchantments:
     - BINDING_CURSE
   mechanisms:
-    hides: HIDE_ALL
+    hides: ALL
 
 BehrEdit_Command:
     type: command
@@ -70,7 +70,7 @@ testing:
     type: task
     debug: false
     script:
-        - foreach <server.list_entity_types> as:entity:
+        - foreach <server.entity_types> as:entity:
             - spawn <[Entity]> save:s
             - wait 1t
             - if <entry[s].spawned_entity.is_tamed||invalid> != invalid:
