@@ -4,7 +4,6 @@ crystal_dead:
   mechanisms:
   - custom_model_data: 2
   display name: <&a>Crystal (Dead)
-
   lore:
     - <&e>End Crystal (Dead)
 
@@ -52,4 +51,3 @@ crystal_yellow:
   display name: <&a>Crystal (Yellow)
   lore:
     - <&e>End Crystal (Yellow)
-
