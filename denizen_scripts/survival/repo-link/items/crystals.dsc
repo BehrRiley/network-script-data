@@ -4,13 +4,6 @@ crystal_dead:
   mechanisms:
   - custom_model_data: 2
   display name: <&a>Crystal (Dead)
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 7cf22ce496404e1a7e81d26f46a65e84bb6bc19f
-=======
->>>>>>> 911a01fc345f1ff81c09545bba94e929cb14f85d
   lore:
     - <&e>End Crystal (Dead)
 
@@ -58,10 +51,3 @@ crystal_yellow:
   display name: <&a>Crystal (Yellow)
   lore:
     - <&e>End Crystal (Yellow)
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 7cf22ce496404e1a7e81d26f46a65e84bb6bc19f
-=======
->>>>>>> 911a01fc345f1ff81c09545bba94e929cb14f85d
