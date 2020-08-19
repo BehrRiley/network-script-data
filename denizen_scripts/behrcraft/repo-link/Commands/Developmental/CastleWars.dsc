@@ -146,14 +146,14 @@ CastleWars_Event:
         - announce "<&c>Castle Wars Game was stopped."
 
 
-Event_Command:
+Event_Commandy:
   type: command
-  name: event
+  name: eventy
   usage: /event <&gt>>EventName<&lt> (Queue/Pause/Stop/Manage (AddTime/SlowTime/Settings))
   description: Manages Event Queues.
   tab complete:
     - define SubCommands <list[Queue|Pause|Stop]>
-    - define Events <server.list_scripts.filter[ends_with[Event]]>
+    - define Events <server.scripts.filter[ends_with[Event]]>
     - if <context.args.size> == 0:
       - determine <[SubCommands]>
     - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
@@ -252,8 +252,8 @@ BehrsPreChunker:
   permission: test
   script:
     - if <player.name.contains[behr_riley]>:
-      - define x <player.location.chunk.after[@].before[,]>
-      - define y <player.location.chunk.after[@].before_last[,].after[,]>
+      - define x <player.location.chunk.x>
+      - define y <player.location.chunk.z>
       - define World <player.world>
 
       #- define Diff <element[14].add[<[ChunkRadius].sub[2].mul[8]>]>
@@ -324,17 +324,17 @@ IcecapadePreChunk:
     - else if <context.args.size> == 1 && "!<context.raw_args.ends_with[ ]>":
         - determine <list[16|32|64|128|256].filter[starts_with[<context.args.first>]]>
     - else if <context.args.size> < 2:
-        - determine <server.list_worlds.parse[name]>
+        - determine <server.worlds.parse[name]>
     - else if <context.args.size> == 2 && "!<context.raw_args.ends_with[ ]>":
-        - determine <server.list_worlds.parse[name].filter[starts_with[<context.args.last>]]>
+        - determine <server.worlds.parse[name].filter[starts_with[<context.args.last>]]>
     script:
-    - if <context.args.size> == 2 && <context.args.first.is_integer> && <context.args.first> >= 4 && <server.list_worlds.parse[name].contains[<context.args.last>]>:
+    - if <context.args.size> == 2 && <context.args.first.is_integer> && <context.args.first> >= 4 && <server.worlds.parse[name].contains[<context.args.last>]>:
         - narrate "<&3>[PreChunk] Generation started! See console for information."
         - define world <context.args.get[2]>
         #- define X <context.args.first.mul[-1]>
         #- define Y <context.args.first.mul[-1]>
-        - define X <player.location.chunk.after[@].before[,]>
-        - define Y <player.location.chunk.after[@].before_last[,].after[,]>
+        - define X <player.location.chunk.x>
+        - define Y <player.location.chunk.z>
         - define loops <[X].mul[-2].abs>
         - repeat <[loops]>:
             - chunkload <chunk[<[X]>,<[Y]>,<[world]>]> d:1t

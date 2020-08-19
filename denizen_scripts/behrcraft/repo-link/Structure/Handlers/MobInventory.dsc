@@ -7,7 +7,7 @@ MobInv:
     permission: behrry.essentials.mobinv
     script:
     # % ██ [ Check args ] ██
-        - if <context.args.get[1]||null> != null:
+        - if <context.args.first||null> != null:
             - inject Command_Syntax Instantly
 
     # % ██ [ Define mob ] ██
@@ -50,16 +50,10 @@ MobInv_Handler:
         #    - determine passively cancelled
         on player clicks in *VillagerInventory*:
             - define Whitelist <list[Wheat_Seeds|Beetroot_Seeds|Bread|Carrot|Potato|Beetroot|Wheat]>
-            - if !<[Whitelist].contains[<context.item.material.name||null>]>:
+            - if !<[Whitelist].contains[<context.item.material.name>]>:
                 - determine passively cancelled
         on player closes *SheepInventory*|*VillagerInventory*:
             - define Inventory <context.inventory>
             - inventory clear d:<[Inventory]>
             - inventory set d:<[Inventory]> o:<[Inventory].list_contents>
             - note as:<[Inventory]> remove
-
-#MobInventory_Handler:
-#    type: world
-#    events:
-#        on player
-#

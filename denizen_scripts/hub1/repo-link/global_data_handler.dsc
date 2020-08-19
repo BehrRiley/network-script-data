@@ -2,10 +2,11 @@ global_data_handler:
   type: world
   debug: true
   events:
-    on server starts:
+    on server start:
       - yaml id:data_handler create
 
     on bungee player joins network:
+      - inject Error_Handler.Start
     # % ██ [ Cache Player Info ] ██
       - define Name <context.name>
       - define UUID <context.uuid>
@@ -25,8 +26,10 @@ global_data_handler:
 
         - yaml id:<[GlobalYaml]> create
         - yaml id:<[GlobalYaml]> savefile:<[Directory]>
+        - inject Error_Handler.Return
 
     on bungee player switches to server:
+      - inject Error_Handler.Start
     # % ██ [ Cache Player Info ] ██
       - define Name <context.name>
       - define UUID <context.uuid>
@@ -48,11 +51,12 @@ global_data_handler:
         - bungeerun <[Server]> Player_Data_Join_Event def:<[UUID]>|<[Event]>
       - else:
         - yaml id:global.player.<[UUID]> load:data/global/players/<[UUID]>.yml
-      #^- define PlayerData <yaml[global.player.<[UUID]>].list_keys[].parse_tag[<map.with[<[parse_value]>].as[<yaml[global.player.<[UUID]>].read[<[parse_value]>]>]>].combine>
         - define PlayerData <yaml[global.player.<[UUID]>].read[]>
         - run External_Player_Data_Join_Event def:<list_single[<[PlayerMap]>].include_single[<[PlayerData]>].include[<[Server]>|<[Event]>]>
+        - inject Error_Handler.Return
 
     on bungee player leaves network:
+      - inject Error_Handler.Start
     # % ██ [ Cache Player Info ] ██
       - define Name <context.name>
       - define UUID <context.uuid>
@@ -66,6 +70,7 @@ global_data_handler:
 
     # % ██ [ Fire Player Quit Events ] ██
       - bungeerun <[Server]> Player_Data_Quit_Event def:<[UUID]>
+      - inject Error_Handler.Return
 
 External_Player_Data_Join_Event:
   type: task
@@ -108,3 +113,42 @@ External_Player_Data_Join_Event:
         - bungeerun Relay Player_Join_Message def:<list_single[<[PlayerMap]>]>
       - else:
         - bungeerun Relay Player_Switch_Message def:<list_single[<[PlayerMap]>]>
+
+Error_Handler:
+  type: task
+  debug: true
+  Record:
+    - debug record start
+  script:
+    - ~debug record submit save:mylog
+    - define WeirdList <list>
+    - foreach Name|UUID|Server as:Tag:
+      - if <[<[Tag]>]||invalid> == invalid:
+        - foreach next
+      - else:
+        - if <[<[Tag]>]> == null:
+          - foreach next
+      - define WeirdList:->:<[Tag]>
+    - if <[WeirdList].is_empty>:
+      - stop
+    - define Context <list>
+    - foreach <[WeirdList]> as:Tag:
+      - define Context "<[Context].include_single[`**<&lt>context.<[Tag]><&gt>`** returned: `<[<[Tag]>]>`]>"
+    - define Context "<[Context].include_single[`**<&lt>context.<[Tag]><&gt>`** returned: `<[<[Tag]>]>`]>"
+    - define Link "<entry[mylog].submitted||DEBUG FAILED>"
+    - define Text "<&lt>@!626086306606350366<&gt> <&lt>a:blueweewoo:725197352645689435<&gt> I'm alerting you about the script setup for debugging a Bungee Event issue:<&nl> <[Link]><&nl><[Context].separated_by[<&nl>]>"
+    - bungeerun Relay Simple_Discord_Embed def:<list_single[<[Text]>].include[626086306606350366]>
+
+modify_global_player_data_safe:
+  type: task
+  definitions: uuid|node|value
+  script:
+    - if <yaml[data_handler].contains[player.<[uuid]>]> && <yaml[data_handler].read[player.<[uuid]>.server]> != <bungee.server>:
+      - bungeerun player_data_safe_modify def:<[uuid]>|<[node]>|<[value]>
+    - else if <yaml.list.contains[global.player.<[uuid]>]>:
+      - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
+    - else:
+      - yaml id:global.player.<[uuid]> load:data/players/<[uuid]>.yml
+      - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
+      - yaml id:global.player.<[uuid]> savefile:data/players/<[uuid]>.yml
+      - yaml id:global.player.<[uuid]> unload

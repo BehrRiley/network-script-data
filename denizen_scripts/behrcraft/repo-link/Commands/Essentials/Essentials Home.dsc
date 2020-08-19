@@ -93,7 +93,7 @@ Home_Command:
             - stop
 
     # % ██ [ Check if home world exists ] ██
-        - if !<server.list_worlds.contains[<[Location].world>]>:
+        - if !<server.worlds.contains[<[Location].world>]>:
             - narrate format:Colorize_Red "World is not loaded."
             - stop
 
@@ -111,7 +111,7 @@ Home_GUI:
   House: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2Y3Y2RlZWZjNmQzN2ZlY2FiNjc2YzU4NGJmNjIwODMyYWFhYzg1Mzc1ZTlmY2JmZjI3MzcyNDkyZDY5ZiJ9fX0=
   definitions: nbt|click|slot
   script:
-    - if <[nbt].exists>:
+    - if <[nbt]||null> != null:
         - foreach <[nbt].unescaped> as:Data:
             - define <[Data].before[/]> <[Data].after[/]>
     - else:
@@ -122,7 +122,7 @@ Home_GUI:
         - case Main_Menu:
             - define Homes <player.flag[Behr.Essentials.Homes]>
             - define Title "My Homes"
-            - define WorldList <server.list_worlds.parse[name]>
+            - define WorldList <server.worlds.parse[name]>
             - choose <[Mode]>:
                 - case Teleport:
                     - define ActionLore "<&3>C<&b>lick <&3>t<&b>o <&3>T<&b>eleport"
@@ -143,7 +143,7 @@ Home_GUI:
             - foreach <[Homes]> as:HomeData:
                 - define HomeName <[HomeData].before[/]>
                 - define HomeWorld <[HomeData].after[/].as_location.world.name||invalid>
-                - if <[HomeList].exists>:
+                - if <[HomeList]||null> != null:
                     - if <[HomeList].size> == 27:
                         - foreach stop
                         
@@ -153,7 +153,7 @@ Home_GUI:
                     - define Display "<&6>N<&e>ame<&6>: <&a><[HomeName]>"
                     - define Lore "<list[<[ActionLore]>|<&6>W<&e>orld<&6>: <&a><[HomeLoc].world.name>|<&6>L<&e>ocation<&6>: <&6>[<&a><[HomeLoc].x.round_up>,<[HomeLoc].y.round_up>,<[HomeLoc].z.round_up><&6>]]>"
                     - define NBT <[ActionNBT].include[name/<[HomeName]>|Location/<[HomeLoc]>]>
-                    - define Item <item[Action_Item].with[material=Player_Head;Skull_skin=a|<script.yaml_key[House]>;display_name=<[Display]>;lore=<[Lore]>;nbt=<[NBT]>]>
+                    - define Item <item[Action_Item].with[material=Player_Head;Skull_skin=a|<script.data_key[House]>;display_name=<[Display]>;lore=<[Lore]>;nbt=<[NBT]>]>
                     - define HomeList:->:<[Item]>
 
             - define HomeCount <[HomeList].size>
@@ -211,17 +211,7 @@ Home_GUI:
             - inventory open d:<[Inventory]>
 
         - case ModeSelect:
-            - choose <[Mode]>:
-                - case Teleport:
-                    - run Home_GUI def:<list[Menu/Home_GUI|Action/Main_Menu|Mode/Teleport].escaped>
-                - case Rename:
-                    - run Home_GUI def:<list[Menu/Home_GUI|Action/Main_Menu|Mode/Rename].escaped>
-                - case Relocate:
-                    - run Home_GUI def:<list[Menu/Home_GUI|Action/Main_Menu|Mode/Relocate].escaped>
-                - case HomeSelect:
-                    - run Home_GUI def:<list[Menu/Home_GUI|Action/Main_Menu|Mode/HomeSelect].escaped>
-                - case Delete:
-                    - run Home_GUI def:<list[Menu/Home_GUI|Action/Main_Menu|Mode/Delete].escaped>
+            - run Home_GUI def:<list[Menu/Home_GUI|Action/Main_Menu|Mode/<[Mode]>].escaped>
         - case Teleport:
             - execute as_player "home <[Name]>"
         - case Rename:

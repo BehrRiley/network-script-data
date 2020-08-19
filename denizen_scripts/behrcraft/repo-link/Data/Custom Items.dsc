@@ -7,7 +7,7 @@ MagicSword:
         - sharpness:10
     mechanisms:
         unbreakable: true
-        flags: hide_all
+        hides: all
 
 MagicSwordHandler:
     type: world
@@ -40,7 +40,7 @@ MagicSwordHandler:
                 #- narrate "<&c>Old<&4>: <&e><context.final_damage>"
                 #- narrate "<&e>New<&6>: <&2><[Damage]>"
                 - determine <[Damage]>
-        on player right clicks with MagicSword:
+        on player right clicks block with:MagicSword:
             - if <player.target||null> == null:
                 - stop
             - if !<player.target.is_spawned>:
@@ -52,7 +52,7 @@ MagicSwordHandler:
             - if <[Points].size> > 3 && <[Points].size> < 25:
                 - flag player Behrry.Combat.Invulnerable duration:10t
                 - define Distance <[PLoc].forward[<[Points].size.sub[2]>].center.add[0,0.5,0]>
-                - define Dloc <[Distance].find.surface_blocks.within[4].filter[x.is[==].to[<[Distance].x>]].filter[z.is[==].to[<[Distance].z>]].get[1].add[0,1.1,0].with_yaw[<[Ploc].yaw>].with_pitch[<[PLoc].pitch>]>
+                - define Dloc <[Distance].find.surface_blocks.within[4].filter[x.is[==].to[<[Distance].x>]].filter[z.is[==].to[<[Distance].z>]].first.add[0,1.1,0].with_yaw[<[Ploc].yaw>].with_pitch[<[PLoc].pitch>]>
                 - if <player.is_on_ground>:
                     - define PVel <player.velocity.mul[0.55]>
                 - else:

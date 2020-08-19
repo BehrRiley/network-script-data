@@ -62,6 +62,7 @@ network_item_events:
 network_item_inventory:
   type: inventory
   inventory: chest
+  title: <&a>Play Menu
   definitions:
     filler: <item[white_stained_glass_pane]>
     this_player_head: <item[player_head].with[skull_skin=<player.name>;display_name=<player.name>]>
@@ -70,9 +71,9 @@ network_item_inventory:
     cosmetics_item: <item[hub_cosmetics_item].with[nbt=item/cosmetics]>
     settings_item: <item[hub_settings_item].with[nbt=item/settings]>
   slots:
-    - "[filler] [filler] [filler] [filler] [this_player_head] [filler] [filler] [filler] [filler]"
-    - "[filler] [server_item] [filler] [warp_item] [filler] [cosmetics_item] [filler] [settings_item] [filler]"
-    - "[filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]"
+    - [filler] [filler] [filler] [filler] [this_player_head] [filler] [filler] [filler] [filler]
+    - [filler] [server_item] [filler] [warp_item] [filler] [cosmetics_item] [filler] [settings_item] [filler]
+    - [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler] [filler]
 
 network_item_inventory_events:
   type: world
@@ -84,14 +85,11 @@ network_item_inventory_events:
           - case server:
             - inventory open d:command_play_inventory
           - case warp:
-            - inventory close
-            - wait 1t
-            - execute as_op "cmi warp"
+            # TODO
+            - narrate "<&c>Work in Progress."
           - case settings:
             # TODO
             - narrate "<&c>Not Yet Implemented."
           - case cosmetics:
             # TODO
             - narrate "<&c>Not Yet Implemented."
-            
-        

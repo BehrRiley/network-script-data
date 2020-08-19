@@ -35,7 +35,7 @@ mod_message_discord:
     - define field2_inline true
     - define fields:|:<map.with[name].as[<[field2_name]>].with[value].as[<[field2_value]>].with[inline].as[<[field2_inline]>]>
 
-    - if <[length].exists>:
+    - if <[length]||null> != null:
       - define fieldD_name Duration<&co>
       - define fieldD_value <[length].as_duration.formatted>
       - define fieldD_inline true
@@ -64,7 +64,7 @@ mod_get_incidents_task:
   debug: false
   script:
     # Define directory and YAML ID
-    - define dir data/globalData/players/<server.match_offline_player[<[player]>].uuid>.yml
+    - define dir data/players/<server.match_offline_player[<[player]>].uuid>.yml
     - define id amp.get.<server.match_offline_player[<[player]>].uuid>
     # Load yaml data
     - ~yaml id:<[id]> load:<[dir]>

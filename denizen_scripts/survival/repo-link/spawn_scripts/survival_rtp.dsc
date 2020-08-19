@@ -8,8 +8,8 @@ survival_rtp:
     - define min <script.data_key[minimum]>
     - define max <script.data_key[maximum]>
     - define world <script.data_key[world]>
-    - define x <util.random.int[<[min]>].to[<[max]>].*[<list[1|-1].random>]>
-    - define z <util.random.int[<[min]>].to[<[max]>].*[<list[1|-1].random>]>
+    - define x <util.random.int[<[min]>].to[<[max]>].mul[<list[1|-1].random>]>
+    - define z <util.random.int[<[min]>].to[<[max]>].mul[<list[1|-1].random>]>
     - chunkload <location[<[x]>,200,<[z]>,<[world]>].chunk> duration:10s
     - wait 5t
     - narrate "<&a>You have 1 minute of no fall damage."
@@ -59,7 +59,7 @@ spawn_effects_handler:
   script:
     - while <server.has_flag[spawn_portal_running]> && <server.has_flag[people_in_spawn]>:
       - playeffect totem <server.flag[spawn_totem_locations].random[35]> quantity:1 targets:<server.flag[people_in_spawn]>
-      - playeffect redstone <server.flag[spawn_cosmetics_blocks].random[3]> special_data:<util.random.decimal[1.5].to[2.5]>|<server.flag[spawn_cosmetics_colors].random> quantity:3 offset:0.25 targets:<server.flag[people_in_spawn]>
+      - playeffect redstone at:<server.flag[spawn_cosmetics_blocks].random[3]> special_data:<util.random.decimal[1.5].to[2.5]>|<server.flag[spawn_cosmetics_colors].random> quantity:3 offset:0.25 targets:<server.flag[people_in_spawn]>
       - playeffect soul at:<server.flag[spawn_soul_forge_effects].random[10]> offset:0.2 quantity:1 data:0.2 targets:<server.flag[people_in_spawn]>
       - playeffect soul_fire_flame at:<server.flag[spawn_soul_forge_effects].random[3]> quantity:1 data:0.01 offset:0.25 targets:<server.flag[people_in_spawn]>
       - wait 1t
@@ -75,8 +75,9 @@ spawn_speed_handler:
 
 spawn_sound_effects_handler:
   type: task
-  sounds: MUSIC_DISC_STRAD|MUSIC_DISC_FAR|MUSIC_DISC_MALL
   debug: false
   script:
-    - adjust <player> stop_sound:music
-    - playsound <player> sound:<script[spawn_sound_effects_handler].data_key[sounds].as_list.random> pitch:1 volume:150 sound_category:music
+    #- adjust <player> stop_sound:music
+    - execute as_server "stopsound <player.name> music" silent
+    - wait 1t
+    - playsound <player> sound:<list[MUSIC_DISC_STRAD|MUSIC_DISC_FAR|MUSIC_DISC_MALL].random> volume:150 sound_category:music

@@ -14,8 +14,8 @@ Colorize:
                 - define 1 <&2>
                 - define 2 <&a>
             - case Red:
-                - define 1 <&4>
-                - define 2 <&c>
+                - define 1 <&color[#ff3300]>
+                - define 2 <&color[#ff5c33]>
             - case Purple:
                 - define 1 <&5>
                 - define 2 <&d>
@@ -26,7 +26,7 @@ Colorize:
                 - define 1 <&8>
                 - define 2 <&7>
 
-        - define Text <[String].split[].parse_tag[<tern[<[parse_value].matches_character_set[!@#$<&pc>^&*|()<&lt><&gt>{}<&lb><&rb>:;'<&dq>-_,.?/ABCDEFGHIJKLMNOPQRSTUVWXYZ]>].pass[<[1]><[parse_value]>].fail[<[2]><[parse_value]>]>].unseparated>
+        - define Text <[String].split[].parse_tag[<tern[<[parse_value].matches_character_set[!@#$<&pc>^&*|()<&lt><&gt>{}<&lb><&rb>:;<&sq><&dq>-_,.?/ABCDEFGHIJKLMNOPQRSTUVWXYZ]>].pass[<[1]><[parse_value]>].fail[<[2]><[parse_value]>]>].unseparated>
         - Determine <[Text]>
 
 Colorize_Green:
@@ -45,4 +45,3 @@ Colorize_Blue:
     type: format
     debug: false
     format: <proc[Colorize].context[<text>|blue]>
-    

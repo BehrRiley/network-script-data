@@ -24,12 +24,12 @@ Essentials:
         #    - define YamlSize <yaml[<player.uuid>].read[<[Key]>].size||0>
         #    - define UID <yaml[<player.uuid>].read[<[Key]>].get[<[YamlSize]>].before[Lasagna]||0>
         #    - if <[YamlSize]> > 9:
-        #        - foreach <yaml[<player.uuid>].read[<[Key]>].get[1].to[<[YamlSize].sub[9]>]>:
+        #        - foreach <yaml[<player.uuid>].read[<[Key]>].first.to[<[YamlSize].sub[9]>]>:
         #            - yaml id:<player.uuid> set <[Key]>:<-:<[Value]>
         #    - yaml id:<player.uuid> set <[Key]>:->:<[UID].add[1]>Lasagna<player.inventory.list_contents>
         #    - yaml id:<player.uuid> savefile:../../../../.playerdata/<player.uuid>.dsc
         on player respawns:
-            - if <player.flag[settings.essentials.bedspawn]||false> == true:
+            - if <player.flag[settings.essentials.bedspawn]||false>:
                 - determine passively <player.bed_spawn>
             - else:
                 - determine passively <player.world.spawn_location>

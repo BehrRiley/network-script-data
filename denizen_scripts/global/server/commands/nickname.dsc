@@ -84,11 +84,11 @@ Nickname_Command:
 
             - stop
     # % ██ [  Too long ? ] ██
-        - if <[Nickname].parse_color.strip_color.length> > 16 || <[HexColored].exists>:
+        - if <[Nickname].parse_color.strip_color.length> > 16 || <[HexColored]||null> != null:
             - define reason "Nicknames should be less than 16 charaters."
             - inject Command_Error
     #%  % Blacklisting a list of names %  %#
-    #^   - define Blacklist "<server.list_players.filter[has_permission[Behr.Essentials.Nickname.Others]].parse[name].include[Admin|a d m i n|owner|owna|administrator|moderator|server|behr_riley|Founder|Mod|Admin|Helper]>"
+    #^   - define Blacklist "<server.players.filter[has_permission[Behr.Essentials.Nickname.Others]].parse[name].include[Admin|a d m i n|owner|owna|administrator|moderator|server|behr_riley|Founder|Mod|Admin|Helper]>"
     #^   - if <[Nickname].contains_any[<[Blacklist]>]> || <[Nickname].parse_color.strip_color.contains_any[<[Blacklist]>]>:
     #^       - define reason "Illegal Name."
     #^       - inject Command_Error

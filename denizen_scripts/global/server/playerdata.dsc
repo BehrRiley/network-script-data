@@ -18,7 +18,7 @@ player_data_handler:
 
 Player_Data_Join_Event:
   type: task
-  debug: true
+  debug: false
   definitions: UUID|Event
   script:
   # % ██ [ Cache Player Info ] ██
@@ -27,7 +27,7 @@ Player_Data_Join_Event:
 
   # % ██ [ Verify Player ] ██
     - waituntil rate:2t <player[<[UUID]>].is_online||false> || <[Timeout].duration_since[<util.time_now>].in_seconds> == 0
-    - if !<player[<[UUID]>].is_online>:
+    - if !<player[<[UUID]>].is_online||false>:
       - stop
 
   # % ██ [ Load Global Player Data ] ██
@@ -56,7 +56,7 @@ Player_Data_Join_Event:
 
 Player_Data_Quit_Event:
   type: task
-  debug: true
+  debug: false
   definitions: UUID
   script:
     - inject Unload_Player_Data
@@ -64,7 +64,7 @@ Player_Data_Quit_Event:
 
 Player_Data_Switch_Event:
   type: task
-  debug: true
+  debug: false
   definitions: UUID
   script:
     - inject Unload_Player_Data
@@ -90,3 +90,9 @@ Unload_Player_Data:
   # % ██ [ Unload Global Player Data ] ██
     - ~yaml id:global.player.<[UUID]> savefile:data/global/players/<[UUID]>.yml
     - yaml id:global.player.<[UUID]> unload
+
+player_data_safe_modify:
+  type: task
+  definitions: uuid|node|value
+  script:
+    - yaml id:global.player.<[uuid]> set <[node]>:<[value]>

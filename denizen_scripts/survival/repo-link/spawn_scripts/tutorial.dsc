@@ -53,13 +53,13 @@ tutorial_data:
     particle_guide: true
   7:
     hologram:
-      - "<&6><&l>Cosmetics"
+      - <&6><&l>Cosmetics
       - "<&e>Here you can purchase titles and bow trails!"
       - "<&e>Use <&b>/titles<&e> and <&b>/bowtrails<&e> to use them."
     particle_guide: true
   8:
     hologram:
-      - "<&6><&l>Claims"
+      - <&6><&l>Claims
       - "<&e>Here you can purchase upgrades for your claim."
       - "<&e>Upgrades only apply <&c>within<&e> your claim."
       - "<&c>The claims system will be explained in a few steps."
@@ -72,13 +72,13 @@ tutorial_data:
     particle_guide: true
   10:
     hologram:
-      - "<&6><&l>Stonks!"
+      - <&6><&l>Stonks!
       - "<&e>Our Stonks Broker buys and sells items."
       - "<&e>Prices fluctuate, so check back often!"
     particle_guide: true
   11:
     hologram:
-      - "<&6><&l>Survivalist"
+      - <&6><&l>Survivalist
       - "<&e>Want something a little more useful?"
       - "<&e>The survivalist sells backpacks, tents, and more!"
     particle_guide: true
@@ -95,20 +95,20 @@ tutorial_data:
       - "<&e>Warps can be made by any player within their claim."
       - "<&e>You can visit server warps, or other player's warps."
       - "<&e>Command Menu<&co> <&b>/warps"
-      - "<&a>--------------------------"
+      - <&a>--------------------------
       - "<&e>Use <&b>/warps <&e>and go to Grim to continue."
     particle_guide: true
   14:
     hologram:
-      - "<&6><&l>Grim"
+      - <&6><&l>Grim
       - "<&e>Grim can help you return to your death location."
       - "<&c>... For a cost."
-    particle_guide: true
+    particle_guide: false
     title: "<&6>Use <&b>/warps"
     subtitle: "<&e>Go to the server warp: <&4>Grim"
   15:
     hologram:
-      - "<&6><&l>Claims"
+      - <&6><&l>Claims
       - "<&e>You can claim land!"
       - "<&e>You can also give access to different groups of players."
       - "<&e>If a group doesn't exist, it will be created."
@@ -117,7 +117,7 @@ tutorial_data:
     particle_guide: true
   16:
     hologram:
-      - "<&6><&l>Elevators"
+      - <&6><&l>Elevators
       - "<&e>Gold blocks function as elevators."
       - "<&e>You can travel up, or down 25 blocks at a time."
       - "<&e>Step inside to give it a try!"
@@ -139,7 +139,7 @@ tutorial_data:
     particle_guide: true
   19:
     hologram:
-      - "<&6><&l>Chat"
+      - <&6><&l>Chat
       - "<&e>We have cross-server chat available"
       - "<&e>Use <&b>/chat<&e> to change your channel"
       - "<&e>You can also click on the channel name in chat!"
@@ -172,7 +172,10 @@ tutorial_data:
 tutorial_spawn_finale:
   type: task
   script:
-    - fakespawn ender_dragon <location[tutorial_dragon]> duration:10m
+    - repeat 20:
+      - wait 1t
+      - playeffect redstone at:<location[tutorial_dragon]> special_data:1|black quantity:<[value].mul[2]> offset:<[value].mul[0.2]>
+      - playeffect dragon_breath at:<location[tutorial_dragon]> data:0.5 quantity:10 offset:0
 
 
 ###############
@@ -191,13 +194,14 @@ tutorial_start:
   type: task
   script:
     - teleport <player> tutorial_start
+    - playsound <player> sound:entity_ender_pearl_throw volume:0.5
     - flag player tutorial:0
     - foreach <script[tutorial_data].parsed_key[start.hologram]>:
-      - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<[value]>] <location[tutorial_start_hologram].sub[0,<[loop_index].*[0.25]>,0]> duration:10m
-    - fakespawn armor_stand[custom_name_visible=true;visible=false;marker=true;custom_name=<&a><&b><script[tutorial_data].parsed_key[start.start_button]>] <location[tutorial_start_hologram].right[1.5].sub[0,<script[tutorial_data].parsed_key[start.hologram].size.*[0.25]>,0]> duration:10m
-    - fakespawn armor_stand[visible=false;custom_name=ContinueTutorial] <location[tutorial_start_hologram].right[1.5].sub[0,<script[tutorial_data].parsed_key[start.hologram].size.+[4].*[0.25]>,0]> duration:10m
-    - fakespawn armor_stand[custom_name_visible=true;visible=false;marker=true;custom_name=<&b><&a><script[tutorial_data].parsed_key[start.skip_button]>] <location[tutorial_start_hologram].left[1.5].sub[0,<script[tutorial_data].parsed_key[start.hologram].size.*[0.25]>,0]> duration:10m
-    - fakespawn armor_stand[visible=false;custom_name=SkipTutorial] <location[tutorial_start_hologram].left[1.5].sub[0,<script[tutorial_data].parsed_key[start.hologram].size.+[4].*[0.25]>,0]> duration:10m
+      - fakespawn armor_stand[custom_name_visible=true;visible=false;custom_name=<[value]>] <location[tutorial_start_hologram].sub[0,<[loop_index].mul[0.25]>,0]> duration:10m
+    - fakespawn armor_stand[custom_name_visible=true;visible=false;marker=true;custom_name=<&a><&b><script[tutorial_data].parsed_key[start.start_button]>] <location[tutorial_start_hologram].right[1.5].sub[0,<script[tutorial_data].parsed_key[start.hologram].size.mul[0.25]>,0]> duration:10m
+    - fakespawn armor_stand[visible=false;custom_name=ContinueTutorial] <location[tutorial_start_hologram].right[1.5].sub[0,<script[tutorial_data].parsed_key[start.hologram].size.add[4].mul[0.25]>,0]> duration:10m
+    - fakespawn armor_stand[custom_name_visible=true;visible=false;marker=true;custom_name=<&b><&a><script[tutorial_data].parsed_key[start.skip_button]>] <location[tutorial_start_hologram].left[1.5].sub[0,<script[tutorial_data].parsed_key[start.hologram].size.mul[0.25]>,0]> duration:10m
+    - fakespawn armor_stand[visible=false;custom_name=SkipTutorial] <location[tutorial_start_hologram].left[1.5].sub[0,<script[tutorial_data].parsed_key[start.hologram].size.add[4].mul[0.25]>,0]> duration:10m
 
 tutorial_next:
   type: task
@@ -216,6 +220,7 @@ tutorial_next:
         - narrate <script[tutorial_data].parsed_key[<[stage]>.message]>
       - if <script[tutorial_data].list_keys[<[stage]>].contains[particle_guide]> && <script[tutorial_data].parsed_key[<[stage]>.particle_guide]>:
         - look <player> tutorial_<[stage]>
+        - playsound <player> sound:entity_ender_pearl_throw volume:0.5
         - define last_distance 128
         - while <player.location.world.name> == spawn && <player.location.distance[<location[tutorial_<[stage]>]>]> > <script[tutorial_data].data_key[distance_check]>:
           - define points <player.location.points_between[<location[tutorial_<[stage]>]>].get[3].to[last]>
@@ -227,7 +232,7 @@ tutorial_next:
               - define value <[value].above[2]>
             - playeffect <script[tutorial_data].parsed_key[particle_trail.particle]> at:<[value]> quantity:<script[tutorial_data].parsed_key[particle_trail.quantity]> offset:<script[tutorial_data].parsed_key[particle_trail.offset]> targets:<player>
             - wait 1t
-          - if <player.location.distance[<location[tutorial_<[stage]>]>]> > <[last_distance].+[5]>:
+          - if <player.location.distance[<location[tutorial_<[stage]>]>]> > <[last_distance].add[5]>:
             - narrate "<&4>You have gone too far from your next tutorial location."
             - narrate "<element[<&e>You can restart the tutorial at any time by using <&b>/tutorial<&e>.].on_hover[<&e>Click to restart the tutorial].on_click[/tutorial]>"
             - inject tutorial_skipped
@@ -236,9 +241,9 @@ tutorial_next:
             - define last_distance <player.location.distance[<location[tutorial_<[stage]>]>]>
           - wait 5t
       - foreach <script[tutorial_data].parsed_key[<[stage]>.hologram]>:
-        - fakespawn armor_stand[custom_name_visible=true;marker=true;visible=false;custom_name=<[value]>] <location[tutorial_<[stage]>].above[3].sub[0,<[loop_index].*[0.25]>,0]> duration:10m
+        - fakespawn armor_stand[custom_name_visible=true;marker=true;visible=false;custom_name=<[value]>] <location[tutorial_<[stage]>].above[3].sub[0,<[loop_index].mul[0.25]>,0]> duration:10m
         - wait 4t
-      - if <script[tutorial_data].parsed_key[<[stage].+[1]>]||null> == null:
+      - if <script[tutorial_data].parsed_key[<[stage].add[1]>]||null> == null:
         - fakespawn armor_stand[custom_name_visible=true;marker=true;visible=false;custom_name=<script[tutorial_data].parsed_key[complete_button]>] <location[tutorial_<[stage]>].above[1]> duration:10m
       - else:
         - fakespawn armor_stand[custom_name_visible=true;marker=true;visible=false;custom_name=<script[tutorial_data].parsed_key[continue_button]>] <location[tutorial_<[stage]>].above[1]> duration:10m
@@ -246,6 +251,8 @@ tutorial_next:
       - stop
     - flag player tutorial:!
     - flag player tutorial_status:completed
+    - playsound <player> sound:entity_player_levelup volume:0.5
+    - firework <player.location> random trail
     - narrate "<&a>You have completed the tutorial!"
     - narrate "<&a>Please jump through the hole in front of you to begin your journey!"
 
@@ -257,6 +264,7 @@ tutorial_timeout:
       - if <queue.time_ran.in_seconds> > 600:
         - inject tutorial_skipped
         - narrate "<&4>Your tutorial has timed out."
+        - playsound <player> sound:block_beacon_deactivate volume:0.5
         - narrate "<element[<&e>You can restart the tutorial at any time by using <&b>/tutorial<&e>.].on_hover[<&e>Click to restart the tutorial].on_click[/tutorial]>"
       - wait 10s
 
@@ -265,14 +273,15 @@ tutorial_skipped:
   script:
     - foreach <player.fake_entities>:
       - fakespawn <[value]> cancel
+    - playsound <player> sound:entity_chicken_ambient volume:0.5
     - flag player tutorial:!
     - flag player tutorial_status:skipped
-
 
 tutorial_events:
   type: world
   events:
     on player clicks fake entity flagged:tutorial:
+      - playsound <player> sound:ui_button_click volume:0.5
       - if <context.entity.name> == ContinueTutorial:
         - foreach <player.fake_entities>:
           - fakespawn <[value]> cancel

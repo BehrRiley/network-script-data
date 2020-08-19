@@ -15,38 +15,28 @@ spawn_world_protection:
     on player breaks hanging in:spawn_cuboid:
       - if !<player.has_flag[world.spawn.modify]>:
         - determine cancelled
-    on player clicks bukkit_priority:HIGHEST in:spawn_cuboid:
+    on player clicks block bukkit_priority:HIGHEST in:spawn_cuboid:
       - if !<player.has_flag[world.spawn.modify]> && !<player.has_flag[world.spawn.can_shoot]>:
         - determine cancelled
 
-# fall protection in spawn
-spawn_player_takes_fall_damage:
-  type: world
-  debug: false
-  events:
-    on player damaged by fall in:spawn:
-      - determine cancelled
 
-# Anti pvp in spawn
-spawn_player_damages:
+# Anti Damaged Events
+spawn_player_takes_damage:
   type: world
   debug: false
   events:
-    on player damaged by player in:spawn:
+# Anti Damaged Player
+    on player damaged in:spawn:
       - determine cancelled
 
 # Anti Hunger
-spawn_player_food_level:
-  type: world
-  debug: false
-  events:
-    on entity changes food level in:spawn:
+    on player changes food level in:spawn:
+      - determine 20
+
+# Anti Drown
+    on player changes air level in:spawn:
       - determine cancelled
 
 # Save the bees!
-spawn_bee_damage_prevent:
-  type: world
-  debug: false
-  events:
     on bee damaged by player in:spawn:
       - determine cancelled

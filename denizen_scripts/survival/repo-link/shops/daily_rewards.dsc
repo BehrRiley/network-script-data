@@ -67,14 +67,14 @@ daily_reward_command:
   name: give_daily_reward
   permission: not.a.perm
   script:
-    - inject daily_rewards_test player:<server.match_player[<context.args.get[1]>]>
+    - inject daily_rewards_test player:<server.match_player[<context.args.first>]>
 
 daily_reward_config_manager:
   type: world
   debug: false
   load_yaml:
-    - if <server.has_file[data/globalData/network/daily_rewards.yml]>:
-      - yaml id:daily_reward load:data/globalData/network/daily_rewards.yml
+    - if <server.has_file[data/global/network/daily_rewards.yml]>:
+      - yaml id:daily_reward load:data/global/network/daily_rewards.yml
   events:
     on server start:
       - inject locally load_yaml
