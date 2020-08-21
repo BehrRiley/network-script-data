@@ -19,7 +19,7 @@ mod_report_command:
       - if <[target]> != <player>:
         - if <context.args.get[2]||null> != null:
           - define reason <context.args.get[2].to[<context.args.size>].space_separated>
-          - run mod_notify_report def:<player>|<[target]>|<[reason]>|<bungee.server||Server>
+          - run mod_notify_report def:<list[<player>|<[target]>].include_single[<[reason]>].include[<bungee.server||Server>]>
           - narrate "<&e>You have successfully reported <[target].name> for <[reason]>."
         - else:
           - narrate "<&c>A reason must be provided in order to report this player."

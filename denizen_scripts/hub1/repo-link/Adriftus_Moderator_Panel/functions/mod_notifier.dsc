@@ -51,7 +51,7 @@ mod_notify_report:
     - define reporter <[reporter].as_player.name>
     - define name <[uuid].as_player.name>
     - define message "<&6>[<&a><&l><[server]><&6>] <&e><[reporter]> <&a>has reported <&c><[name]> <&a>for <&6><[reason]>."
-    - if <bungee.list_servers.size||0> > 1:
+    - if <bungee.connected>:
       - bungeerun <bungee.list_servers> mod_message_staff def:<[message]>
     - else:
       - run mod_message_staff def:<[message]>
