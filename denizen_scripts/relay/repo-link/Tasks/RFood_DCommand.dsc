@@ -4,6 +4,15 @@ RFood_DCommand:
     - Everyone
   definitions: Message|Channel|Author|Group
   debug: false
+  icons:
+    - https://cdn.discordapp.com/attachments/625076684558958638/746849947382448288/icons8-kawaii-rice-96.png
+    - https://cdn.discordapp.com/attachments/625076684558958638/746849948926214265/icons8-kawaii-taco-96.png
+    - https://cdn.discordapp.com/attachments/625076684558958638/746849950985617587/icons8-kawaii-noodle-96.png
+    - https://cdn.discordapp.com/attachments/625076684558958638/746849952252297286/icons8-kawaii-cupcake-96.png
+    - https://cdn.discordapp.com/attachments/625076684558958638/746849954370289704/icons8-kawaii-jam-96.png
+    - https://cdn.discordapp.com/attachments/625076684558958638/746849956740202627/icons8-kawaii-bread-96.png
+    - https://cdn.discordapp.com/attachments/625076684558958638/746849960489910382/icons8-kawaii-croissant-96.png
+    - https://cdn.discordapp.com/attachments/625076684558958638/746849962515759136/icons8-kawaii-milk-96.png
   script:
   # % ██ [ Clean Definitions & Inject Dependencies ] ██
   #^- inject Role_Verification
@@ -14,7 +23,7 @@ RFood_DCommand:
     - Define UserPFP https://cdn.discordapp.com/avatars/<[UserID]>/<util.parse_yaml[<entry[Response].result>].get[avatar]>
   # % ██ [ Clean Definitions & Inject Dependencies ] ██
     - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
-    - define headers <list[User-Agent/really|Content-Type/application/json]>
+    - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
   # % ██ [ Verify Arguments            ] ██
     - if !<script[DDTBCTY].list_keys[WebHooks].contains[<[Channel]>]>:
       - stop
@@ -52,7 +61,7 @@ RFood_DCommand:
     - inject Embedded_Color_Formatting
     - define Author <map.with[name].as[<[Author].name>].with[icon_url].as[<[UserPFP]>]>
     - define Embeds <list[<map.with[color].as[<[Color]>].with[description].as[<[Message]>].with[author].as[<[Author]>]>]>
-    - define Data <map.with[username].as[NoteHook].with[avatar_url].as[https://cdn.discordapp.com/attachments/642764810001448980/715739998980276224/server-icon.png].with[embeds].as[<[Embeds]>].to_json>
+    - define Data <map.with[username].as[Food<&sp>Support].with[avatar_url].as[<script.data_key[icons].random>].with[embeds].as[<[Embeds]>].to_json>
 
     # normal webget
     - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>

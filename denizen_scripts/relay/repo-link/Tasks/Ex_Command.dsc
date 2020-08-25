@@ -12,7 +12,6 @@ Ex_DCommand:
     definitions: Message|Channel|Author|Group
     debug: false
     Context: Color
-    speed: 0
     script:
 # - ██ [ Clean Definitions & Inject Dependencies ] ██
         - inject Role_Verification
@@ -40,8 +39,8 @@ Ex_DCommand:
         - define color Code
         - inject Embedded_Color_Formatting
         - define Embeds "<list_single[<map[color/<[Color]>].with[description].as[Command ran: `/<[Command]>`]>]>"
-        - define Data <map.with[username].as[<[Server]><&sp>Server].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[Embeds]>].to_json>
+        - define Data <map.with[username].as[<[Server].to_titlecase><&sp>Server].with[avatar_url].as[https://cdn.discordapp.com/attachments/625076684558958638/739228903700168734/icons8-code-96.png].with[embeds].as[<[Embeds]>].to_json>
 
         - define Hook <script[DDTBCTY].data_key[WebHooks.<[Channel]>.hook]>
-        - define headers <list[User-Agent/really|Content-Type/application/json]>
+        - define headers <yaml[Saved_Headers].read[Discord.Webhook_Message]>
         - ~webget <[Hook]> data:<[Data]> headers:<[Headers]>
