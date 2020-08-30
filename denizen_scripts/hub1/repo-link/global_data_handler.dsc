@@ -146,9 +146,9 @@ player_info_map:
 # % ██  [ Retrieves a map of the player's information, with the keys 'name, uuid, server' based on the player's uuid ] ██
 # % ██  [ Returns 'null' if the player uuid is invalid (or not online) ] ██
 # - ██  [ Usage ]  Retrieves the player's information (in map form) from 'hub1' and stores it in <entry[player_map].result>.
-# - ██  [       ]  - ~bungeetag server:hub1 <proc[player_info_map].context[<[player_uuid]>]> save:player_map
+# - ██  [       ]  - ~bungeetag server:hub1 <proc[player_info_map_uuid].context[<[player_uuid]>]> save:player_map
 # - ██  [       ]  Retrieves the player's infortmation (in map form) and stores it in the `player_map` definition. (only works on 'hub1')
-# - ██  [       ]  - define player_map <proc[player_info_map].context[<[player_uuid]>]>
+# - ██  [       ]  - define player_map <proc[player_info_map_uuid].context[<[player_uuid]>]>
 
 player_info_map_uuid:
     type: procedure
