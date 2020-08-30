@@ -6,12 +6,10 @@ global_data_handler:
       - yaml id:data_handler create
 
     on bungee player joins network:
-      - inject Error_Handler.Start
     # % ██ [ Cache Player Info ] ██
       - define Name <context.name>
       - define UUID <context.uuid>
       - define GlobalYaml global.player.<[UUID]>
-      - yaml id:data_handler set player.<[UUID]>:<empty>
 
     # % ██ [ Verify Global Player Data Exists ] ██
       - define Directory data/global/players/<[UUID]>.yml
@@ -26,51 +24,53 @@ global_data_handler:
 
         - yaml id:<[GlobalYaml]> create
         - yaml id:<[GlobalYaml]> savefile:<[Directory]>
-        - inject Error_Handler.Return
-
+    # % ██ [ Track Player ] ██
+      - yaml id:data_handler set network.names:->:<[Name]>
+      - yaml id:data_handler set network.uuids:->:<[UUID]>
     on bungee player switches to server:
-      - inject Error_Handler.Start
     # % ██ [ Cache Player Info ] ██
       - define Name <context.name>
       - define UUID <context.uuid>
       - define Server <context.server>
-      - define PlayerMap <map.with[Name].as[<[Name]>].with[UUID].as[<[UUID]>]>
+      - if <yaml[data_handler].contains[players.<[UUID]>.server]>:
+        - define Old_Server <yaml[data_handler].read[players.<[UUID]>.server]>
+      - define PlayerMap <map.with[Name].as[<[Name]>].with[UUID].as[<[UUID]>].with[Server].as[<[Server]>]>
       - define LocalServers <yaml[bungee.config].list_keys[servers].filter_tag[<yaml[bungee.config].read[servers.<[filter_value]>.address].starts_with[localhost]>]>
 
     # % ██ [ Track Player ] ██
-      - if <yaml[data_handler].contains[player.<[UUID]>.server]>:
-        - yaml id:data_handler set server.<yaml[data_handler].read[player.<[UUID]>.server]>:<-:<[PlayerMap]>
-        - define Event Switched
-      - else:
-        - define Event Joined
-      - yaml id:data_handler set player.<[UUID]>.server:<[Server]>
-      - yaml id:data_handler set server.<[Server]>:->:<[PlayerMap]>
+      - if <yaml[data_handler].contains[players.<[UUID]>.server]>:
+        - yaml id:data_handler set servers.<[Old_Server]>:<-:<[UUID]>
+      - yaml id:data_handler set players.<[UUID]>.name:<[name]>
+      - yaml id:data_handler set players.<[UUID]>.server:<[server]>
+      - yaml id:data_handler set servers.<[server]>:->:<[UUID]>
+
 
     # % ██ [ Fire Player Login Events ] ██
       - if <[LocalServers].contains[<[Server]>]>:
-        - bungeerun <[Server]> Player_Data_Join_Event def:<[UUID]>|<[Event]>
+        - bungeerun <[Server]> Player_Data_Join_Event def:<[UUID]>|Switched
       - else:
         - yaml id:global.player.<[UUID]> load:data/global/players/<[UUID]>.yml
         - define PlayerData <yaml[global.player.<[UUID]>].read[]>
-        - run External_Player_Data_Join_Event def:<list_single[<[PlayerMap]>].include_single[<[PlayerData]>].include[<[Server]>|<[Event]>]>
-        - inject Error_Handler.Return
+        - run External_Player_Data_Join_Event def:<list_single[<[PlayerMap]>].include_single[<[PlayerData]>].include[<[Server]>|Joined]>
 
     on bungee player leaves network:
-      - inject Error_Handler.Start
     # % ██ [ Cache Player Info ] ██
       - define Name <context.name>
       - define UUID <context.uuid>
-      - define Server <yaml[data_handler].read[player.<[UUID]>.server]>
+      - define PlayerMap <proc[array_lookup].context[data_handler|players|uuid|<[UUID]>]>
+      - define Server <[PlayerMap].get[Server]>
       - define PlayerMap <map.with[Name].as[<[Name]>].with[UUID].as[<[UUID]>]>
       - define LocalServers <yaml[bungee.config].list_keys[servers].filter_tag[<yaml[bungee.config].read[servers.<[filter_value]>.address].starts_with[localhost]>]>
 
-    # % ██ [ Track Player ] ██
-      - yaml id:data_handler set player.<[UUID]>:!
-      - yaml id:data_handler set server.<[Server]>:<-:<[PlayerMap]>
+    # % ██ [ Remove Player Data ] ██
+      - yaml id:data_handler set players.<[UUID]>:!
+      - yaml id:data_handler set servers.<[server]>:<-:<[UUID]>
+
+      - yaml id:data_handler set network.names:<-:<[Name]>
+      - yaml id:data_handler set network.uuids:<-:<[UUID]>
 
     # % ██ [ Fire Player Quit Events ] ██
       - bungeerun <[Server]> Player_Data_Quit_Event def:<[UUID]>
-      - inject Error_Handler.Return
 
 External_Player_Data_Join_Event:
   type: task
@@ -114,27 +114,16 @@ External_Player_Data_Join_Event:
       - else:
         - bungeerun Relay Player_Switch_Message def:<list_single[<[PlayerMap]>]>
 
-Error_Handler:
-  type: task
-  debug: true
-  Record:
-    - debug record start
-  script:
-    - ~debug record submit save:mylog
-    - define WeirdList <list>
-    - foreach Name|UUID|Server as:Tag:
-      - if <[<[Tag]>]||invalid> == invalid:
-        - foreach next
-      - else:
-        - if <[<[Tag]>]> == null:
-          - foreach next
-      - define WeirdList:->:<[Tag]>
-    - if <[WeirdList].is_empty>:
-      - stop
-    - define Context <list>
-    - foreach <[WeirdList]> as:Tag:
-      - define Context "<[Context].include_single[`**<&lt>context.<[Tag]><&gt>`** returned: `<[<[Tag]>]>`]>"
-    - define Context "<[Context].include_single[`**<&lt>context.<[Tag]><&gt>`** returned: `<[<[Tag]>]>`]>"
-    - define Link "<entry[mylog].submitted||DEBUG FAILED>"
-    - define Text "<&lt>@!626086306606350366<&gt> <&lt>a:blueweewoo:725197352645689435<&gt> I'm alerting you about the script setup for debugging a Bungee Event issue:<&nl> <[Link]><&nl><[Context].separated_by[<&nl>]>"
-    - bungeerun Relay Simple_Discord_Embed def:<list_single[<[Text]>].include[626086306606350366]>
+#@modify_global_player_data_safe:
+#@  type: task
+#@  definitions: uuid|node|value
+#@  script:
+#^    - if <yaml[data_handler].contains[player.<[uuid]>]> && <yaml[data_handler].read[player.<[uuid]>.server]> != <bungee.server>:
+#^      - bungeerun player_data_safe_modify def:<[uuid]>|<[node]>|<[value]>
+#^    - else if <yaml.list.contains[global.player.<[uuid]>]>:
+#^      - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
+#^    - else:
+#^      - yaml id:global.player.<[uuid]> load:data/players/<[uuid]>.yml
+#^      - yaml id:global.player.<[uuid]> set <[node]>:<[value]>
+#^      - yaml id:global.player.<[uuid]> savefile:data/players/<[uuid]>.yml
+#^      - yaml id:global.player.<[uuid]> unload

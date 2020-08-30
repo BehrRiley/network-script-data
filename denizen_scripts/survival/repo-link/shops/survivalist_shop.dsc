@@ -1,18 +1,10 @@
 survivalistAssignment:
     type: assignment
-    interact scripts:
-    - survivalistInteract
     actions:
         on assignment:
         - trigger name:click state:true
-
-survivalistInteract:
-    type: interact
-    steps:
-        1:
-            click trigger:
-                script:
-                - inject survivalistInventoryInject
+        on click:
+        - inject survivalistInventoryInject
 
 survivalistInventory:
     type: inventory
@@ -26,7 +18,7 @@ survivalistInventory:
         backpack_36: <item[Backpack_36].with[nbt=item/Backpack_36;lore=<&e>Slots:<&sp><&a>36|<&a>Buy<&sp>Price:<&sp><&e><script[survivalistData].data_key[Items.Backpack_36.Prices].before[/]>|<&c>Sell<&sp>Price:<&sp><script[survivalistData].data_key[Items.Backpack_36.Prices].after[/]>]>
         backpack_45: <item[Backpack_45].with[nbt=item/Backpack_45;lore=<&e>Slots:<&sp><&a>45|<&a>Buy<&sp>Price:<&sp><&e><script[survivalistData].data_key[Items.Backpack_45.Prices].before[/]>|<&c>Sell<&sp>Price:<&sp><script[survivalistData].data_key[Items.Backpack_45.Prices].after[/]>]>
         backpack_54: <item[Backpack_54].with[nbt=item/Backpack_54;lore=<&e>Slots:<&sp><&a>54|<&a>Buy<&sp>Price:<&sp><&e><script[survivalistData].data_key[Items.Backpack_54.Prices].before[/]>|<&c>Sell<&sp>Price:<&sp><script[survivalistData].data_key[Items.Backpack_54.Prices].after[/]>]>
-        grappling_hook: <item[tripwire_hook].with[nbt=item/Grappling_Hook;lore=<&a>Buy<&sp>Price:<&sp><&e><script[survivalistData].data_key[Items.Grappling_Hook.Prices].before[/]>|<&c>Sell<&sp>Price:<&sp><script[survivalistData].data_key[Items.Grappling_Hook.Prices].after[/]>]>
+        grappling_hook: <item[grappling_hook].with[nbt=item/Grappling_Hook;lore=<&a>Buy<&sp>Price:<&sp><&e><script[survivalistData].data_key[Items.Grappling_Hook.Prices].before[/]>|<&c>Sell<&sp>Price:<&sp><script[survivalistData].data_key[Items.Grappling_Hook.Prices].after[/]>]>
         mushroom_home: <item[mushroom_home].with[nbt=item/Mushroom_Home;lore=<&a>Buy<&sp>Price:<&sp><&e><script[survivalistData].data_key[Items.Mushroom_Home.Prices].before[/]>|<&c>Sell<&sp>Price:<&sp><script[survivalistData].data_key[Items.Mushroom_Home.Prices].after[/]>]>
     slots:
     - [filler] [filler] [filler] [filler] [] [filler] [filler] [filler] [filler]

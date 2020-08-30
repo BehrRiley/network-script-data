@@ -24,11 +24,6 @@ Home_Command:
             - run Home_GUI
             - stop
 
-    # - ██ [ Temporary Event Handle ] ██
-        - if <player.has_flag[Event.InEvent]>:
-            - narrate format:Colorize_Red "You cannot do that during an event."
-            - stop
-
     # % ██ [ Check for existing homes ] ██
         - else if !<player.has_flag[Behr.Essentials.Homes]>:
             - narrate format:Colorize_Red "You have no homes"
@@ -125,6 +120,9 @@ Home_GUI:
 
     - choose <[Action]>:
         - case Main_Menu:
+            - if !<player.has_flag[Behr.Essentials.Homes]>:
+                - define reason "You have no homes!"
+                - inject error_response
             - define Homes <player.flag[Behr.Essentials.Homes]>
             - define Title "My Homes"
             - define WorldList <server.worlds.parse[name]>
