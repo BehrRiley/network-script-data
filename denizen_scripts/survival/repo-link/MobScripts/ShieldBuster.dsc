@@ -1,6 +1,6 @@
 #Used to make Mythicmobs break shields faster. Shoutout to Pjochillin for making this for me.
 
-on player damaged:
+on player animates shield_block:
 - if <player.item_in_offhand.material.name> == shield:
     - if <context.damager.is_mythicmob>:
         - if <player.item_in_offhand.durability.add[<context.damager.mythicmob.level>]> >= <player.item_in_offhand.max_durability>:
