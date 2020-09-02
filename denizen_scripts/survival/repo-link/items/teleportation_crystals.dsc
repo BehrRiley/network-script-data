@@ -5,7 +5,7 @@ teleportation_crystal:
   material: firework_star
   display name: <&b><&o>Teleportation Crystal
   lore:
-    - "<&3>Right Click to open up the teleportation menu."
+    - <&3>Right Click to open up the teleportation menu.
   mechanisms:
     hides: ALL
 
@@ -25,17 +25,17 @@ teleportation_crystal_menu:
     - define inventory <list>
     - foreach <server.online_players> as:player:
       - define lore <list[<&b>Left<&sp>Click<&sp>to<&sp>teleport<&sp>to<&co><&sp><&e><[player].name>]>
-      - define lore:|:<&3>Right<&sp>Click<&sp>to<&sp>request<&sp>to<&sp>teleport<&sp>here
+      - define lore:->:<&3>Right<&sp>Click<&sp>to<&sp>request<&sp>to<&sp>teleport<&sp>here
       - define item <item[player_head].with[display_name=<&e><[player].name>;lore=<[lore]>;skull_skin=<[player].name>;nbt=<list[name/<[player].name>]>]>
       - define inventory:->:<[item]>
     - determine <[inventory]>
   slots:
-    - "[] [] [] [] [] [] [] [] []"
-    - "[] [] [] [] [] [] [] [] []"
-    - "[] [] [] [] [] [] [] [] []"
-    - "[] [] [] [] [] [] [] [] []"
-    - "[] [] [] [] [] [] [] [] []"
-    - "[b2] [b1] [b1] [b2] [close] [b2] [b1] [b1] [b2]"
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [] [] [] [] [] [] [] [] []
+    - [b2] [b1] [b1] [b2] [close] [b2] [b1] [b1] [b2]
 
 # -- Teleportation Crystal Menu Events
 # -> Left Click to request to teleport to player.
@@ -49,11 +49,8 @@ teleportation_crystal_menu_events:
     
     on player left clicks player_head in teleportation_crystal_menu:
       - define other_player <server.match_offline_player[<context.item.nbt[name]>]>
-      # Player Verification dependency
-      - define user <[other_player]>
-      - inject player_verification
       # Check if the other player has a map with your player tag.
-      - if <[other_player].has_flag[teleportation_crystal]>:
+      - if <[other_player].has_flag[teleportation_crystal]> && <[other_player].is_online>:
         - foreach <[other_player].flag[teleportation_crystal]> as:map:
           - if <[map].contains[<player>]>:
             - define inner_map <[map].get[<player>].as_map>
@@ -74,11 +71,8 @@ teleportation_crystal_menu_events:
     
     on player right clicks player_head in teleportation_crystal_menu:
       - define other_player <server.match_offline_player[<context.item.nbt[name]>]>
-      # Player Verification dependency
-      - define user <[other_player]>
-      - inject player_verification
       # Check if the other player has a map with your player tag.
-      - if <[other_player].has_flag[teleportation_crystal]>:
+      - if <[other_player].has_flag[teleportation_crystal]> && <[other_player].is_online>:
         - foreach <[other_player].flag[teleportation_crystal]> as:map:
           - if <[map].contains[<player>]>:
             - define inner_map <[map].get[<player>].as_map>
