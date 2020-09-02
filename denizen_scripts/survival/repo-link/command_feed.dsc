@@ -1,20 +1,18 @@
-heal_command:
+feed_command:
     type: command
-    name: heal
-    usage: /heal (player)
-    description: Heals a player
+    name: feed
+    usage: /feed (player)
+    description: feeds a player
     permission: adriftus.staff
     script:
     - if <context.args.size> > 1:
         - inject command_syntax
     - if <context.args.is_empty>:
-        - heal <player>
         - feed 20 <player>
-        - narrate "You have been healed"
+        - narrate "You have been fed."
     - else:
         - define user <context.args.first>
         - inject player_verification
-        - heal <[user]>
         - feed 20 <[user]>
-        - narrate "<player> has been healed"
-        - narrate "<user> has healed you" targets:<player>
+        - narrate "<player> has been fed"
+        - narrate "<user> has fed you" targets:<player>
