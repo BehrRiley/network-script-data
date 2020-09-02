@@ -14,5 +14,5 @@ feed_command:
         - define user <context.args.first>
         - inject player_verification
         - feed 20 <[user]>
-        - narrate "<player> has been fed"
-        - narrate "<user> has fed you" targets:<player>
+        - narrate "<user> has been fed"
+        - narrate "<player.name> has fed you" targets:<user>

@@ -16,5 +16,5 @@ heal_command:
         - inject player_verification
         - heal <[user]>
         - feed 20 <[user]>
-        - narrate "<player> has been healed"
-        - narrate "<user> has healed you" targets:<player>
+        - narrate "<user> has been healed"
+        - narrate "<player.name> has healed you" targets:<user>
