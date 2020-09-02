@@ -9,12 +9,12 @@ heal_command:
         - inject command_syntax
     - if <context.args.is_empty>:
         - heal <player>
-        - feed 20 <player>
+        - feed amount:20 <player>
         - narrate "You have been healed"
     - else:
         - define user <context.args.first>
         - inject player_verification
         - heal <[user]>
-        - feed 20 <[user]>
+        - feed amount:20 <[user]>
         - narrate "<user> has been healed"
         - narrate "<player.name> has healed you" targets:<user>

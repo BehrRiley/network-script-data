@@ -8,11 +8,11 @@ feed_command:
     - if <context.args.size> > 1:
         - inject command_syntax
     - if <context.args.is_empty>:
-        - feed 20 <player>
+        - feed amount:20 <player>
         - narrate "You have been fed."
     - else:
         - define user <context.args.first>
         - inject player_verification
-        - feed 20 <[user]>
+        - feed amount:20 <[user]>
         - narrate "<user> has been fed"
         - narrate "<player.name> has fed you" targets:<user>
