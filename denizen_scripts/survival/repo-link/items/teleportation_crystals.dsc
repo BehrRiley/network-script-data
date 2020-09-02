@@ -83,7 +83,7 @@ teleportation_crystal_menu_events:
           - if <[map].contains[<player>]>:
             - define inner_map <[map].get[<player>].as_map>
             - if <[inner_map].get[request_type]> == teleport_to:
-              - teleport <player> <[inner_map].get[location].as_location>
+              - teleport <[other_player]> <[inner_map].get[location].as_location>
               - flag <[other_player]> teleportation_crystal:<-:<[map]>
               - flag <player> teleportation_crystal:<-:<[map].with[<[other_player]>].as[<[inner_map].with[request_type].as[teleport_here]>]>
               - take scriptname:teleportation_crystal from:<[other_player].inventory>
