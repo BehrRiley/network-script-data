@@ -54,6 +54,9 @@ teleportation_crystal_menu_events:
   events:
     on player clicks in teleportation_crystal_menu priority:10:
       - determine cancelled
+	
+	on player clicks red_stained_glass_pane in teleportation_crystal_menu:
+	  - inventory close
     
     on player left clicks player_head in teleportation_crystal_menu:
       - define other_player <server.match_offline_player[<context.item.nbt[name]>]>
