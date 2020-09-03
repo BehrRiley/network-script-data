@@ -68,7 +68,7 @@ teleportation_crystal_menu_events:
             - if <[inner_map].get[request_type]> == teleport_here:
               - teleport <player> <[inner_map].get[location].as_location>
               - flag <[other_player]> teleportation_crystal:<-:<[map]>
-              - flag <player> teleportation_crystal:<-:<[map].with[<[other_player]>].as[<[inner_map].with[request_type].as[teleport_to]>]>
+              - flag <player> teleportation_crystal:<-:<map.with[<[other_player]>].as[<[inner_map].with[request_type].as[teleport_to]>]>
               - take scriptname:teleportation_crystal from:<[other_player].inventory>
               - take scriptname:teleportation_crystal from:<player.inventory>
               - stop
@@ -90,7 +90,7 @@ teleportation_crystal_menu_events:
             - if <[inner_map].get[request_type]> == teleport_to:
               - teleport <[other_player]> <[inner_map].get[location].as_location>
               - flag <[other_player]> teleportation_crystal:<-:<[map]>
-              - flag <player> teleportation_crystal:<-:<[map].with[<[other_player]>].as[<[inner_map].with[request_type].as[teleport_here]>]>
+              - flag <player> teleportation_crystal:<-:<map.with[<[other_player]>].as[<[inner_map].with[request_type].as[teleport_here]>]>
               - take scriptname:teleportation_crystal from:<[other_player].inventory>
               - take scriptname:teleportation_crystal from:<player.inventory>
               - stop
