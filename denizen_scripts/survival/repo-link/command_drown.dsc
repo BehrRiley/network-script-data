@@ -1,4 +1,4 @@
-feed_command:
+drown_command:
     type: command
     name: drown
     usage: /drown (player)
@@ -7,7 +7,7 @@ feed_command:
     script:
     - if <context.args.size> > 1:
         - inject command_syntax
-    - if <context.args.is_empty>:
+    - else if <context.args.is_empty>:
         - animate animation:HURT_DROWN <player>
     - else:
         - define user <context.args.first>
