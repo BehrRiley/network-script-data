@@ -31,7 +31,7 @@ teleportation_crystal_menu:
     close: <item[red_stained_glass_pane].with[display_name=<&c>Cancel]>
   procedural items:
     - define inventory <list>
-    - foreach <server.online_players> as:player:
+    - foreach <server.online_players.exclude[<player>]> as:player:
       - define lore <list[<&b>Left<&sp>Click<&sp>to<&sp>teleport<&sp>to<&co><&sp><&e><[player].name>]>
       - define lore:->:<&3>Right<&sp>Click<&sp>to<&sp>request<&sp>to<&sp>teleport<&sp>here
       - define item <item[player_head].with[display_name=<&e><[player].name>;lore=<[lore]>;skull_skin=<[player].name>;nbt=<list[name/<[player].name>]>]>
