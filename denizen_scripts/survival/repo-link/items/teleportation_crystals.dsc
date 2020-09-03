@@ -103,5 +103,5 @@ teleportation_crystal_events:
   type: world
   debug: false
   events:
-    on player right clicks with teleportation_crystal:
+    on player right clicks block with:teleportation_crystal:
 	  - inventory open d:teleportation_crystal_menu
