@@ -12,4 +12,4 @@ smite_command:
     - else:
         - define user <context.args.first>
         - inject player_verification
-        - strike no_damage <player.curson_on><[user]>
+        - strike no_damage <[user].location>
