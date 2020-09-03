@@ -12,6 +12,6 @@ drown_command:
     - else:
         - define user <context.args.first>
         - inject player_verification
-        - repeat 3
+        - repeat 3:
             - animate animation:HURT_DROWN <[user]>
             - wait 14t
