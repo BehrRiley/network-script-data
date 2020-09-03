@@ -13,9 +13,9 @@ teleportation_crystal:
       type: shaped
       output_quantity: 1
       input:
-        - air|teleportation_shard|air
-        - teleportation_shard|diamond|teleportation_shard
-        - air|teleportation_shard|air
+      - air|teleportation_shard|air
+      - teleportation_shard|diamond|teleportation_shard
+      - air|teleportation_shard|air
 
 # -- Teleportation Crystal Menu
 teleportation_crystal_menu:
