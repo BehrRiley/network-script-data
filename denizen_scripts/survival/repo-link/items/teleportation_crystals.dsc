@@ -96,7 +96,7 @@ teleportation_crystal_menu_events:
               - stop
       # Request to teleport a player to you.
       - define teleport_map <map.with[<player>].as[<map.with[request_type].as[teleport_here].with[location].as[<player.location>]>]>
-      - flag <[other_player]> teleportation_crystal:->:<[teleport_nap]> duration:3m
+      - flag <[other_player]> teleportation_crystal:->:<[teleport_map]> duration:3m
       - flag <player> teleportation_crystal:->:<map.with[<[other_player]>].as[<[teleport_map].with[request_type].as[teleport_to]>]> duration:3m
       - narrate targets:<[other_player]> "<&3><player.name> <&b>requests you to teleport to them!"
       - narrate targets:<[other_player]> "<&b>Use a teleportation crystal to confirm their request. <&3>(Teleport to: <player.name>)"
