@@ -10,37 +10,36 @@ slime_mob_handler:
                 - if <player.equipment_map.contains[helmet]> <player.equipment_map.get[helmet].material.name.ends_with[_Helmet]>:
                   - define slot 40
                   - define item <player.equipment_map.get[helmet].material.name>
-                  - determine <context.damager.mythicmob.level.mul[3]>
+                  - hurt <context.damager.mythicmob.level.mul[3]>
                 - else:
-                  - determine <context.damager.mythicmob.level.mul[5]>
+                  - hurt <context.damager.mythicmob.level.mul[5]>
                   - narrate "<&e>Acid splashes on you, burning your face."
               - case 2:
                 - if <player.equipment_map.contains[chestplate]> <player.equipment_map.get[chestplate].material.name.ends_with[_chestplate]>:
                   - define slot 39
                   - define item <player.equipment_map.get[helmet].material.name>
-                  - determine <context.damager.mythicmob.level.mul[3]>
+                  - hurt <context.damager.mythicmob.level.mul[3]>
                 - else:
-                  - determine <context.damager.mythicmob.level.mul[5]>
+                  - hurt <context.damager.mythicmob.level.mul[5]>
                   - narrate "<&e>Acid splashes on you, burning your chest."
               - case 3:
                 - if <player.equipment_map.contains[leggings]> <player.equipment_map.get[leggings].material.name.ends_with[_leggings]>:
                   - define slot 38
                   - define item <player.equipment_map.get[helmet].material.name>
-                  - determine <context.damager.mythicmob.level.mul[3]>
+                  - hurt <context.damager.mythicmob.level.mul[3]>
                 - else:
-                  - determine <context.damager.mythicmob.level.mul[5]>
+                  - hurt <context.damager.mythicmob.level.mul[5]>
                   - narrate "<&e>Acid splashes on you, burning your legs."
               - case 4:
                 - if <player.equipment_map.contains[boots]> <player.equipment_map.get[boots].material.name.ends_with[_boots]>:
                   - define slot 37
                   - define item <player.equipment_map.get[helmet].material.name>
-                  - determine <context.damager.mythicmob.level.mul[3]>
+                  - hurt <context.damager.mythicmob.level.mul[3]>
                 - else
-                  - determine <context.damager.mythicmob.level.multiply[5]>
+                  - hurt <context.damager.mythicmob.level.multiply[5]>
                   - narrate "<&e>Acid splashes on you, burning your feet."
           - if <[item].durability.add[<context.damager.mythicmob.level.sub[5]>]> >= <[item].max_durability>:
             - playeffect effect:ITEM_CRACK at:<player.location.above[0.5].forward[0.4]> special_data:<[item]> offset:0.2 quantity:15
             - take slot:<[slot]>
           - else:
             - inventory adjust slot:<[slot]> durability:<[item].durability.add[<<context.damager.mythicmob.level.sub.[6]>.multiply[<context.damager.size.div[2].round_up>]>]>
-d
