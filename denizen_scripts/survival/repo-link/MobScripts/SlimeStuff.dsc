@@ -29,7 +29,7 @@ armor_degradation:
                   - hurt <context.damager.mythicmob.level.multiply[3]>
                 - else
                   - hurt <context.damager.mythicmob.level.multiply[5]>
-                  - narrate "<&e>Acid splashes on you, burning your Legs."
+                  - narrate "<&e>Acid splashes on you, burning your legs."
               - case 4
                 - if <player.equipment_map.get[boots].material.name> == *_boots
                   - define slot 37
