@@ -42,4 +42,4 @@ armor_degradation:
             - playeffect effect:ITEM_CRACK at:<player.location.above[0.5].forward[0.4]> special_data:<[item]> offset:0.2 quantity:15
             - take slot:<[slot]>
           - else:
-            - inventory adjust slot:<[slot]> durability:<[item].durability.add[<context.damager.mythicmob.level.sub.[6]>]>
+            - inventory adjust slot:<[slot]> durability:<[item].durability.add[<<context.damager.mythicmob.level.sub.[6]>.multiply[<context.damager.size.divide[2].round_up>]>]>
