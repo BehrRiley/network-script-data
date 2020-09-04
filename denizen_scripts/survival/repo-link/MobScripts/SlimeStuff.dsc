@@ -1,5 +1,3 @@
-#Used to make Mythicmobs break shields faster. Shoutout to Pjochillin for making this for me.
-
 armor_degradation:
   type: world
   debug: false
