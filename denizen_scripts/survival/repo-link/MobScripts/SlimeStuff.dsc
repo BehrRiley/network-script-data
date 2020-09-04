@@ -3,7 +3,7 @@ armor_degradation:
   debug: false
   events:
     on player damaged by slime:
-      - if <context.damager.is_mythicmob> && <context.damager.MythicMob.level.is[MORE].to[6]>:
+      - if <context.damager.is_mythicmob> && <context.damager.MythicMob.level.is[MORE].to[5]>:
           - determine passively cancelled
           - choose <util.random.int[1].to[4]>:
               - case 1
