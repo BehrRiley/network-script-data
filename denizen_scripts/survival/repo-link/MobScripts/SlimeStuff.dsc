@@ -21,12 +21,12 @@ slime_mob_handler:
             - define equipment boots
             - define slot 37
             - define body_part feet
-      - if !<player.equipment_map.contains[<[equipment]>]>:
+      - if !<player.equipment_map.contains[<[equipment]>]> || <player.equipment_map.get[<[equipment]>].ends_with[_helmet]>:
         - actionbar "<&e>Acid splashes on you, burning your <[body_part]>."
         - determine <context.damager.mythicmob.level.mul[5]>
 
       - define item <player.equipment_map.get[<[equipment]>]>
-      - else if <[item].repairable>:
+      - if <[item].repairable>:
         - if <[item].durability.add[<context.damager.mythicmob.level.sub[5]>]> >= <[item].max_durability>:
           - playeffect effect:ITEM_CRACK at:<player.location.above[0.5].forward[0.4]> special_data:<[item]> offset:0.2 quantity:15
           - take slot:<[slot]>
