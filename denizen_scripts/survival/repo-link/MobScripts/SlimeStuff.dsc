@@ -26,6 +26,7 @@ slime_mob_handler:
         - actionbar "<&e>Acid splashes on you, burning your <[body_part]>."
         - determine <context.damager.mythicmob.level.mul[5]>
       - define item <player.equipment_map.get[<[equipment]>]>
+      - define Durrbillty <[item].durability.add[<context.damager.mythicmob.level.sub.[6].mul[<context.damager.size.div[2].round_up>]>]>
       - if <[item].repairable>:
         - if <[Durrbillty]> >= <[item].max_durability>:
           - playeffect effect:ITEM_CRACK at:<player.location.above[0.5].forward[0.4]> special_data:<[item]> offset:0.2 quantity:15
