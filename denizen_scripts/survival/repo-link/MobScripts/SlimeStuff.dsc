@@ -3,7 +3,6 @@ slime_mob_handler:
   debug: false
   events:
     on player damaged by slime:
-      - define Durrbillty <[item].durability.add[<context.damager.mythicmob.level.sub.[6].mul[<context.damager.size.div[2].round_up>]>]>
       - if <context.damager.is_mythicmob> && <context.damager.MythicMob.level.is[MORE].to[5]>:
         - choose <util.random.int[1].to[4]>:
           - case 1:
