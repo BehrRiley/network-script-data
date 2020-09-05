@@ -1,6 +1,6 @@
 create_webhook:
     type: task
-    debug: true
+    debug: false
     definitions: channel_id|channel_name
     script:
         - define url https://discord.com/api/channels/<[channel_id]>/webhooks
@@ -9,8 +9,8 @@ create_webhook:
         - ~webget <[url]> headers:<[headers]> data:<[channel_data]> save:response
         - if <entry[response].failed>:
             - stop
-        - define result <entry[response].result>
-        - define hook https://discordapp.com/api/webhooks/<[result].get[id]>/<[result].get[token]>
+        - define hook_map <util.parse_yaml[<entry[response].result>]>
+        - define hook https://discordapp.com/api/webhooks/<[hook_map].get[id]>/<[hook_map].get[token]>
 
     #| Response is a Map object
 
