@@ -7,7 +7,7 @@ Heal_Command:
     permission: Behr.Essentials.Heal
     tab complete:
         - if <player.groups.contains[Moderation]>:
-            - define Blacklist <[<player>]>
+            - define Blacklist <player>
             - inject Online_Player_Tabcomplete
     script:
     # % ██ [  Verify args ] ██
