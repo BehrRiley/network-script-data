@@ -32,4 +32,4 @@ slime_mob_handler:
           - take slot:<[slot]>
         - else:
           - inventory adjust slot:<[slot]> durability:<[item].durability.add[<context.damager.mythicmob.level.sub.[6].mul[<context.damager.size.div[2].round_up>]>]>
-        - determine <context.damager.mythicmob.level.mul[3]>
+      - determine <context.damager.mythicmob.level.mul[3]>
