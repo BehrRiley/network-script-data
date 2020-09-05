@@ -162,7 +162,6 @@
 - [misc_scripts](misc_scripts)
 - [scriptdata](scriptdata)
     - [global](scriptdata/global)
-        - [Behr_Essentials](scriptdata/global/Behr_Essentials)
         - [bungee](scriptdata/global/bungee)
         - [chat](scriptdata/global/chat)
         - [discord](scriptdata/global/discord)
