@@ -14,23 +14,16 @@ global_data_handler:
     # % ██ [ Verify Global Player Data Exists ] ██
       - define Directory data/global/players/<[UUID]>.yml
       - if !<server.has_file[<[Directory]>]>:
-        # $ ██ [ Temporary for resolving current playerdata prior to transition ] ██
-        - if <server.has_file[data/globalData/players/<[UUID]>.yml]>:
-          - yaml id:<[GlobalYaml]> load:data/globalData/players/<[UUID]>.yml
-          - yaml id:<[GlobalYaml]> savefile:<[Directory]>
-          - yaml id:<[GlobalYaml]> unload
-          - stop
-        # $ ██ [ -------------------------------------------------------------- ] ██
-
         - yaml id:<[GlobalYaml]> create
         - yaml id:<[GlobalYaml]> savefile:<[Directory]>
+
     on bungee player switches to server:
     # % ██ [ Cache Player Info ] ██
       - define Name <context.name>
       - define UUID <context.uuid>
       - define Server <context.server>
       - if <yaml[data_handler].contains[players.<[UUID]>.server]>:
-        - define Old_Server <yaml[data_handler].read[players.<[UUID]>.server]>
+        - define Old_Server <yaml[data_handler].read[players.uuids.<[UUID]>.server]>
       - define PlayerMap <map.with[Name].as[<[Name]>].with[UUID].as[<[UUID]>].with[Server].as[<[Server]>]>
       - define LocalServers <yaml[bungee.config].list_keys[servers].filter_tag[<yaml[bungee.config].read[servers.<[filter_value]>.address].starts_with[localhost]>]>
 
@@ -42,7 +35,6 @@ global_data_handler:
       - yaml id:data_handler set servers.<[server]>:->:<[UUID]>
       - yaml id:data_handler set players.names.<[name]>.UUID:<[UUID]>
       - yaml id:data_handler set players.names.<[name]>.server:<[server]>
-
 
     # % ██ [ Fire Player Login Events ] ██
       - if <[LocalServers].contains[<[Server]>]>:
@@ -56,7 +48,7 @@ global_data_handler:
     # % ██ [ Cache Player Info ] ██
       - define Name <context.name>
       - define UUID <context.uuid>
-      - define Server <yaml[data_handler].read[players.<[uuid]>.server]>
+      - define Server <yaml[data_handler].read[players.uuids.<[uuid]>.server]>
       - define PlayerMap <map.with[name].as[<[name]>].with[uuid].as[<[uuid]>].with[server].as[<[server]>]>
       - define LocalServers <yaml[bungee.config].list_keys[servers].filter_tag[<yaml[bungee.config].read[servers.<[filter_value]>.address].starts_with[localhost]>]>
 
@@ -91,7 +83,7 @@ External_Player_Data_Join_Event:
       - foreach <[PlayerData]>:
         - yaml id:<[GlobalYaml]> Set <[Key]>:<[Value]>
 
-      # % ██ [ Load and Set Display_Name ] ██
+    # % ██ [ Load and Set Display_Name ] ██
       - define Name <player[<[UUID]>].name>
       - if !<yaml[<[GlobalYaml]>].contains[Display_Name]>:
         - yaml id:<[GlobalYaml]> set Display_Name:<[Name]>
@@ -101,7 +93,7 @@ External_Player_Data_Join_Event:
       - if !<yaml[<[GlobalYaml]>].contains[Tab_Display_name]>:
         - yaml id:<[GlobalYaml]> set Tab_Display_name:<[Name]>
 
-      # % ██ [ Fire Player Login Tasks ] ██
+    # % ██ [ Fire Player Login Tasks ] ██
       - define PlayerMap <map.with[Name].as[<[Name]>].with[Server].as[<bungee.server>]>
       - if <yaml[<[GlobalYaml]>].contains[Rank]>:
         - define PlayerMap <[PlayerMap].with[Rank].as[<yaml[<[GlobalYaml]>].read[rank].strip_color>]>
@@ -136,7 +128,7 @@ player_info_map:
     definitions: input
     script:
     - if <yaml[data_handler].contains[players.<[input]>]>:
-      - determine <yaml[data_handler].read[players.<[input]>].with[name].as[<[input]>]>
+      - determine <yaml[data_handler].read[players.names.<[input]>].with[name].as[<[input]>]>
     - determine null
     
 # % ██  [ Retrieves a map of the player's information, with the keys 'name, uuid, server' based on the player's uuid ] ██
@@ -151,5 +143,5 @@ player_info_map_uuid:
     definitions: input
     script:
     - if <yaml[data_handler].contains[players.<[input]>]>:
-      - determine <yaml[data_handler].read[players.<[input]>].with[uuid].as[<[input]>]>
+      - determine <yaml[data_handler].read[players.uuids.<[input]>].with[uuid].as[<[input]>]>
     - determine null
