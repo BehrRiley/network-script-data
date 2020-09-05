@@ -9,7 +9,7 @@ drown_command:
             - define Blacklist <[<player>]>
             - inject Online_Player_Tabcomplete
     script:
-    # % ██ [  Verify args ] ██
+    # % ██ [  Verify argumentss ] ██
     - if <context.args.is_empty>:
         - define User <player>
     - else if <context.args.size> == 1:

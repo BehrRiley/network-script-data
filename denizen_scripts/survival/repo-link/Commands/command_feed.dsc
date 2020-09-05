@@ -9,7 +9,7 @@ feed_command:
             - define Blacklist <[<player>]>
             - inject Online_Player_Tabcomplete
     script:
-    # % ██ [  Verify args ] ██
+    # % ██ [  Verify arguments ] ██
         - if <context.args.is_empty>:
             - define User <player>
         - else if <context.args.size> == 1:
@@ -18,7 +18,7 @@ feed_command:
         - else:
             - inject Command_Syntax
 
-    # % ██ [  Heal Player ] ██
+    # % ██ [  Feed Player ] ██
         - adjust <[User]> food_level:20
         - if <[User]> != <player>:
             - narrate "<[user].display_name><&e> has been fed."
