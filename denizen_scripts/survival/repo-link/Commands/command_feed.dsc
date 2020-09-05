@@ -6,7 +6,7 @@ feed_command:
     permission: adriftus.staff
     tab complete:
         - if <player.groups.contains[Moderation]>:
-            - define Blacklist <[<player>]>
+            - define Blacklist <player>
             - inject Online_Player_Tabcomplete
     script:
     # % ██ [  Verify arguments ] ██
