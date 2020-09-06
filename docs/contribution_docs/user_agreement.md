@@ -1,4 +1,5 @@
 1. DEFINITIONS
+
 (a) Adriftus - Adriftus Studios, [INSERT_PHYSICAL_ADDRESS_HERE/INSERT_EMAIL_ADDRESS_HERE\*], [APPLICABLE_CONTACT_INFORMATION\*].
 
 (b) Game(s) - Minecraft: The Game [(,_)LIST_OTHER_GAME_NETWORKS\*].
@@ -15,6 +16,7 @@
 
 
 2. DURATION
+
 (a) Duration - Unless modified or amended by Adriftus, this agreement and its provisions shall remain in effect. Termination of any license granted by Adriftus under this agreement does not affect any other provisions of this agreement.
 
 
@@ -23,15 +25,17 @@
 
 
 4. CONDUCT
+
 (a) It is Your responsibility to read, understand and accept the Code of Conduct in effect each and every time You use the Service. You acknowledge that Adriftus may make changes to the Code of Conduct at any time. You also acknowledge that each and every time You click "ACCEPT" You warrant and represent that You did read, understand and accept the most recent version of the Code of Conduct in effect at that time.
 
 
 5. ACCOUNT ACCESS AND PERMISSIBLE ASSIGNMENT
+
 (a) By clicking "ACCEPT" You warrant and represent that you:
 
-1. are at least 18 years of age and otherwise legally competent to read, understand and - accept the provisions of this agreement on behalf of yourself;
-2. are at least 18 years of age and otherwise legally competent to read, understand and - accept the provisions of this agreement on behalf of yourself and a minor age 13-17 for whom - you are legally permitted to allow access to the Game; or
-3. are a minor age 13-17 that has been authorized to click "ACCEPT" under the provisions of Section 5(b) below. YOU ARE HEREBY FOREWARNED THAT ADRIFTUS MAY, IN ITS SOLE AND ABSOLUTE DISCRETION, EXERCISE ITS RIGHT TO TERMINATE BASED ON FAILURE TO COMPLY WITH THE CRITERIA ABOVE.
+- (i) are at least 18 years of age and otherwise legally competent to read, understand and - accept the provisions of this agreement on behalf of yourself;
+- (ii) are at least 18 years of age and otherwise legally competent to read, understand and - accept the provisions of this agreement on behalf of yourself and a minor age 13-17 for whom - you are legally permitted to allow access to the Game; or
+- (iii) are a minor age 13-17 that has been authorized to click "ACCEPT" under the provisions of Section 5(b) below. YOU ARE HEREBY FOREWARNED THAT ADRIFTUS MAY, IN ITS SOLE AND ABSOLUTE DISCRETION, EXERCISE ITS RIGHT TO TERMINATE BASED ON FAILURE TO COMPLY WITH THE CRITERIA ABOVE.
 
 (b) If you are at least 18 years of age and otherwise legally competent to read, understand and accept the provisions of this agreement on behalf of yourself and a minor age 13-17 for whom you are legally permitted to allow access to the Game, you can choose to allow use of Adriftus Account by that minor subject to the following provisions:
 
@@ -47,6 +51,7 @@
 
 
 6. INDEMNITY
+
 (a) In addition to the provisions of Sections 3(b) and 5(b)(vi), You agree to defend, indemnify and hold harmless Adriftus, any third-parties under agreement with Adriftus, any parent, subsidiary or affiliate of Adriftus, and any employee, agent, supplier, licensee, customer, distributor, shareholder, director or officer of any of the foregoing, as well as any person using the Game and any person or entity that becomes aware of Your use of the Game at any time, with respect to any and all claims, liabilities, injuries, damages, losses or expenses (including but not limited to attorney's fees and costs) that arise under, from or in any way, directly or indirectly, relate to:
 
 - (i) Your failure to comply with any provision of this agreement; and
@@ -55,4 +60,5 @@
 
 
 7. GENERAL PROVISIONS
+
 [((a) Governing Law and Venue - This agreement and any controversy related to this agreement shall be interpreted in accordance with and governed by the laws of the state of [PHYSICAL_ADDRESS_IF_REGISTERED\*], or, as appropriate, by federal law as applied by a federal court sitting in [PHYSICAL_ADDRESS_IF_REGISTERED\*], both without regard to [PHYSICAL_ADDRESS_IF_REGISTERED\*] choice of law rules. You and Adriftus expressly agree that the United Nations Convention on Contracts for the International Sale of Goods do not apply to this agreement or to transactions processed under the agreement. To the extent not otherwise precluded by any other provision of this agreement, any and all Dispute(s) and litigation(s) arising out of or related to this agreement, including without limitation matters connected with its performance, shall be subject to the exclusive jurisdiction of the courts of [PHYSICAL_ADDRESS_IF_REGISTERED\*], and/or the Federal courts sitting therein. You and Adriftus hereby irrevocably submit to the personal jurisdiction of such courts and irrevocably waive all objections to such venue.)IF_REGISTERED_ORGANIZATION/LLC/COPYRIGHTED\*]
