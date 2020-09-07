@@ -1,4 +1,4 @@
-slime_mob_handler:
+slime_damage_handler:
   type: world
   debug: false
   events:
@@ -34,9 +34,33 @@ slime_mob_handler:
       - if <[item].repairable>:
         - if <[Durrbillty]> >= <[item].max_durability>:
           - playeffect effect:ITEM_CRACK at:<player.location.above[0.5].forward[0.4]> special_data:<[item]> offset:0.2 quantity:15
+          - playsound <context.location> sound:ENTITY_ITEM_BREAK
           - take slot:<[slot]>
 #Item Durability Damage
         - else:
           - inventory adjust slot:<[slot]> durability:<[Durrbillty]>
 #Damage player
       - determine <context.damager.mythicmob.level.mul[3]>
+
+slime_puddle_creator:
+  type: world
+  debug: false
+  script:
+  - if <context.entity.is_mythicmob.entity[SLIME1]>
+    - define Puddlesize <context.entity.size.div[2]>
+    - define Puddle_Location <player.location.find.surface_blocks.within[Puddlesize]>
+    - flag server blocks_to_remove.<[Puddle_Location].simple>:<[Puddle_Location].material>
+    - modifyblock <[Puddle_Location]> slime_block
+    - wait 5s
+    - if <server.has_flag[blocks_to_remove.<[Puddle_Location].simple>]>:
+      - modifyblock <[Puddle_Location]> <server.flag[blocks_to_remove.<[Puddle_Location].simple>].as_material>
+
+player_slime_block_break_handler:
+  type: world
+  debug: false
+  script:
+  on player breaks:slime_block
+  - if <server.has_flag[blocks_to_remove.<[context.location].simple>]>:
+    - modifyblock <[Puddle_Location]> <server.flag[blocks_to_remove.<[Puddle_Location].simple>].as_material>
+    - playeffect effect:BLOCK_CRACK at:<context.location> special_data:SLIME_BLOCK quantity:20
+    - playsound <context.location> sound:BLOCK_SLIME_BLOCK_BREAK
