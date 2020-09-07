@@ -49,7 +49,7 @@ slime_puddle_creator:
   - if <context.entity.is_mythicmob> && <context.entity.mythicmob.internal_name> == slime1:
     - define Puddlesize <context.entity.size.div[2]>
     - define Puddle_Location <player.location.find.surface_blocks.within[Puddlesize]>
-    - flag server blocks_to_remove.<[Puddle_Location].simple>:<[Puddle_Location].material>
+    - flag server blocks_to_remove.<[Puddle_Location].simple>:<[Puddle_Location].material> duration:5s
     - modifyblock <[Puddle_Location]> slime_block
     - wait 5s
     - if <server.has_flag[blocks_to_remove.<[Puddle_Location].simple>]>:
