@@ -58,9 +58,9 @@ slime_puddle_creator:
 player_slime_block_break_handler:
   type: world
   debug: false
-  script:
-  on player breaks:slime_block
-  - if <server.has_flag[blocks_to_remove.<[context.location].simple>]>:
-    - modifyblock <[Puddle_Location]> <server.flag[blocks_to_remove.<[<[Puddle_Location]>].simple>].as_material>
-    - playeffect effect:BLOCK_CRACK at:<context.location> special_data:SLIME_BLOCK quantity:20
-    - playsound <context.location> sound:BLOCK_SLIME_BLOCK_BREAK
+  events:
+    on player breaks:slime_block
+      - if <server.has_flag[blocks_to_remove.<[context.location].simple>]>:
+        - modifyblock <[Puddle_Location]> <server.flag[blocks_to_remove.<[<[Puddle_Location]>].simple>].as_material>
+        - playeffect effect:BLOCK_CRACK at:<context.location> special_data:SLIME_BLOCK quantity:20
+        - playsound <context.location> sound:BLOCK_SLIME_BLOCK_BREAK
