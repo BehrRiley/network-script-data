@@ -144,7 +144,7 @@ BehrCraft_Command:
   description: Sends a player to the BehrCraft server
   usage: /behrcraft
   name: BehrCraft
-  alias:
+  aliases:
   - bc
   script:
   - adjust <player> send_to:behrcraft
