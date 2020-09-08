@@ -43,7 +43,7 @@ slime_damage_handler:
       - determine <context.damager.mythicmob.level.mul[3]>
 
 slime_puddle_creator:
-  type: world
+  type: task
   debug: false
   script:
   - if <context.entity.is_mythicmob> && <context.entity.mythicmob.internal_name> == slime1:
