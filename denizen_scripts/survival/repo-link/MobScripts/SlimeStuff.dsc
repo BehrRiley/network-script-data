@@ -48,11 +48,11 @@ slime_puddle_creator:
   script:
   - if <context.entity.is_mythicmob> && <context.entity.mythicmob.internal_name> == slime1:
     - define Puddlesize <context.entity.size.div[2]>
-    - define Puddle_Location <player.location.find.surface_blocks.within[Puddlesize]>
-    - flag server blocks_to_remove.<[Puddle_Location].simple>:<[Puddle_Location].material> duration:5s
+    - define Puddle_Location <context.entity.location.find.surface_blocks.within[<[Puddlesize]>].filter[material.name.contains_any[grass_block|air].not].filter[material.is_solid]>
+    - flag server blocks_to_remove.<[<[Puddle_Location]>].simple>:<[<[Puddle_Location]>].material> duration:5s
     - modifyblock <[Puddle_Location]> slime_block
     - wait 5s
-    - if <server.has_flag[blocks_to_remove.<[Puddle_Location].simple>]>:
+    - if <server.has_flag[blocks_to_remove.<[Puddle_Location]>].simple>]>:
       - modifyblock <[Puddle_Location]> <server.flag[blocks_to_remove.<[Puddle_Location].simple>].as_material>
 
 player_slime_block_break_handler:
@@ -61,6 +61,6 @@ player_slime_block_break_handler:
   script:
   on player breaks:slime_block
   - if <server.has_flag[blocks_to_remove.<[context.location].simple>]>:
-    - modifyblock <[Puddle_Location]> <server.flag[blocks_to_remove.<[Puddle_Location].simple>].as_material>
+    - modifyblock <[Puddle_Location]> <server.flag[blocks_to_remove.<[<[Puddle_Location]>].simple>].as_material>
     - playeffect effect:BLOCK_CRACK at:<context.location> special_data:SLIME_BLOCK quantity:20
     - playsound <context.location> sound:BLOCK_SLIME_BLOCK_BREAK
