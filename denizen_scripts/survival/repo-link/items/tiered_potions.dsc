@@ -58,7 +58,7 @@ tiered_potions_events:
       - if <player.item_in_hand> == <context.item>:
         - inventory adjust slot:<player.held_item_slot> nbt:uses/<[usage]>
       - else:
-        - inventory adjust slot:<player.inventory.find[<player.item_in_offhand>]> nbt:uses/<[usage]>
+        - inventory adjust slot:41 nbt:uses/<[usage]>
 
 
 # -- Tiered Potions
