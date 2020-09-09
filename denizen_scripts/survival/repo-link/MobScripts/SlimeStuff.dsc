@@ -53,4 +53,3 @@ slime_puddle_creator:
     - define Puddlesize <context.entity.size.div[2]>
     - define Puddle_Location <context.entity.location.find.surface_blocks.within[<[Puddlesize]>].filter[material.is_solid]>
     - showfake slime_block <[Puddle_Location]> d:10 players:<context.entity.location.find.players.within[20]>
-
