@@ -12,11 +12,9 @@ Day_command:
 
 Night_command:
     type: command
-    name: Day
-    usage: /day
-    aliases:
-    - daymanfighterofthenightman
-    description: Sets to daytime
+    name: night
+    usage: /night
+    description: Sets to nighttime
     permission: adriftus.staff
     script:
     - time global 13000t mainland
