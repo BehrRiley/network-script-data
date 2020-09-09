@@ -56,9 +56,9 @@ tiered_potions_events:
       - determine passively cancelled
       - define usage <context.item.nbt[uses].add[1]||1>
       - if <player.item_in_hand> == <context.item>:
-        - inventory adjust slot:<player.held_item_slot> nbt:<list[uses/<[usage]>]>
+        - inventory adjust slot:<player.held_item_slot> nbt:uses/<[usage]>
       - else:
-        - inventory adjust slot:<player.inventory.find[<player.item_in_offhand>]> nbt:<list[uses/<[usage]>]>
+        - inventory adjust slot:<player.inventory.find[<player.item_in_offhand>]> nbt:uses/<[usage]>
 
 
 # -- Tiered Potions
