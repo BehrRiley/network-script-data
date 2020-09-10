@@ -38,7 +38,7 @@ slime_damage_handler:
             - playeffect effect:ITEM_CRACK at:<player.location.above[0.5].forward[0.4]> special_data:<[item]> offset:0.2 quantity:15
             - playsound <context.location> sound:ENTITY_ITEM_BREAK
             - take slot:<[slot]>
-            - ex narrate "Your <[slot]> has melted from the acid!" target:<player>
+            - ex narrate "Your armor has melted from the acid!"
 #Item Durability Damage
           - else:
             - inventory adjust slot:<[slot]> durability:<[Durrbillty]>
