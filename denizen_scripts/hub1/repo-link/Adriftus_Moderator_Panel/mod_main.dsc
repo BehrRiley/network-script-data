@@ -2,9 +2,8 @@
 # - REPLACE TAB COMPLETES WITH NEW TAB COMPLETIONS SYSTEM.
 # - MAKE COMMAND DEFINITIONS CONSISTENT BETWEEN COMMANDS. (Definition name, value, usage, etc.)
 # - EXPAND CHAT (UN)MUTE FUNCTION.
-# - Use <context.args.is_empty> instead of `<context.args.first||null> == null`.
 # - Replace nested foreach loop in mod_get_infractions procedure in mod_infractions.
-# - Split panel scripts up into a folder.
+# - Move player verification into its own injectable task. (Online, Has Permission, etc.)
 
 # -- /mod - Adriftus Moderator Panel
 mod_command:
@@ -13,11 +12,11 @@ mod_command:
   permission: adriftus.staff
   name: mod
   description: Adriftus Moderator Panel
-  usage: /mod [username]
+  usage: /mod (username)
   tab complete:
     # -- One Argument Tab Complete
-    - define Blacklist <player||null>
-    - inject Online_Player_Tabcomplete
+    - define blacklist <player||null>
+    - inject online_player_tabcomplete
     # - define arguments <server.online_players.parse[name].exclude[<player.name>]>
     # - if <context.args.is_empty>:
     #   - determine <[arguments]>
@@ -26,7 +25,7 @@ mod_command:
   script:
     # -- Hopefully this logic will work & make sense in a few weeks.
     - if <context.args.is_empty>:
-      - inventory open d:mod_online_inv
+      - inject mod_online_inv_open
     - else if <context.args.first> == version:
       - narrate "<&6>Adriftus <&e>Moderator Panel"
       - narrate "<&f>Version 2.0.0 - 2020-07-31"
@@ -63,7 +62,7 @@ mod_command:
           - yaml unload id:amp.target.<[uuid]>
         # Flag moderator with map of target player's information
         - flag <player> amp_map:<[map]>
-        - inventory open d:<inventory[mod_actions_inv]>
+        - inject mod_actions_inv_open
     - else:
       - narrate "<&c>Invalid player name entered!"
 
