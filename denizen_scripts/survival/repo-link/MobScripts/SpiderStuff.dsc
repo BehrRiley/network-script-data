@@ -7,4 +7,5 @@ Paranoia_poison_canceller:
 #Using determine cancelled then hurt to prevent poison on the player from hallucination spiders.
         - if <context.damage.entity.mythicmob.stance> == HALLUCINATED
           - determine passively cancelled
-          - hurt <context.damager.mythicmob.level.sub[6]> <player> source:Dontloop
+          - ratelimit <player> 1t
+          - hurt <context.damager.mythicmob.level.sub[6]> <player> source:<context.entity>
