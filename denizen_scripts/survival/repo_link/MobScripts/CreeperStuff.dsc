@@ -4,4 +4,10 @@ Creeper_Prime_Signal:
   events:
     on entity explosion primes:
       - If <context.entity.is_mythicmob>:
-        - mythicsignal <context.entity> PrimetimeShowtime source:<context.entity>
+        - mythicsignal <context.entity.mythicmob> PrimetimeShowtime source:<context.entity>
+
+creeper_vents:
+#Placeholder to come later.
+
+creeper_splosion:
+#Placeholder to come later.
