@@ -6,8 +6,8 @@ Creeper_Prime_Signal:
       - If <context.entity.is_mythicmob>:
         - mythicsignal <context.entity.mythicmob> PrimetimeShowtime source:<context.entity>
 
-creeper_vents:
+#creeper_vents:
 #Placeholder to come later.
 
-creeper_splosion:
+#creeper_splosion:
 #Placeholder to come later.
