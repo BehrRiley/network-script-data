@@ -25,7 +25,7 @@ slime_damage_handler:
           - define slot 37
           - define body_part feet
     # % Check for empty slot or invalid item
-      - if !<player.equipment_map.contains[<[equipment]>]> || !<player.equipment_map.get[<[equipment]>].ends_with[_helmet]>:
+      - if !<player.equipment_map.contains[<[equipment]>]> || !<player.equipment_map.get[<[equipment]>].material.name.ends_with[_helmet]>:
         - actionbar "<&e>Acid splashes on you, burning your <[body_part]>."
         # % Damage player without armor
         - determine <context.damager.mythicmob.level.mul[5]>
