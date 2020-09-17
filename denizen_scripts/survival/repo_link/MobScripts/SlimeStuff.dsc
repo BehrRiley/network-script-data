@@ -51,7 +51,7 @@ slime_puddle_creator:
   debug: false
   script:
   - if <context.entity.is_mythicmob> && <context.entity.mythicmob.internal_name> == slime1:
-    - if <context.entity.size> == 1
+    - if <context.entity.size> == 1:
       - showfake slime_block <context.entity.location,sub[0,1,0]> d:10 players:<context.entity.location.find.players.within[20]>
       - playeffect effect:block_crack at:<context.entity.location.add[0,1,0]> quantity:2  offset:0.5 special_data:SLIME_BLOCK
       - stop
@@ -61,4 +61,4 @@ slime_puddle_creator:
       - define Puddlesize 1
     - define Puddle_Location <context.entity.location.find.surface_blocks.within[<[Puddlesize]>].filter[material.is_solid]>
     - showfake slime_block <[Puddle_Location]> d:10 players:<context.entity.location.find.players.within[20]>
-    - playeffect effect:block_crack at:<context.entity.location.add[0,1,0]> quantity:<<[Puddlesize]>.mul[5]>  offset:<<[Puddle_Location]>.div[4]> special_data:SLIME_BLOCK
+    - playeffect effect:block_crack at:<context.entity.location.add[0,1,0]> quantity:<[Puddlesize].mul[5]>  offset:<[Puddle_Location].div[4]> special_data:SLIME_BLOCK
