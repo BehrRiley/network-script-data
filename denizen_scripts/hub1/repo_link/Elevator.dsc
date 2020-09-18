@@ -57,10 +57,13 @@ Elevator_Command:
     - repeat <[Distance].mul[2]> as:No:
       - foreach <[BLocs]> as:Loc:
         - define i <[Loop_Index]>
-        - define YData <tern[<[No].is[OR_LESS].than[<[Distance]>]>].pass[<[No]>/Up].fail[<[Distance].mul[2].sub[<[No]>]>/Down]>
+        - if <[No].is[OR_LESS].than[<[Distance]>]>:
+          - define YData <[No]>/Up
+        - else:
+          - define YData <[Distance].mul[2].sub[<[No]>]>/Down
         - define Y <[YData].before[/]>
         - define NewLoc <[Loc].add[0,<[Y]>,0]>
-        - modifyblock <[Loc].add[0,<[Y].add[<map[Up/-<[Length]>|Down/1].get[<[YData].after[/]>]>]>,0]> air
+        - modifyblock <[Loc].add[0,<[Y].add[<map.with[Up].as[-<[Length]>].with[Down].as[1].get[<[YData].after[/]>]>]>,0]> air
         - if <[YData].after[/]> == Up:
           - foreach <[NewLoc].find.entities.within[0.5]> as:Entity:
             - adjust <[Entity]> velocity:0,0.55,0
