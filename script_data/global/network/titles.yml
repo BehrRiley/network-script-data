@@ -9,7 +9,6 @@ gui:
     - '&7* &eName: &7<[tagID]>'
     - '&7* &ePreview: &r<[tag].parsed>'
     - '&7* &eDescription: &7<[description]>'
-in_shop: true
     - '&r'
     - '&7* Want more cool titles? let us know!'
     - '&7  Buy more titles available at the shops!'
