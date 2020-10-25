@@ -12,13 +12,13 @@ command_play:
     - if <context.args.is_empty>:
       - inventory open d:command_play_inventory
       - stop
-    - else if <context.args.size> > 1:
-      - inject Command_Syntax
+    - else if <context.args.size> != 1:
+      - inject command_syntax
       
     # % ██ [ Verify Valid Server for Network ] ██
     - else if !<yaml[bungee_config].contains[servers.<context.args.first.to_lowercase>]>:
       - define Reason "Invalid Server."
-      - inject Command_Error
+      - inject command_error
 
     # % ██ [ Verify Valid Online Server ] ██
     - else if !<bungee.list_servers.contains[<context.args.first.to_lowercase>]>:
@@ -28,7 +28,7 @@ command_play:
     # % ██ [ Check for Same Server ] ██
     - else if <bungee.server> == <context.args.first.to_lowercase>:
       - define Reason "You're already on <yaml[bungee_config].parsed_key[servers.<context.args.first.to_lowercase>.display_name]>."
-      - inject Command_Error
+      - inject command_error
       
     # % ██ [ Transfer Server ] ██
     - narrate "<&e>Joining Server<&co> <yaml[bungee_config].parsed_key[servers.<context.args.first.to_lowercase>.display_name]>"
@@ -97,16 +97,16 @@ command_play_inventory:
         - define lore:<&e>---------------------
         # Next is the server status
         - if <bungee.list_servers.contains[<[server]>]>:
-          - define lore:|:<&a>Server<&sp>Status<&co><&sp>Online
+          - define lore:->:<&a>Server<&sp>Status<&co><&sp>Online
         - else:
-          - define lore:|:<&c>Server<&sp>Status<&co><&sp>Offline
+          - define lore:->:<&c>Server<&sp>Status<&co><&sp>Offline
         # Then the server's description
         - define lore:|:<yaml[bungee_config].parsed_key[servers.<[server]>.description]>
         # Bottom border
-        - define lore:|:<&e>---------------------
+        - define lore:->:<&e>---------------------
         - adjust <entry[item].result> lore:<[lore]> save:item
         - adjust <entry[item].result> nbt:server/<[server]> save:item
-        - define list:|:<entry[item].result>
+        - define list:->:<entry[item].result>
     - determine <[list]>
   slots:
     - [filler] [filler] [filler] [filler] [player] [filler] [filler] [filler] [filler]

@@ -1,6 +1,6 @@
 global_data_handler:
   type: world
-  debug: true
+  debug: false
   events:
     on server start:
       - yaml id:data_handler create
@@ -62,7 +62,7 @@ global_data_handler:
 
 External_Player_Data_Join_Event:
   type: task
-  debug: true
+  debug: false
   definitions: PlayerMap|PlayerData|Server|Event
   script:
     - bungee <[Server]>:
@@ -125,9 +125,10 @@ External_Player_Data_Join_Event:
 
 player_info_map:
     type: procedure
+    debug: false
     definitions: input
     script:
-    - if <yaml[data_handler].contains[players.<[input]>]>:
+    - if <yaml[data_handler].contains[players.names.<[input]>]>:
       - determine <yaml[data_handler].read[players.names.<[input]>].with[name].as[<[input]>]>
     - determine null
     
@@ -140,8 +141,9 @@ player_info_map:
 
 player_info_map_uuid:
     type: procedure
+    debug: false
     definitions: input
     script:
-    - if <yaml[data_handler].contains[players.<[input]>]>:
+    - if <yaml[data_handler].contains[players.uuids.<[input]>]>:
       - determine <yaml[data_handler].read[players.uuids.<[input]>].with[uuid].as[<[input]>]>
     - determine null

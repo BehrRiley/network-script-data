@@ -98,6 +98,7 @@ tutorial_data:
       - <&a>--------------------------
       - "<&e>Use <&b>/warps <&e>and go to Grim to continue."
     particle_guide: true
+    subtitle: "<&e>Go to the server warp: <&4>Grim"
   14:
     hologram:
       - <&6><&l>Grim
@@ -105,7 +106,6 @@ tutorial_data:
       - "<&c>... For a cost."
     particle_guide: false
     title: "<&6>Use <&b>/warps"
-    subtitle: "<&e>Go to the server warp: <&4>Grim"
   15:
     hologram:
       - <&6><&l>Claims
@@ -172,11 +172,11 @@ tutorial_data:
 tutorial_spawn_finale:
   type: task
   script:
+    - fakespawn ender_dragon <location[tutorial_dragon]> duration:10m
     - repeat 20:
       - wait 1t
       - playeffect redstone at:<location[tutorial_dragon]> special_data:1|black quantity:<[value].mul[2]> offset:<[value].mul[0.2]>
       - playeffect dragon_breath at:<location[tutorial_dragon]> data:0.5 quantity:10 offset:0
-      - fakespawn ender_dragon <location[tutorial_dragon]> duration:10m
 
 
 ###############
@@ -231,7 +231,7 @@ tutorial_next:
         - look <player> tutorial_<[stage]>
         - playsound <player> sound:entity_ender_pearl_throw volume:0.5
         - define last_distance 128
-        - while <player.location.world.name> == spawn && <player.location.distance[<location[tutorial_<[stage]>]>]> > <script[tutorial_data].data_key[distance_check]>:
+        - while <player.world.name> == spawn && <player.location.distance[<location[tutorial_<[stage]>]>]> > <script[tutorial_data].data_key[distance_check]>:
           - define points <player.location.points_between[<location[tutorial_<[stage]>]>].get[3].to[last]>
           - foreach <[points]>:
             - if !<player.is_online>:

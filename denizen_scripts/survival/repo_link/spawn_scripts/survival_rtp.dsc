@@ -18,7 +18,7 @@ survival_rtp:
   #^  - if !<yaml[global.player.<player.uuid>].contains[titles.unlocked.explorer]>:
     - if !<yaml[global.player.<player.uuid>].read[titles.unlocked].contains[Explorer]||false>:
       - define id First_RTP
-      - inject Achievement_give
+      - inject achievement_give
     - wait 1m
     - narrate "<&c>You now take fall damage as normal."
 
@@ -57,7 +57,7 @@ spawn_effects_handler:
   debug: false
   script:
     - while <server.has_flag[spawn_portal_running]> && <server.has_flag[people_in_spawn]>:
-      - playeffect totem <server.flag[spawn_totem_locations].random[35]> quantity:1 targets:<server.flag[people_in_spawn]>
+      - playeffect totem <server.flag[spawn_totem_locations].random[50]> quantity:1 targets:<server.flag[people_in_spawn]>
       - playeffect redstone at:<server.flag[spawn_cosmetics_blocks].random[3]> special_data:<util.random.decimal[1.5].to[2.5]>|<server.flag[spawn_cosmetics_colors].random> quantity:3 offset:0.25 targets:<server.flag[people_in_spawn]>
       - playeffect soul at:<server.flag[spawn_soul_forge_effects].random[10]> offset:0.2 quantity:1 data:0.2 targets:<server.flag[people_in_spawn]>
       - playeffect soul_fire_flame at:<server.flag[spawn_soul_forge_effects].random[3]> quantity:1 data:0.01 offset:0.25 targets:<server.flag[people_in_spawn]>

@@ -73,7 +73,7 @@ Backpack_54:
 Backpack_events:
   type: world
   events:
-    on player right clicks block with:Backpack_*:
+    on player right clicks block with:Backpack_* ignorecancelled:true:
       - determine passively cancelled
       - wait 1t
       - inject Backpack_open
@@ -86,7 +86,7 @@ Backpack_events:
     on player clicks Backpack_* in Backpack_inventory_*:
       - determine cancelled
     on player clicks in Backpack_inventory_*:
-      - if <player.inventory.slot[<context.hotbar_button>].scriptname.starts_with[Backpack_]||false>
+      - if <context.item.scriptname.starts_with[Backpack_]||false>:
         - determine cancelled
 
 Backpack_inventory_9:
@@ -145,4 +145,3 @@ Backpack_open:
     - if !<[item].nbt[backpack_contents].as_list.is_empty||true>:
       - inventory set o:<[item].nbt[backpack_contents]> d:<[inventory]>
     - inventory open d:<[inventory]>
-    
