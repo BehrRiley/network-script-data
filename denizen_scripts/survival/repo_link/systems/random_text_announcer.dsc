@@ -33,6 +33,6 @@ random_text_announcer:
       - define Text "<&c>Have you found any <&b>Custom Recipes<&c>?"
       - narrate <proc[MsgHover].context[<[Hover]>|<[Text]>]>
     - case 8:
-      - narrate "<&c>You have been online for <&b><server.real_time_since_start.sub[<player.flag[LoginTime]>].formatted> Time for a posture check!"
+      - narrate "<&c>You have been online for <&b><util.time_now.duration_since[<player.flag[LoginTime]>].formatted><&b>. Time for a posture check!"
     - case 9:
       - narrate "<&c>Did you just hear a <&a>creeper <&c>behind you?"
