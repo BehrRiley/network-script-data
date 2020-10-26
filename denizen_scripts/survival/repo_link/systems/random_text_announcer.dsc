@@ -3,7 +3,7 @@ random_text_announcer:
   debug: false
   events:
     on system time minutely every:30:
-      - choose <util.random.int[1].to[8]>:
+      - choose <util.random.int[1].to[9]>:
         - case 1:
           - announce "<&e>When was the last time you had a glass of delicious, delicious water?"
         - case 2:
