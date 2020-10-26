@@ -116,3 +116,4 @@ economy_pay:
     - money take quantity:<[amount]> from:<player>
     - money give quantity:<[amount]> to:<[user]>
     - narrate "<&c>You have paid <[user].display_name> <&a>$<[amount].economy.formatted><&c> from your account."
+    
