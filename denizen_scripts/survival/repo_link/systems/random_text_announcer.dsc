@@ -30,8 +30,8 @@ random_text_announcer:
           - announce "<&e>Did you know you could store books in a bookshelf using <&b>right click while sneaking?"
         - case 7:
           - define Hover "<proc[Colorize].context[I've heard 3 potatoes and an onion make a delicious soup|green]>"
-          - define Text "<&e>Have you found any <&b>Custom Recipes<&e>?"
-          - narrate <proc[MsgHover].context[<[Hover]>|<[Text]>]>
+          - define Text "<&c>Have you found any <&b>Custom Recipes<&c>?"
+          - narrate <proc[Msg_Hover].context[<[Hover]>|<[Text]>]>
         - case 8:
           - narrate targets:<server.online_players> per_player "<&e>You have been online for <&b><util.time_now.duration_since[<player.flag[LoginTime]>].formatted><&b>. Time for a posture check!"
         - case 9:
