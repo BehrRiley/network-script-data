@@ -100,13 +100,12 @@ economy_pay:
   type: command
   name: pay
   script:
-    - define amount <context.args.second||null>
-    - define payee <context.args.first||null>
-    - if <[amount]> == null:
+    - if <context.args.size> != 2:
+      - inject command_syntax
+    - define amount <context.args.get[2]>
+    - define payee <context.args.first>
+    - if !<[amount].is_integer>:
       - narrate "<&c>You must specify how much you want to pay."
-      - stop
-    - if <[payee]> == null:
-      - narrate "<&c>You must specify who you want to pay."
       - stop
     - else if <player.money> < <[amount]>:
       - narrate "<&c>You don't have enough money for that."
