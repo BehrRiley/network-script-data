@@ -27,7 +27,7 @@ survival_falloff_rtp:
   debug: false
   events:
     after player enters spawn_below:
-    - if !<player.flag[RecentRTP]>:
+    - if !<player.has_flag[RecentRTP]>:
       - inject survival_rtp
       - if <location[home_<player.uuid>]||null> != null:
         - flag <player> RecentRTP duration:10m
