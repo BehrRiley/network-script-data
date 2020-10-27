@@ -32,10 +32,14 @@ survival_falloff_rtp:
       - if <location[home_<player.uuid>]||null> != null:
         - flag <player> RecentRTP duration:10m
       - flag <player> RecentRTP duration:60s
-    - if <location[home_<player.uuid>]||null> != null:
+      - stop
+
+    - else if <location[home_<player.uuid>]||null> != null:
       - teleport <location[home_<player.uuid>]>
       - narrate "<&a>You have been teleported home! Please wait <player.flag[RecentRTP].expiration.formatted> more before teleportation!"
-    - execute as_player "spawn"
+      - stop
+
+    - teleport spawn
     - narrate "Please wait <player.flag[RecentRTP].expiration.formatted> seconds before teleporting again"
 
 survival_rtp_portal:
