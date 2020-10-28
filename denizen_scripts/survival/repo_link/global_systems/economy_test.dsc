@@ -112,6 +112,7 @@ economy_pay:
       - stop
         - define user <context.args.first>
         - inject Player_Verification
+    - if <[amount]> < 0:
     - money take quantity:<[amount]> from:<player>
     - money give quantity:<[amount]> to:<[user]>
     - narrate targets:<[payor]> "<&b>You have paid <[user].display_name> <&a>$<[amount].economy.formatted><&b> from your account."
