@@ -13,3 +13,4 @@ Silk_Spawners:
             - define Type <context.item_in_hand.nbt[key]>
             - wait 1t
             - adjust <context.location> spawner_type:<[Type]>
+ 
