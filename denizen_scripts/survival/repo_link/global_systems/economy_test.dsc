@@ -103,7 +103,7 @@ economy_pay:
     - if <context.args.size> != 2:
       - inject command_syntax
     - define amount <context.args.get[2]>
-    - define payee <context.args.first>
+    - define payor <player>
     - if !<[amount].is_integer>:
       - narrate "<&c>You must specify how much you want to pay."
       - stop
@@ -114,5 +114,6 @@ economy_pay:
         - inject Player_Verification
     - money take quantity:<[amount]> from:<player>
     - money give quantity:<[amount]> to:<[user]>
-    - narrate "<&c>You have paid <[user].display_name> <&a>$<[amount].economy.formatted><&c> from your account."
+    - narrate targets:<[payor]> "<&b>You have paid <[user].display_name> <&a>$<[amount].economy.formatted><&b> from your account."
+    - narrate targets:<[user]> "<&b>You have been paid <&a>$<[amount].economy.formatted><&b> by <[payor].display_name>"
     
