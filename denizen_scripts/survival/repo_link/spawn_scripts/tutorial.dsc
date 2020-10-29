@@ -194,6 +194,7 @@ first_time_tutorial:
 tutorial_command:
   type: command
   name: tutorial
+  debug: false
   description: Start the Tutorial!
   usage: /tutorial
   script:
@@ -288,6 +289,7 @@ tutorial_skipped:
 
 tutorial_events:
   type: world
+  debug: false
   events:
     on player clicks fake entity flagged:tutorial:
       - playsound <player> sound:ui_button_click volume:0.5
