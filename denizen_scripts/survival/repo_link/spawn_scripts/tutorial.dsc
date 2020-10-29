@@ -242,7 +242,7 @@ tutorial_next:
               - define value <[value].above[2]>
             - playeffect <script[tutorial_data].parsed_key[particle_trail.particle]> at:<[value]> quantity:<script[tutorial_data].parsed_key[particle_trail.quantity]> offset:<script[tutorial_data].parsed_key[particle_trail.offset]> targets:<player>
             - wait 1t
-          - if <player.location.distance[<location[tutorial_<[stage]>]>]> > <[last_distance].add[5]>:
+          - if <player.location.distance[<location[tutorial_<[stage]>]>]> > <[last_distance].add[10]>:
             - narrate "<&4>You have gone too far from your next tutorial location."
             - narrate "<element[<&e>You can restart the tutorial at any time by using <&b>/tutorial<&e>.].on_hover[<&e>Click to restart the tutorial].on_click[/tutorial]>"
             - inject tutorial_skipped
