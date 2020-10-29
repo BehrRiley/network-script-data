@@ -112,6 +112,9 @@ economy_pay:
     - else if <player.money> < <[amount]>:
       - narrate "<&c>You don't have enough money for that."
       - stop
+    - else if <player.name.to_lowercase> == <[payee].to_lowercase>:
+      - narrate "<&c>You cannot pay yourself money."
+      - stop
     - else if <[amount]> < 0:
       - narrate "<&c>You cannot pay a negative amount."
       - stop
