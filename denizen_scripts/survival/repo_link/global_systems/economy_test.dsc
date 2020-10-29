@@ -99,6 +99,8 @@ economy_withdraw:
 economy_pay:
   type: command
   name: pay
+  tab complete:
+    - determine <server.online_players.parse[name].filter[to_lowercase.starts_with[<context.raw_args.before_last[<&sp>].to_lowercase>]]>
   script:
     - if <context.args.size> != 2:
       - inject command_syntax
@@ -118,4 +120,4 @@ economy_pay:
     - money take quantity:<[amount]> from:<player>
     - money give quantity:<[amount]> to:<[user]>
     - narrate "<&c>You have paid <[user].display_name> <&a><server.economy.format[<[amount]>]><&c> from your account." targets:<player>
-    - narrate "<&c>You have been paid <&a><server.economy.format[<[amount]>]><&c> from <[user].display_name>." targets:<[user]>
+    - narrate "<&c>You have been paid <&a><server.economy.format[<[amount]>]><&c> from <player.display_name>." targets:<[user]>
