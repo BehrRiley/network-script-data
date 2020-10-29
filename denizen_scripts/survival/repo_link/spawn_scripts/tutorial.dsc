@@ -198,6 +198,9 @@ tutorial_command:
   description: Start the Tutorial!
   usage: /tutorial
   script:
+    - if <player.has_flag[combat]>:
+      - narrate "<&c>You cannot use this command while in combat."
+      - stop
     - inject tutorial_start
 
 tutorial_start:
