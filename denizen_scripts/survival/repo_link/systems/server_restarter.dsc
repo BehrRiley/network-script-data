@@ -30,4 +30,4 @@ survival_restart_announcer:
         - wait 1s
         - actionbar "<&a>The server will be restarting in <server.flag[restart_in_process].expiration.seconds.round_down[1]> seconds."
         - wait 1s
-      - inject survival_restarter
+      - inject survival_restarter locally
