@@ -154,7 +154,7 @@ weekly_vote_key:
 vote_crate_key_events:
   type: world
   events:
-    on player right clicks block with:daily_vote_key||weekly_vote_key ignorecancelled:true:
+    on player right clicks block with:daily_vote_key|weekly_vote_key ignorecancelled:true:
     - if !<server.has_flag[<context.location.simple>.daily_crate]> && !<server.has_flag[<context.location.simple>.weekly_crate]>:
       - determine passively cancelled
       - ratelimit 20t
