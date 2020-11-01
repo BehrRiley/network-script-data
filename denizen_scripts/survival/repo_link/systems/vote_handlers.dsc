@@ -105,6 +105,32 @@ weeklykeys:
   - if !<player.has_flag[weekly_crate_pending]>:
     - narrate "<&c>You are not currently eligible to claim a <item[weekly_vote_crate_key].display> at this time. <&nl><&e>Current Progress:<&a><[voter].flag[weekly_votes_reward]><&fs><[voter].flag[weekly_votes_reward].sub[1].mul[7]>"
 
+recoverkeys:
+  type: command
+  debug: false
+  usage: /recoverkeys
+  description: rewards players with their their daily vote keys they were ineligible to claim for some other reason.
+  script:
+  - if <player.flag[daily_key_pending]> > 0:
+    - if <[voter].inventory.is_full>:
+      - if <[voter].enderchest.is_full>:
+        - narrate "<&c>Your inventory and enderchest are full. Please make some room and try again later to claim your <item[daily_vote_crate_key].display>!"
+      - else:
+        - give to:<player.enderchest> daily_vote_crate_key quantity:<player.flag[daily_key_pending]>
+        - flag <player> daily_key_pending:!
+        - announce "<&a><[voter].display_name> <&c>has just recieved a <item[daily_vote_key].display><&c>! Do <&3>/<&b>vote<&c> to recieve yours now!"
+    - else:
+      - give <player> daily_vote_crate_key quantiy:<player.flag[daily_key_pending]>
+      - flag <player> daily_key_pending:!
+      - announce "<&a><[voter].display_name> <&c>has just recieved a <item[daily_vote_key].display><&c>! Do <&3>/<&b>vote<&c> to recieve yours now!"
+      - else:
+        - flag <[voter]> inventory_daily_key_offline counter:++
+        - flag <[voter]> offline_daily_keys counter:++
+  - else:
+    - narrate "<&c>You do not have any pending keys at this time."
+
+
+
 daily_vote_key:
   type: item
   material: tripwire_hook
