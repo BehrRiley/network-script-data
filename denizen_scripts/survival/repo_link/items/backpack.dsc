@@ -91,6 +91,8 @@ Backpack_events:
         - determine cancelled
     on player drops backpack_*:
     - determine cancelled
+    on player prepares anvil craft backpack_*:
+    - determine <element[9001]>
 
 Backpack_inventory_9:
   type: inventory
