@@ -1200,7 +1200,7 @@ claiming_protection_events:
     - if !<yaml[claims].read[groups.<[group]>.members.<player.uuid>.break]||false> && !<yaml[claims].read[groups.<[group]>.members.everyone.break]>:
       - narrate "<&c>You do not have permission to trample crops here."
       - determine cancelled
-    on player clicks *door|*_button|lever|chest|ender_chest|*_gate|crafting_table|anvil|furnace|brewing_stand|enchanting_table|*_bed|bookshelf|barrel|hopper|tnt|dispenser|dropper|stonecutter|lodeston|beehive|smithing_table|lectern|grindstone|flethcing_table|cartography_table|blast_furnace|smoker|composter|loom|trappged_chest|*_shulker_box|cauldron|cake|beacon priority:100:
+    on player clicks *door|*_button|lever|chest|ender_chest|*_gate|crafting_table|anvil|furnace|brewing_stand|enchanting_table|*_bed|bookshelf|barrel|hopper|tnt|dispenser|dropper|stonecutter|lodeston|beehive|smithing_table|lectern|grindstone|flethcing_table|cartography_table|blast_furnace|smoker|composter|loom|trappged_chest|*_shulker_box|cauldron|cake|bell|jukebox|note_block|beacon|respawn-anchor|repeater|redstone_dust|comparator|daylight_detector|tripwire_hook|end_portal_frame|flower_pot|bee_nest|armor_stand|item_frame|*minecart|*boat| priority:100:
     - define location <context.location||<player.location>>
     - define group <yaml[claims].read[<[location].chunk.world>.<[location].chunk.x>.<[location].chunk.z>]||null>
     - if <[group]> == null:
