@@ -85,7 +85,7 @@ economy_withdraw:
   name: withdraw
   script:
     - define amount <context.args.first||null>
-      - if !<[amount].is_int>:
+      - if !<[amount].is_integer>:
         - narrate "<&c>Please specify an amount to withdraw using only numbers."
       - if <[amount]> == null:
         - narrate "<&c>You must specify how much you want to withdraw."
