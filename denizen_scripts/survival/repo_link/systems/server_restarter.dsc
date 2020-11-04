@@ -4,11 +4,9 @@ server_restart_handler_survival-plus:
   events:
     on restart command:
       - determine passively fulfilled
-      - if <context.source_type> == server:
+      - if <context.source_type> == server || <player.has_permission[adriftus.admin]>::
         - inject survival_restart_timer
         - stop
-      - if <player.has_permission[*]>:
-        - inject survival_restart_timer
     on system time 02:55:
       - inject survival_restart_timer
 
@@ -16,6 +14,7 @@ server_restart_handler_survival-plus:
 survival_restart_announcer:
     type: task
     debug: false
+    scripts:
     survival_restarter:
       - bungeeexecute "send survival behrcraft"
       - wait 3s
