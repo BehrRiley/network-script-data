@@ -4,7 +4,7 @@ server_restart_handler_survival-plus:
   events:
     on restart command:
       - determine passively fulfilled
-      - if <context.source_type> == server ||<player.has_permission[adriftus.admin]>::
+      - if <context.source_type> == server || <player.has_permission[adriftus.admin]>::
         - inject survival_restart_timer
         - stop
     on system time 02:55:
