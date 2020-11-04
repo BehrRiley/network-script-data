@@ -85,16 +85,18 @@ economy_withdraw:
   name: withdraw
   script:
     - define amount <context.args.first||null>
-    - if <[amount]> == null:
-      - narrate "<&c>You must specify how much you want to withdraw."
-      - stop
-    - else if <player.money> < <[amount]>:
-      - narrate "<&c>You don't have enough money."
-      - stop
-    - money take quantity:<[amount]>
-    - give "<item[economy_bank_note].with[nbt=value/<[amount]>;lore=<&a>------------------------|<&e>Value<&co> <&a><server.economy.format[<[amount]>]>|<&e>Right click while holding to deposit.|<&a>------------------------]>"
-    - narrate "<&b>You have withdrawn <&a><server.economy.format[<[amount]>]><&b> from your account."
-    - narrate "<&b>Check your inventory for the bank note."
+      - if !<[amount].is_int>:
+        - narrate "<&c>Please specify an amount to withdraw using only numbers."
+      - if <[amount]> == null:
+        - narrate "<&c>You must specify how much you want to withdraw."
+        - stop
+      - else if <player.money> < <[amount]>:
+        - narrate "<&c>You don't have enough money."
+        - stop
+      - money take quantity:<[amount]>
+      - give "<item[economy_bank_note].with[nbt=value/<[amount]>;lore=<&a>------------------------|<&e>Value<&co> <&a><server.economy.format[<[amount]>]>|<&e>Right click while holding to deposit.|<&a>------------------------]>"
+      - narrate "<&b>You have withdrawn <&a><server.economy.format[<[amount]>]><&b> from your account."
+      - narrate "<&b>Check your inventory for the bank note."
 
 economy_pay:
   type: command
@@ -102,7 +104,7 @@ economy_pay:
   tab complete:
     - determine <server.online_players.parse[name].filter[to_lowercase.starts_with[<context.raw_args.before_last[<&sp>].to_lowercase>]]>
   script:
-    - if <context.args.size> != 2:
+    - if <context.args.size> < 2:
       - inject command_syntax
     - define amount <context.args.get[2]>
     - define payee <context.args.first>
