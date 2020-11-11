@@ -11,7 +11,7 @@ vote_receiver:
         - inject locally weekly_vote_counter
   #Check for offline keys and award/announce
       on player joins:
-      - if <player.flag[weekly_crate_pending]>:
+      - if <player.has_flag[weekly_crate_pending]>:
         - narrate: "<&e>You have a <item[weekly_vote_key].display> <&e>pending. Do <&3>/<&b>weeklykeys <&e>to claim it.!"
       - if <player.flag[enderchest_daily_key_offline]> > 0:
         - if <player.flag[enderchest_daily_key_offline]> > 1:
